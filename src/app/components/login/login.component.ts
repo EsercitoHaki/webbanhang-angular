@@ -18,7 +18,8 @@ export class LoginComponent {
   @ViewChild('loginForm') loginForm!: NgForm;
 
   phoneNumber: string = '33445566';
-  password: string = '1234567';
+  password: string = '123456789';
+  showPassword: boolean = false;
 
   roles: Role[] = []; // Mảng roles
   rememberMe: boolean = true;
@@ -86,7 +87,12 @@ export class LoginComponent {
                 date_of_birth: new Date(response.date_of_birth),
               };    
               this.userService.saveUserResponseToLocalStorage(this.userResponse); 
-              this.router.navigate(['/']);                      
+              if(this.userResponse?.role.name == 'admin') {
+                this.router.navigate(['/admin']);    
+              } else if(this.userResponse?.role.name == 'user') {
+                this.router.navigate(['/']);                      
+              }
+              
             },
             complete: () => {
               debugger;
@@ -106,5 +112,8 @@ export class LoginComponent {
         alert(error.error.message);
       }
     });
+  }
+  togglePassword() {
+    this.showPassword = !this.showPassword;
   }
 }

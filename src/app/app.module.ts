@@ -18,7 +18,9 @@ import {
 import { TokenInterceptor } from './interceptors/token.interceptors';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app/app.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { UserProfileComponent } from './components/user-profile/user.profile.component';
+import { AdminModule } from './components/admin/admin.module';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -33,14 +35,15 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     LoginComponent, 
     RegisterComponent, 
     AppComponent, 
-    UserProfileComponent
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AdminModule,
   ],
   providers: [provideHttpClient(),
     {
