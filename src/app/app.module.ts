@@ -21,6 +21,7 @@ import { AppComponent } from './app/app.component';
 import { UserProfileComponent } from './components/user-profile/user.profile.component';
 import { AdminModule } from './components/admin/admin.module';
 import { CommonModule } from '@angular/common';
+import { ProductComponent } from './components/product/product.component';
 
 
 @NgModule({
@@ -35,7 +36,7 @@ import { CommonModule } from '@angular/common';
     LoginComponent, 
     RegisterComponent, 
     AppComponent, 
-    UserProfileComponent,
+    UserProfileComponent, ProductComponent,
   ],
   imports: [
     BrowserModule,
