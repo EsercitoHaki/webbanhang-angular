@@ -9,7 +9,7 @@
         <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
             <div *ngFor="let image of product?.product_images; let i = index" 
-                 class="carousel-item" [ngClass]="{'active': i === currentImageIndex}">
+                class="carousel-item" [ngClass]="{'active': i === currentImageIndex}">
               <div class="square-image">
                 <img [src]="image.image_url" class="product-image" alt="Product Image">
               </div>
@@ -29,10 +29,10 @@
         <div class="row">
           <div class="thumbnail-container">
             <div *ngFor="let image of product?.product_images; let i = index" 
-                 class="thumbnail-item" 
-                 [ngClass]="{'active': i === currentImageIndex}"
-                 (click)="thumbnailClick(i)">
-              <img [src]="image.image_url" class="thumbnail-image" alt="Thumbnail Image">
+                class="thumbnail-item" 
+                [ngClass]="{'active': i === currentImageIndex}"
+                (click)="thumbnailClick(i)">
+            <img [src]="image.image_url" class="thumbnail-image" alt="Thumbnail Image">
             </div>
           </div>
         </div>
