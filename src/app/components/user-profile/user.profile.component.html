@@ -1,8 +1,8 @@
 <app-header></app-header>
 <form [formGroup]="userProfileForm"> 
 <div>
-    <div class="col-md-3 mx-auto">
-        <h2 class="product-header">Thông tin người dùng</h2>
+    <div class="col-md-3 mx-auto fade-in">
+        <h2 class="product-header fade-in">Thông tin người dùng</h2>
             <div class="mb-3">
                 <label for="fullname" class="form-label">Họ và tên</label>
                 <input type="text" 
@@ -61,7 +61,7 @@
                     Mật khẩu không khớp.
                   </div>
               </div>              
-              <div class="text-center">
+              <div class="text-center fade-in">
                 <button type="button" 
                     (click)="save()"
                     class="btn btn-primary">Lưu thay đổi</button>

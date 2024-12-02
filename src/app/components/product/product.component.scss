@@ -126,6 +126,6 @@ nav .pagination .page-item .page-link  {
 nav .pagination .page-item .page-link:hover {
     background-color: $bg-pg-hover-active;
 }
-nav .pagination .page-item .page-link:active {
+nav .pagination .page-item .page-link.active {
     background-color: $bg-pg-hover-active !important;
 }

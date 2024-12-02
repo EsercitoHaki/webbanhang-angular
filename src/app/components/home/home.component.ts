@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   }
 
   private initializeVanillaTilt(): void {
-    const productItems = document.querySelectorAll('.product-item');
+    const productItems = document.querySelectorAll('.chu');
     if (productItems.length > 0) {
       VanillaTilt.init(productItems as any);
       this.isVanillaTiltInitialized = true;
