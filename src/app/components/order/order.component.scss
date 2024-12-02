@@ -1,5 +1,6 @@
+@import "../../styles/shared-styles.scss";
 .container {
-    color: white;
+    background-color: $bg-body;
 }
 .intro-section {
     color: white;
@@ -7,10 +8,10 @@
     text-align: center;
 }
 .product-header {
-    color: rgb(233, 66, 176);
+    color: $order-text-header;
 }
 .form-control {
-    background-color: rgb(19, 23, 42);
+    background-color: $order-bg-input;
     border: 1px solid rgb(29, 33, 54);
     color: white;
 }
@@ -21,9 +22,6 @@
 }
 .form-label {
     color: white;
-}
-.product-header {
-    color: rgb(233, 66, 176);
 }
 .product-order {
     color: rgb(105, 244, 181);

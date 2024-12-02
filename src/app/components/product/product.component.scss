@@ -56,12 +56,15 @@
     color: $text-hint;
 }
 
+.row{
+    width: 100%;
+}
 .product-item {
-    height: 420px;
+    height: 440px;
     background-color: $item-boder;
     border-radius: 20px;
     padding: 20px;
-    margin-bottom: 20px;
+    margin: 0 0px 20px 20px;
 }
 
 .product-image {
@@ -114,15 +117,15 @@ select.form-control.product-category {
 }
 
 nav .pagination .page-item .page-link  {
-    background-color: $text-red;
+    background-color: $bg-pagination;
     color:$text-in-pagiation;
     border: none;
     font-weight: bold;
     
 }
 nav .pagination .page-item .page-link:hover {
-    background-color: $bg-pagination;
+    background-color: $bg-pg-hover-active;
 }
 nav .pagination .page-item .page-link:active {
-    background-color: $bg-pagination !important;
+    background-color: $bg-pg-hover-active !important;
 }
