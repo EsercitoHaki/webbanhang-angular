@@ -157,4 +157,21 @@ export class OrderComponent implements OnInit{
       // Viết mã xử lý áp dụng mã giảm giá ở đây
       // Cập nhật giá trị totalAmount dựa trên mã giảm giá nếu áp dụng
   }
+
+  deleteOrder(orderId: number) {
+    if (confirm('Bạn có chắc chắn muốn xóa đơn hàng này không?')) {
+      this.orderService.deleteOrder(orderId).subscribe({
+        next: (response) => {
+          alert(response); // Display success message
+          this.cartItems = this.cartItems.filter(item => item.product.id !== orderId); // Update local state
+          this.calculateTotal(); // Recalculate total
+        },
+        error: (error) => {
+          console.error('Lỗi khi xóa đơn hàng:', error);
+          alert('Không thể xóa đơn hàng. Vui lòng thử lại.');
+        },
+      });
+    }
+  }
+  
 }

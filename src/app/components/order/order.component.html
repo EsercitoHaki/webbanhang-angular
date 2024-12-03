@@ -112,7 +112,9 @@
                             <td>{{ item.quantity }}</td>
                             <td>{{ item.product.price | number:'1.2-2' }}</td>
                             <td>{{ (item.product.price * item.quantity) | number:'1.2-2' }}</td>
-
+                            <td>
+                                <button class="btn btn-danger" (click)="deleteOrder(item.product.id)">X</button>
+                            </td>
                         </tr>
                     </ng-container>
                 </tbody>
