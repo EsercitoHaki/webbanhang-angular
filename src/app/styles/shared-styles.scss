@@ -67,7 +67,7 @@ $bg-header:#A43232;
 $boder-header-active: #333;
 
 //product
-$text-in-item:#333;
+$text-in-item:#F2F2F2;
 $item-boder: #F2F2F2;
 $text-in-pagiation: #333;
 $bg-pagination: #F2F2F2;
@@ -76,8 +76,13 @@ $bg-pg-hover-active:#BBBBBB;
 
 //order
 $order-text-hint:rgba(255, 255, 255, 0.1);
-$order-bg-input: #F2F2F2;
-$order-text-header: #32a432;
+$order-bg-input: #333;
+$order-text-header: #F2F2F2;
+$order-bg-product-table:#F2F2F2;
+
+//user profile
+$user-text-header:#F2F2F2;
+$user-bg-form:#333;
 
 
 
