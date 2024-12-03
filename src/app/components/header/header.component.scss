@@ -1,38 +1,45 @@
 @import "../../styles/shared-styles.scss";
 
-.navbar {
-    background-color: $bg-header !important;
-}
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 
-svg {
+  .navbar {
+    background-color: $bg-header !important;
+  }
+
+  svg {
     margin-right: 10px;
     transition: transform 0.3s ease;
   }
-  
+
   .svg-link:hover svg {
     transform: scale(1.1);
   }
 
-.navbar .container {
+  .navbar .container {
     background-color: $bg-header !important;
-}
+  }
 
-.navbar .container .navbar-brand {
+  .navbar .container .navbar-brand {
     color: $text-header;
-}
+  }
 
-.navbar .container .navbar-nav .nav-link {
+  .navbar .container .navbar-nav .nav-link {
     color: $text-header;
     border-radius: 18px;
     padding: 8px 16px;
-}
+  }
 
-.navbar .container .navbar-nav .nav-link.active {
+  .navbar .container .navbar-nav .nav-link.active {
     background-color: $boder-header-active !important;
     color: $text-header !important;
-}
-.navbar .container .navbar-nav .nav-link:hover {
+  }
+
+  .navbar .container .navbar-nav .nav-link:hover {
     background-color: #333;
     color: $text-header; 
     transform: translateY(-2px);
   }
+}
