@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   userResponse?: UserResponse | null;
   isPopoverOpen = false;
+  isDropdownOpen = false;
 
   constructor(
     private userService: UserService,
@@ -21,6 +22,10 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.userResponse = this.userService.getUserResponseFromLocalStorage();
+  }
+
+  toggleDropdown(state: boolean): void {
+    this.isDropdownOpen = state;
   }
 
   togglePopover(event: Event): void {
@@ -37,5 +42,20 @@ export class HeaderComponent implements OnInit {
       this.userResponse = this.userService.getUserResponseFromLocalStorage();
     }
     this.isPopoverOpen = false;
+  }
+
+  logout() {
+    this.userService.removeUserFromLocalStorage();
+    this.tokenService.removeToken();
+    this.userResponse = this.userService.getUserResponseFromLocalStorage();    
+    this.router.navigate(['/']);
+  }
+
+  navigateToProfile(): void {
+    this.router.navigate(['/user-profile']);
+  }
+
+  handleChangePassword(): void {
+    this.router.navigate(['/change-password']);
   }
 }

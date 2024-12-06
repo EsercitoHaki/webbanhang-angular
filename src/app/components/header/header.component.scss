@@ -1,45 +1,35 @@
 @import "../../styles/shared-styles.scss";
+.nav-item {
+  position: relative;
 
-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 9999999999;
+    display: none;
+    color: #fff;
+    background-color:#fff;
+    border: 1px solid #fff;
+    border-radius: 0.5rem;
+    min-width: 150px;
 
-  .navbar {
-    background-color: $bg-header !important;
+    li {
+      padding: 8px 12px;
+      background-color: #fff;
+      cursor: pointer;
+
+      &:hover {
+        background-color:#fff;
+        color: #fff;
+      }
+    }
   }
 
-  svg {
-    margin-right: 10px;
-    transition: transform 0.3s ease;
+  &:hover .dropdown-menu {
+    display: block;
   }
-
-  .svg-link:hover svg {
-    transform: scale(1.1);
-  }
-
-  .navbar .container {
-    background-color: $bg-header !important;
-  }
-
-  .navbar .container .navbar-brand {
-    color: $text-header;
-  }
-
-  .navbar .container .navbar-nav .nav-link {
-    color: $text-header;
-    border-radius: 18px;
-    padding: 8px 16px;
-  }
-
-  .navbar .container .navbar-nav .nav-link.active {
-    background-color: $boder-header-active !important;
-    color: $text-header !important;
-  }
-
-  .navbar .container .navbar-nav .nav-link:hover {
-    background-color: #333;
-    color: $text-header; 
-    transform: translateY(-2px);
+  .dropdown-item{
+    background-color: #fff;
   }
 }

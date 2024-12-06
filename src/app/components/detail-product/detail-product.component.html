@@ -1,10 +1,10 @@
 <app-header></app-header>
 <div class="container">
-    <div class="intro-section">
+    <div class="intro-section fade-in">
         <h1>Đây là trang chi tiết sản phẩm</h1>
         <p>Sử dụng Bootstrap</p>
     </div>    
-    <div class="row">
+    <div class="row fade-in">
       <div class="col-md-6">
         <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
@@ -26,7 +26,7 @@
             <span class="visually-hidden">Next</span>
           </button>
         </div>
-        <div class="row">
+        <div class="row fade-in">
           <div class="thumbnail-container">
             <div *ngFor="let image of product?.product_images; let i = index" 
                 class="thumbnail-item" 
@@ -37,7 +37,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 fade-in">
         <div class="product-details">
           <h2>{{ product?.name }}</h2>
           <p>{{ product?.description }}</p>

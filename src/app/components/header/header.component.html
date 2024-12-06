@@ -47,18 +47,18 @@
               Giỏ hàng
             </a>
           </li>
-          <li class="nav-item">
-            <ng-container *ngIf="userResponse">
-              <ng-container
-                ngbPopover="Tài khoản của tôi,Đơn mua,Đăng xuất"
-                popoverTitle="User Actions"
-                triggers="click">
-                <a class="nav-link" routerLink="/user-profile">{{ userResponse.fullname }}</a>
-              </ng-container>
-            </ng-container>
-            <ng-container *ngIf="!userResponse">
-              <a class="nav-link" routerLink="/login" routerLinkActive="active">Đăng nhập</a>
-            </ng-container>
+          <li class="nav-item" *ngIf="userResponse">
+            <div ngbDropdown class="d-inline-block" (mouseenter)="toggleDropdown(true)" (mouseleave)="toggleDropdown(false)">
+              <a class="nav-link dropdown-toggle" ngbDropdownToggle>{{ userResponse.fullname }}</a>
+              <ul ngbDropdownMenu *ngIf="isDropdownOpen">
+                <li><a class="dropdown-item" (click)="navigateToProfile()">Thông tin cá nhân</a></li>
+                <li><a class="dropdown-item" (click)="handleChangePassword()">Đổi mật khẩu</a></li>
+                <li><a class="dropdown-item" (click)="logout()">Đăng xuất</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item" *ngIf="!userResponse">
+            <a class="nav-link" routerLink="/login" routerLinkActive="active">Đăng nhập</a>
           </li>
         </ul>
       </div>
