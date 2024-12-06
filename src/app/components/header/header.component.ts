@@ -11,8 +11,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   userResponse?: UserResponse | null;
-  isPopoverOpen = false;
-  isDropdownOpen = false;
+  isDropdownOpen: boolean = false;
 
   constructor(
     private userService: UserService,
@@ -24,24 +23,9 @@ export class HeaderComponent implements OnInit {
     this.userResponse = this.userService.getUserResponseFromLocalStorage();
   }
 
-  toggleDropdown(state: boolean): void {
-    this.isDropdownOpen = state;
-  }
-
-  togglePopover(event: Event): void {
-    event.preventDefault();
-    this.isPopoverOpen = !this.isPopoverOpen;
-  }
-
-  handleItemClick(index: number): void {
-    if (index === 0) {
-      this.router.navigate(['/user-profile']);
-    } else if (index === 2) {
-      this.userService.removeUserFromLocalStorage();
-      this.tokenService.removeToken();
-      this.userResponse = this.userService.getUserResponseFromLocalStorage();
-    }
-    this.isPopoverOpen = false;
+  toggleDropdown(): void {
+    // Tắt dropdown nếu đang mở, hoặc mở nếu đang đóng
+    this.isDropdownOpen = !this.isDropdownOpen;
   }
 
   logout() {

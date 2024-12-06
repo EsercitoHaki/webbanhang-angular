@@ -1,55 +1,51 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-dark">
     <div class="container">
+      <!-- Logo SVG -->
       <a routerLink="/" class="svg-link">
         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="80" viewBox="0 0 100 100">
-          <!-- Vòng tròn nền -->
           <circle cx="50" cy="50" r="48" fill="#8e44ad" stroke="#732d91" stroke-width="4" />
-        
-          <!-- Khuôn mặt -->
           <circle cx="50" cy="50" r="30" fill="#ffffff" />
-        
-          <!-- Mắt trái -->
           <ellipse cx="40" cy="45" rx="5" ry="8" fill="#8e44ad" />
-          <!-- Mắt phải -->
           <ellipse cx="60" cy="45" rx="5" ry="8" fill="#8e44ad" />
-        
-          <!-- Miệng -->
           <path d="M40 60 Q50 70 60 60" stroke="#8e44ad" stroke-width="3" fill="none" />
-        
-          <!-- Sừng trái -->
           <path d="M35 30 Q25 10 45 10 Q37 20 35 30" fill="#ffffff" stroke="#8e44ad" stroke-width="2" />
-          <!-- Sừng phải -->
           <path d="M65 30 Q75 10 55 10 Q63 20 65 30" fill="#ffffff" stroke="#8e44ad" stroke-width="2" />
-        
         </svg>
       </a>
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
+          <!-- Menu Items -->
           <li class="nav-item">
             <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Trang chủ</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/products" routerLinkActive="active">
-              Sản phẩm
-            </a>
+            <a class="nav-link" routerLink="/products" routerLinkActive="active">Sản phẩm</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/notifications" routerLinkActive="active">Thông báo</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/orders" routerLinkActive="active">
-              <i class="fas fa-shopping-cart icon"></i>
-              Giỏ hàng
+              <i class="fas fa-shopping-cart icon"></i> Giỏ hàng
             </a>
           </li>
-          <li class="nav-item" *ngIf="userResponse">
-            <div ngbDropdown class="d-inline-block" (mouseenter)="toggleDropdown(true)" (mouseleave)="toggleDropdown(false)">
-              <a class="nav-link dropdown-toggle" ngbDropdownToggle>{{ userResponse.fullname }}</a>
+
+          <!-- Dropdown -->
+          <<li class="nav-item" *ngIf="userResponse">
+            <div ngbDropdown class="d-inline-block" [ngClass]="{'open': isDropdownOpen}">
+              <a 
+                class="nav-link dropdown-toggle" 
+                (click)="toggleDropdown()" 
+                [ngClass]="{'active': isDropdownOpen}">
+                {{ userResponse.fullname }}
+              </a>
               <ul ngbDropdownMenu *ngIf="isDropdownOpen">
                 <li><a class="dropdown-item" (click)="navigateToProfile()">Thông tin cá nhân</a></li>
                 <li><a class="dropdown-item" (click)="handleChangePassword()">Đổi mật khẩu</a></li>
@@ -57,6 +53,7 @@
               </ul>
             </div>
           </li>
+          
           <li class="nav-item" *ngIf="!userResponse">
             <a class="nav-link" routerLink="/login" routerLinkActive="active">Đăng nhập</a>
           </li>

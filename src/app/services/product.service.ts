@@ -31,4 +31,8 @@ export class ProductService {
     const params = new HttpParams().set('ids', productIds.join(',')); 
     return this.http.get<Product[]>(`${this.apiGetProducts}/by-ids`, { params });
   }
+
+  getRecommenderProduct(productId: number): Observable<Product[]> {
+    return this.http.get<Product[]>(`${environment.apiBaseUrl}/products/recommendations/${productId}`);
+  }
 }

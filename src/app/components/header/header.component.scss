@@ -2,34 +2,39 @@
 .nav-item {
   position: relative;
 
-  .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 9999999999;
-    display: none;
-    color: #fff;
-    background-color:#fff;
-    border: 1px solid #fff;
-    border-radius: 0.5rem;
-    min-width: 150px;
+  div[ngbDropdown] {
+    position: relative;
 
-    li {
-      padding: 8px 12px;
+    ul[ngbDropdownMenu] {
+      position: absolute;
+      top: calc(100% + 5px); // Đặt dropdown cách một khoảng nhỏ bên dưới
+      left: 0;
+      z-index: 9999;
+      display: none; // Mặc định ẩn dropdown
+      color: #000;
       background-color: #fff;
-      cursor: pointer;
+      border: 1px solid #ddd;
+      border-radius: 0.5rem;
+      min-width: 150px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
-      &:hover {
-        background-color:#fff;
-        color: #fff;
+      li {
+        padding: 8px 12px;
+        background-color: #fff;
+        cursor: pointer;
+        &:hover {
+          background-color: #c2c2c2;
+          color: #212529;
+        }
       }
     }
-  }
 
-  &:hover .dropdown-menu {
-    display: block;
+    &.open ul[ngbDropdownMenu] { 
+      display: block; // Hiển thị dropdown khi có class open
+    }
   }
-  .dropdown-item{
-    background-color: #fff;
-  }
+}
+
+header {
+  overflow: visible; // Đảm bảo phần header không bị cắt khi dropdown xuất hiện
 }
