@@ -38,8 +38,4 @@ export class HeaderComponent implements OnInit {
   navigateToProfile(): void {
     this.router.navigate(['/user-profile']);
   }
-
-  handleChangePassword(): void {
-    this.router.navigate(['/change-password']);
-  }
 }

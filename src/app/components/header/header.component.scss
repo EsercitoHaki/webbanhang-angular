@@ -1,40 +1,96 @@
 @import "../../styles/shared-styles.scss";
+
+header {
+  overflow: visible;
+  background-color: $bg-header; /* Sử dụng màu nền từ shared-styles */
+}
+
+.container {
+  display: flex; /* Sử dụng Flexbox */
+  justify-content: space-between; /* Đẩy SVG và nav-items sang hai bên */
+  align-items: center; /* Căn giữa theo trục dọc */
+}
+
+.svg-link {
+  flex-shrink: 0; /* Đảm bảo SVG không co lại */
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1); /* Tăng kích thước nhẹ khi hover */
+  }
+}
+
+.navbar-collapse {
+  flex-grow: 1; /* Chiếm toàn bộ không gian còn lại */
+  display: flex; /* Dùng Flexbox để căn chỉnh */
+  justify-content: flex-end; /* Đẩy nav-items sang phải */
+}
+
 .nav-item {
+  margin-left: 1rem; /* Thêm khoảng cách giữa các nav-items */
   position: relative;
+
+  a {
+    color: $text-header; /* Màu chữ từ shared-styles */
+    text-decoration: none; /* Xóa gạch chân */
+    transition: color 0.3s, border-bottom 0.3s;
+
+    &:hover {
+      color: $text-hover; /* Màu chữ khi hover */
+      border-bottom: 2px solid $boder-header-active; /* Gạch chân khi hover */
+    }
+  }
 
   div[ngbDropdown] {
     position: relative;
 
     ul[ngbDropdownMenu] {
       position: absolute;
-      top: calc(100% + 5px); // Đặt dropdown cách một khoảng nhỏ bên dưới
+      top: calc(100% + 5px); /* Dropdown cách nav-item một khoảng nhỏ */
       left: 0;
       z-index: 9999;
-      display: none; // Mặc định ẩn dropdown
-      color: #000;
-      background-color: #fff;
-      border: 1px solid #ddd;
+      display: none; /* Ẩn mặc định */
+      color: $text-header;
+      background-color: $bg-header;
+      border: 1px solid $border-color;
       border-radius: 0.5rem;
       min-width: 150px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
       li {
         padding: 8px 12px;
-        background-color: #fff;
+        background-color: $bg-header;
         cursor: pointer;
+
         &:hover {
-          background-color: #c2c2c2;
-          color: #212529;
+          background-color: $hover-bg;
+          color: $text-hover;
         }
       }
     }
 
-    &.open ul[ngbDropdownMenu] { 
-      display: block; // Hiển thị dropdown khi có class open
+    &.open ul[ngbDropdownMenu] {
+      display: block; /* Hiển thị dropdown khi mở */
     }
   }
 }
 
-header {
-  overflow: visible; // Đảm bảo phần header không bị cắt khi dropdown xuất hiện
+.navbar-toggler {
+  border: none; /* Xóa viền mặc định */
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=UTF8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.navbar-toggler:hover {
+  background-color: $hover-bg; /* Màu nền khi hover */
+}
+
+.fade-in {
+  @extend .fade-in; /* Kế thừa animation từ shared-styles */
+}
+
+.float {
+  @extend .float; /* Kế thừa animation từ shared-styles */
 }

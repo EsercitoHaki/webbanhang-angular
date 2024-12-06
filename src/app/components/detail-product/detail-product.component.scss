@@ -1,84 +1,128 @@
 @import "../../styles/shared-styles.scss";
 .intro-section {
-    color: white;
-    padding: 20px;
-    text-align: center;
+  color: white;
+  padding: 20px;
+  text-align: center;
 }
 
 .product-image {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
+
 .thumbnail-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .thumbnail-item {
-    width: 120px;
-    height: 120px;
-    margin-right: 5px;
-    /* Thêm khoảng cách ngang giữa các ảnh */
+  width: 120px;
+  height: 120px;
+  margin-right: 5px;
 }
 
 .thumbnail-item:last-child {
-    margin-right: 0;
-    /* Xóa khoảng cách ngang ở ảnh cuối cùng */
+  margin-right: 0;
 }
 
 .thumbnail-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .thumbnail-item.active {
-    border: 2px solid white;
+  border: 2px solid white;
 }
+
 .product-details {
-    color: white;
-    padding: 20px;
+  color: white;
+  padding: 20px;
 }
 
 .product-actions {
-    display: flex;
-    justify-content: flex-start;
-    margin-top: 20px;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 20px;
 }
 
 .product-actions button {
-    margin-right: 10px;
+  margin-right: 10px;
 }
+
 .border-wrapper {
-    border: 1px solid white;      
-  }
+  border: 1px solid white;
+}
 
-  .product-quantity {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      margin-top: 10px;
-  }
+.product-quantity {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 10px;
+}
 
-  .product-quantity button {
-      background-color: transparent;
-      border: none;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-  }
-  .product-quantity input {
-    background-color: transparent;
-    border: none;
-    color: white;
-    font-size: 16px;
-    text-align: center;
-    width: 40px;
-    margin: 0 10px;
-  }
-  .product-quantity input:focus {
-    outline: none;
-  }  
+.product-quantity button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.product-quantity input {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  width: 40px;
+  margin: 0 10px;
+}
+
+.product-quantity input:focus {
+  outline: none;
+}
+
+.carousel-item {
+  position: relative;
+}
+
+.gradient-left,
+.gradient-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px; /* Increased width to make the gradient more noticeable */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.gradient-left {
+  left: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.8), transparent);
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+.gradient-right {
+  right: 0;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.8), transparent);
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+}
+
+.carousel-item:hover .gradient-left,
+.carousel-item:hover .gradient-right {
+  opacity: 1;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-size: 20px 20px;
+}
