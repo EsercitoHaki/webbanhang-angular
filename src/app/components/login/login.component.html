@@ -41,6 +41,12 @@
                     </select>
                 </div>
                 <button type="button" (click)="login()" class="login-button">Đăng nhập</button>
+                <button id="google-login-btn" (click)="onGoogleLogin()" class="login-button">&nbsp;&nbsp;Đăng nhập với Google</button>
+    
+                <div *ngIf="errorMessage" class="error-message">
+                    {{ errorMessage }}
+                </div>                           
+                <button type="button" (click)="login()" class="login-button">Tiếp tục với Facebook</button>
                 <div class="divider"></div>
                 <p class="text-center">Bạn chưa đăng ký? <span>
                         <a href="#" routerLink="/register" class="register-link">Tạo tài khoản</a></span></p>

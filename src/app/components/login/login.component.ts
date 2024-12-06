@@ -1,3 +1,7 @@
+/// <reference types="gapi" />
+/// <reference types="gapi.auth2" />
+
+
 import { Component, ViewChild } from '@angular/core';
 import { LoginDTO } from '../../dtos/user/login.dto';
 import { UserService } from '../../services/user.service';
@@ -8,6 +12,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LoginResponse } from '../../responses/user/login.response';
 import { Role } from '../../models/role'; // Đường dẫn đến model Role
 import { UserResponse } from '../../responses/user/user.response';
+
+declare const gapi: any;
 
 @Component({
   selector: 'app-login',
@@ -20,6 +26,9 @@ export class LoginComponent {
   phoneNumber: string = '33445566';
   password: string = '1234567';
 
+  //
+  errorMessage: string | null = null;
+
   roles: Role[] = []; // Mảng roles
   rememberMe: boolean = true;
   selectedRole: Role | undefined; // Biến để lưu giá trị được chọn từ dropdown
@@ -31,36 +40,81 @@ export class LoginComponent {
   }
   constructor(
     private router: Router,
-    private activatedRoute: ActivatedRoute,
+    private route: ActivatedRoute,
     private userService: UserService,
     private tokenService: TokenService,
     private roleService: RoleService
+    
   ) { }
 
   ngOnInit() {
-    // Gọi API lấy danh sách roles và lưu vào biến roles
-    debugger
-    this.roleService.getRoles().subscribe({      
-      next: (roles: Role[]) => { // Sử dụng kiểu Role[]
-        debugger
+    // Gọi API lấy danh sách roles
+    this.roleService.getRoles().subscribe({
+      next: (roles: Role[]) => {
         this.roles = roles;
         this.selectedRole = roles.length > 0 ? roles[0] : undefined;
       },
-      complete: () => {
-        debugger
-      },  
       error: (error: any) => {
-        debugger
-        console.error('Error getting roles:', error);
+        console.error('Failed to fetch roles:', error.message || error);
+      },
+    });
+  
+    this.route.queryParams.subscribe((params: { [key: string]: string }) => {
+      if (params['error']) {
+        this.errorMessage = 'Đăng nhập thất bại, vui lòng thử lại.';
+      }
+    });
+  
+    // Khởi tạo Google Sign-In
+    this.initializeGoogleSignIn();
+  }
+  
+  initializeGoogleSignIn() {
+    gapi.load('auth2', () => {
+      const auth2 = gapi.auth2.init({
+        client_id: '300458157401-lhpsaqtp4370qlo88gu8a9v8j8ia5pgc.apps.googleusercontent.com', // Thay YOUR_GOOGLE_CLIENT_ID bằng Client ID của bạn
+        scope: 'profile email',
+        ux_mode: 'redirect',
+        redirect_uri: 'http://localhost:4200',
+      });
+  
+      const googleButton = document.getElementById('google-login-btn');
+      auth2.attachClickHandler(googleButton, {}, (googleUser: any) => {
+        const idToken = googleUser.getAuthResponse().id_token;
+        this.loginWithGoogle(idToken);
+      });
+    });
+  }
+  
+  loginWithGoogle(idToken: string): void {
+    this.userService.googleLogin(idToken).subscribe({
+      next: (response: any) => {
+        const { token, user } = response;
+        // Lưu token vào localStorage
+        this.tokenService.setToken(token);
+        // Lưu thông tin người dùng
+        this.userService.saveUserResponseToLocalStorage(user);
+        // Điều hướng đến trang chủ
+        this.router.navigate(['/']);
+      },
+      error: (error) => {
+        console.error('Google login failed:', error.message || error);
+        this.errorMessage = 'Đăng nhập với Google thất bại. Vui lòng thử lại.';
       }
     });
   }
+  
+  
+  
   createAccount() {
     debugger
     // Chuyển hướng người dùng đến trang đăng ký (hoặc trang tạo tài khoản)
     this.router.navigate(['/register']); 
   }
   login() {
+    // Reset thông báo lỗi
+    this.errorMessage = null;
+
     const message = `phone: ${this.phoneNumber}` +
       `password: ${this.password}`;
     //alert(message);
@@ -107,4 +161,20 @@ export class LoginComponent {
       }
     });
   }
+
+  onGoogleLogin() {
+    gapi.load('auth2', () => {
+      const auth2 = gapi.auth2.init({
+        client_id: '300458157401-lhpsaqtp4370qlo88gu8a9v8j8ia5pgc.apps.googleusercontent.com' // Thay bằng Client ID của bạn
+      });
+  
+      auth2.signIn().then((googleUser: gapi.auth2.GoogleUser) => {
+        const idToken = googleUser.getAuthResponse().id_token;
+        this.loginWithGoogle(idToken);
+      }).catch((error: any) => {
+        console.error('Google Sign-In error:', error);
+        this.errorMessage = 'Đăng nhập với Google thất bại. Vui lòng thử lại.';
+      });
+    });
+  }  
 }

@@ -28,17 +28,25 @@ export class UserService {
     return this.http.post(this.apiRegister, registerDTO, this.apiConfig);
   }
 
+
   login(loginDTO: LoginDTO): Observable<any> {    
     return this.http.post(this.apiLogin, loginDTO, this.apiConfig);
   }
-  getUserDetail(token: string) {
-    return this.http.post(this.apiUserDetail, {
+
+  googleLogin(idToken: string): Observable<any> { // <== THÊM HÀM NÀY Ở ĐÂY
+    const apiGoogleLogin = `${environment.apiBaseUrl}/users/google-login`;
+    return this.http.post(apiGoogleLogin, { idToken });
+  }
+
+  getUserDetail(token: string): Observable<any> {
+    return this.http.get(this.apiUserDetail, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       })
-    })
+    });
   }
+  
   updateUserDetail(token: string, updateUserDTO: UpdateUserDTO) {
     debugger
     let userResponse = this.getUserResponseFromLocalStorage();        
