@@ -10,6 +10,7 @@ import { OrderResponse } from '../../responses/order/order.response';
 import { OrderService } from '../../services/order.service';
 import { OrderDetail } from '../../models/order.detail';
 
+
 @Component({
   selector: 'app-detail-product',
   templateUrl: './detail-product.component.html',
@@ -52,9 +53,11 @@ export class DetailProductComponent implements OnInit {
               });
             }            
             debugger
-            this.product = response 
+            this.product = response
             // Bắt đầu với ảnh đầu tiên
             this.showImage(0);
+
+            this.getRecommendedProducts(this.productId);
           },
           complete: () => {
             debugger;
@@ -64,14 +67,22 @@ export class DetailProductComponent implements OnInit {
             console.error('Error fetching detail:', error);
           }
         });
-        this.productService.getRecommenderProduct(this.productId).subscribe({
-          next: (response: any) => {
-            this.recommendedProducts = response.recommendedProducts;
-          }
-        })    
+           
       } else {
         console.error('Invalid productId:', idParam);
       }      
+    }
+    getRecommendedProducts(productId: number)
+    {
+      this.productService.getRecommenderProduct(productId).subscribe({
+        next: (response: any) => {
+          this.recommendedProducts = response;
+        },
+        error: (error: any) => {
+          debugger;
+          console.error('Error fetching detail:', error);
+        }
+      });
     }
     showImage(index: number): void {
       debugger
