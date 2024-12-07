@@ -25,6 +25,7 @@ export class ProductService {
   getDetailProduct(productId: number) {
     return this.http.get(`${environment.apiBaseUrl}/products/${productId}`);
   }
+  
   getProductsByIds(productIds: number[]): Observable<Product[]> {
     // Chuyển danh sách ID thành một chuỗi và truyền vào params
     debugger

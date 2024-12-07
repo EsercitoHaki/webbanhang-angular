@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="container">
     <div class="intro-section fade-in">
-        <h1 class="">Order</h1>
+        <h1 class="">Orders</h1>
     </div> 
     <form [formGroup]="orderForm" class="fade-in"> <!-- Thêm form và gán formGroup -->   
         <div class="row fade-in">
@@ -13,7 +13,7 @@
                             formControlName="fullname" 
                             placeholder="Họ và tên"
                             class="form-control" 
-                            id="fullname" 
+                            id="fullname"
                             [class.is-invalid]="orderForm.get('fullname')!.invalid && orderForm.get('fullname')!.touched">
                         <div 
                             *ngIf="orderForm.get('fullname')!.invalid && orderForm.get('fullname')!.touched" 
@@ -112,7 +112,7 @@
                             <td>{{ item.product.price | number:'1.2-2' }}</td>
                             <td>{{ (item.product.price * item.quantity) | number:'1.2-2' }}</td>
                             <td>
-                                <button class="btn btn-danger" (click)="deleteOrder(item.product.id)">X</button>
+                                <button class="btn btn-danger" (click)="removeItem(item.product.id)">X</button>
                             </td>
                         </tr>
                     </ng-container>

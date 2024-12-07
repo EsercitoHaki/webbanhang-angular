@@ -3,6 +3,7 @@ import { UserService } from '../../services/user.service';
 import { UserResponse } from '../../responses/user/user.response';
 import { TokenService } from '../../services/token.service';
 import { Router } from '@angular/router';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -16,6 +17,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private userService: UserService,
     private tokenService: TokenService,
+    private cartService: CartService,
     private router: Router,
   ) {}
 
@@ -29,6 +31,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
+    this.cartService.clearCart();
     this.userService.removeUserFromLocalStorage();
     this.tokenService.removeToken();
     this.userResponse = this.userService.getUserResponseFromLocalStorage();    
