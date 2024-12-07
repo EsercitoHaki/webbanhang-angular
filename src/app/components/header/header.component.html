@@ -20,7 +20,7 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav ">
           <!-- Menu Items -->
           <li class="nav-item">
             <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Trang chủ</a>
@@ -38,15 +38,15 @@
           </li>
 
           <!-- Dropdown -->
-          <<li class="nav-item" *ngIf="userResponse">
+          <<li class="nav-item " *ngIf="userResponse">
             <div ngbDropdown class="d-inline-block" [ngClass]="{'open': isDropdownOpen}">
               <a 
-                class="nav-link dropdown-toggle" 
+                class="nav-link dropdown-toggle " 
                 (click)="toggleDropdown()" 
                 [ngClass]="{'active': isDropdownOpen}">
                 {{ userResponse.fullname }}
               </a>
-              <ul ngbDropdownMenu *ngIf="isDropdownOpen">
+              <ul ngbDropdownMenu class="list-unstyled" *ngIf="isDropdownOpen">
                 <li><a class="dropdown-item" (click)="navigateToProfile()">Thông tin cá nhân</a></li>
                 <li><a class="dropdown-item" (click)="logout()">Đăng xuất</a></li>
               </ul>

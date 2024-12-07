@@ -4,7 +4,7 @@ import { Category } from '../../models/category';
 import { ProductService } from '../../services/product.service';
 import { CategoryService } from '../../services/category.service';
 import { environment } from '../../environments/environment';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { TokenService } from '../../services/token.service';
 import VanillaTilt from 'vanilla-tilt';
 
@@ -30,11 +30,19 @@ export class ProductComponent implements OnInit, AfterViewChecked {
     private productService: ProductService,
     private categoryService: CategoryService,
     private router: Router,
+    private activatedRoute: ActivatedRoute,  // Thêm ActivatedRoute để lấy query params
     private tokenService: TokenService
   ) {}
 
   ngOnInit(): void {
-    this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
+    // Lấy giá trị page từ query params khi trang được tải lại
+    this.activatedRoute.queryParams.subscribe(params => {
+      const page = +params['page'] || 1; // Lấy giá trị page từ query params hoặc mặc định là 1
+      this.currentPage = page;
+      this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
+    });
+
+    // Lấy danh mục sản phẩm
     this.getCategories(1, 100);
   }
 
@@ -91,6 +99,14 @@ export class ProductComponent implements OnInit, AfterViewChecked {
   onPageChange(page: number): void {
     this.currentPage = page;
     this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
+
+    // Cập nhật query params trong URL mà không thay đổi phần đường dẫn
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute, // Điều hướng dựa trên URL hiện tại
+      queryParams: { page: this.currentPage }, // Cập nhật query params
+      queryParamsHandling: 'merge', // Giữ nguyên các query params khác
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   generateVisiblePageArray(currentPage: number, totalPages: number): number[] {
