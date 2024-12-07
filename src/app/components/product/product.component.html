@@ -1,29 +1,29 @@
 <app-header></app-header>
 <div class="search-box fade-in" id="search-box">
-  <input type="text" class="form-control search-input" 
-      placeholder="Tìm sản phẩm" 
-      [(ngModel)]="keyword">
-  <select class="form-control product-category"             
-      [(ngModel)]="selectedCategoryId">
-      <option [value]="0">Tất cả</option> 
-      <option *ngFor="let category of categories" [value]="category.id">
-          {{ category.name }}
-      </option>
-  </select>
-  <button class="btn btn-gradient" (click)="searchProducts()">Tìm kiếm</button>
+<input type="text" class="form-control search-input" 
+    placeholder="Tìm sản phẩm" 
+    [(ngModel)]="keyword">
+<select class="form-control product-category"             
+    [(ngModel)]="selectedCategoryId">
+    <option [value]="0">Tất cả</option> 
+    <option *ngFor="let category of categories" [value]="category.id">
+        {{ category.name }}
+    </option>
+</select>
+<button class="btn btn-gradient" (click)="searchProducts()">Tìm kiếm</button>
 </div>           
 <div class="row fade-in">
     <div class="col-lg-3 col-sm-6 fade-in" *ngFor="let product of products">
         <div class="product-item card" (click)="onProductClick(product.id)">
-          <div class="imgBox">
+        <div class="imgBox">
             <img [src]="product.url" alt="Product Image" class="mouse product-image">
-          </div>
-          <div class="contentBox">
+        </div>
+        <div class="contentBox">
             <h3>{{ product.name }}</h3>
-            <h2 class="price">Giá: ${{ product.price }}</h2>
+            <h2 class="price">Giá: {{ product.price | number:'1.0-0' }} VNĐ</h2>
             <p class="product-description">{{ product.description }}</p>
             <a href="#" class="buy">Mua ngay</a>
-          </div>
+        </div>
         </div>
     </div>      
 </div>
