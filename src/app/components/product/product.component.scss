@@ -35,25 +35,8 @@
 }
 
 .form-control {
-    background-color: transparent;
+    background-color: $order-bg-input;
     color: $text-white;
-}
-
-.form-control::placeholder {
-    /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: $text-hint;
-    opacity: 1;
-    /* Firefox */
-}
-
-.form-control:-ms-input-placeholder {
-    /* Internet Explorer 10-11 */
-    color: $text-hint;
-}
-
-.form-control::-ms-input-placeholder {
-    /* Microsoft Edge */
-    color: $text-hint;
 }
 
 .row{
