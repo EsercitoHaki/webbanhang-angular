@@ -1,3 +1,4 @@
+@import "../../styles/shared-styles.scss";
 .container {
     color: white;
 }
@@ -7,6 +8,12 @@
     max-width: 600px;            
     border-radius: 10px;
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+}
+.product-header{
+    color: $order-text-header;
+}
+.form-label{
+    color: $order-bg-product-table;
 }
 .product-info {
     display: flex;
@@ -24,16 +31,19 @@
     color: white;
     margin-right: 10px;
 }
+.product-order{
+    
+}
 table {
     width: 100%;
     border-radius: 10px;
     border: none;
-    border-collapse: separate;
-    border: 1px solid white;
     border-spacing: 0;    
-    background-color: rgb(12, 13, 54);    
+    background-color: $order-bg-product-table;    
 }
-
+tr{
+    background-color: $order-bg-product-table;
+}
 th,
 td {
     padding: 10px;

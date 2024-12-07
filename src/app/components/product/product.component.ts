@@ -9,11 +9,11 @@ import { TokenService } from '../../services/token.service';
 import VanillaTilt from 'vanilla-tilt';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-product',
+  templateUrl: './product.component.html',
+  styleUrls: ['./product.component.scss']
 })
-export class HomeComponent implements OnInit, AfterViewChecked {
+export class ProductComponent implements OnInit, AfterViewChecked {
   products: Product[] = [];
   categories: Category[] = [];
   selectedCategoryId: number = 0;
@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   }
 
   private initializeVanillaTilt(): void {
-    const productItems = document.querySelectorAll('.chu');
+    const productItems = document.querySelectorAll('.product-item');
     if (productItems.length > 0) {
       VanillaTilt.init(productItems as any);
       this.isVanillaTiltInitialized = true;

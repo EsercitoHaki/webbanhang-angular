@@ -1,14 +1,26 @@
+@import "../../styles/shared-styles.scss";
+
 .intro-section {
+    background-color: rgba(255,255,255 ,0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
     text-align: center;
     color: white;
     padding: 20px;
 }
+
+.img-landing{
+    height: 500px;
+    width: 500px;
+}
+
 
 .search-box {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .product-category {
@@ -17,7 +29,6 @@
 
 .search-input {
     width: 300px;
-    background-color: rgb(19, 23, 42);
     margin-right: 10px;
     border-color: rgba(255, 255, 255, 0.5);
     color: white;
@@ -25,42 +36,48 @@
 
 .form-control {
     background-color: transparent;
-    color: white;
+    color: $text-white;
 }
 
 .form-control::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: rgba(255, 255, 255, 0.5);
+    color: $text-hint;
     opacity: 1;
     /* Firefox */
 }
 
 .form-control:-ms-input-placeholder {
     /* Internet Explorer 10-11 */
-    color: rgba(255, 255, 255, 0.5);
+    color: $text-hint;
 }
 
 .form-control::-ms-input-placeholder {
     /* Microsoft Edge */
-    color: rgba(255, 255, 255, 0.5);
+    color: $text-hint;
 }
 
 .product-item {
-    background-color: rgb(19, 23, 42);
-    border: 1px solid rgb(35, 39, 61);
+    height: 420px;
+    background-color: $item-boder;
     border-radius: 20px;
     padding: 20px;
     margin-bottom: 20px;
 }
 
 .product-image {
-    width: 100%;
-    height: auto;
+    // width: 100%;
+    // max-height: 360px;
+    // object-fit: cover;
+    // margin-bottom: 10px;
+    width: 100%; /* Đảm bảo ảnh chiếm toàn bộ chiều rộng */
+    height: 266px; /* Đảm bảo tỷ lệ ảnh không bị méo */
+    object-fit: cover; /* Cắt ảnh nếu cần để đảm bảo không bị vỡ tỷ lệ */
     margin-bottom: 10px;
 }
 
+
 .product-name {
-    color: white;
+    color: $text-in-item;
 }
 
 .product-description {
@@ -72,11 +89,11 @@
 }
 
 .product-price {
-    color: white;
+    color: $text-in-item;
 }
 
 .product-rating {
-    color: #FFD700;
+    color: $rating;
     margin-top: 10px;
 }
 
@@ -91,6 +108,21 @@
     /*margin-top, margin-right, margin-bottom, margin-left*/
 }
 select.form-control.product-category {
-    background-color: black;
-    color: white; /* Đổi màu chữ để hiển thị rõ hơn */
+    background-color: $background-select-color;
+    color: $text-white;
+    margin-right: 10px;
+}
+
+nav .pagination .page-item .page-link  {
+    background-color: $text-red;
+    color:$text-in-pagiation;
+    border: none;
+    font-weight: bold;
+    
+}
+nav .pagination .page-item .page-link:hover {
+    background-color: $bg-pg-hover-active;
+}
+nav .pagination .page-item .page-link:active {
+    background-color: $bg-pg-hover-active !important;
 }

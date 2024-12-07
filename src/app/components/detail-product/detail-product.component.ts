@@ -17,6 +17,7 @@ import { OrderDetail } from '../../models/order.detail';
 })
 
 export class DetailProductComponent implements OnInit {
+  recommendedProducts: Product[] = [];
   product?: Product;
   productId: number = 0;
   currentImageIndex: number = 0;
@@ -62,7 +63,12 @@ export class DetailProductComponent implements OnInit {
             debugger;
             console.error('Error fetching detail:', error);
           }
-        });    
+        });
+        this.productService.getRecommenderProduct(this.productId).subscribe({
+          next: (response: any) => {
+            this.recommendedProducts = response.recommendedProducts;
+          }
+        })    
       } else {
         console.error('Invalid productId:', idParam);
       }      
@@ -99,6 +105,7 @@ export class DetailProductComponent implements OnInit {
       debugger
       if (this.product) {
         this.cartService.addToCart(this.product.id, this.quantity);
+        this.router.navigate(['/orders']);
       } else {
         // Xử lý khi product là null
         console.error('Không thể thêm sản phẩm vào giỏ hàng vì product là null.');

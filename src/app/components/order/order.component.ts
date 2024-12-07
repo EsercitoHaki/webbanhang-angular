@@ -45,13 +45,13 @@ export class OrderComponent implements OnInit{
   ) {
     // Tạo FormGroup và các FormControl tương ứng
     this.orderForm = this.formBuilder.group({
-      fullname: ['hoàng xx', Validators.required], // fullname là FormControl bắt buộc      
-      email: ['hoang234@gmail.com', [Validators.email]], // Sử dụng Validators.email cho kiểm tra định dạng email
-      phone_number: ['11445547', [Validators.required, Validators.minLength(6)]], // phone_number bắt buộc và ít nhất 6 ký tự
-      address: ['nhà x ngõ y', [Validators.required, Validators.minLength(5)]], // address bắt buộc và ít nhất 5 ký tự
-      note: ['dễ vữ'],
-      shipping_method: ['express'],
-      payment_method: ['cod']
+      fullname: ['', Validators.required], // fullname là FormControl bắt buộc      
+      email: ['', [Validators.email]], // Sử dụng Validators.email cho kiểm tra định dạng email
+      phone_number: ['', [Validators.required, Validators.minLength(6)]], // phone_number bắt buộc và ít nhất 6 ký tự
+      address: ['', [Validators.required, Validators.minLength(5)]], // address bắt buộc và ít nhất 5 ký tự
+      note: [''],
+      shipping_method: [''],
+      payment_method: ['']
     });
   }
   
@@ -157,4 +157,21 @@ export class OrderComponent implements OnInit{
       // Viết mã xử lý áp dụng mã giảm giá ở đây
       // Cập nhật giá trị totalAmount dựa trên mã giảm giá nếu áp dụng
   }
+
+  deleteOrder(orderId: number) {
+    if (confirm('Bạn có chắc chắn muốn xóa đơn hàng này không?')) {
+      this.orderService.deleteOrder(orderId).subscribe({
+        next: (response) => {
+          alert(response); // Display success message
+          this.cartItems = this.cartItems.filter(item => item.product.id !== orderId); // Update local state
+          this.calculateTotal(); // Recalculate total
+        },
+        error: (error) => {
+          console.error('Lỗi khi xóa đơn hàng:', error);
+          alert('Không thể xóa đơn hàng. Vui lòng thử lại.');
+        },
+      });
+    }
+  }
+  
 }
