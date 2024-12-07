@@ -1,32 +1,4 @@
-
 <app-header></app-header>
-<<<<<<< HEAD
-<div class="container">
-    <div class="intro-section">
-        <h1>Trang chủ</h1>
-    </div>
-    <!--Đoạn này có 1 ô searchbox bên trái, 1 combobox bên phải  -->
-    <div class="search-box">
-        <input type="text" class="form-control search-input" 
-            placeholder="Tìm sản phẩm" 
-            [(ngModel)]="keyword">
-        <select class="form-control product-category"             
-            [(ngModel)]="selectedCategoryId">
-            <option [value]="0">Tất cả</option> 
-            <option *ngFor="let category of categories" [value]="category.id">
-                {{ category.name }}
-            </option>
-        </select>
-        <button class="btn btn-primary" (click)="searchProducts()">Tìm kiếm</button>
-    </div>        
-    <div class="row">
-        <div class="col-lg-4 col-md-6" *ngFor="let product of products">
-            <div class="product-item" (click)="onProductClick(product.id)">
-                <img [src]="product.url" alt="Product Image" class="product-image">
-                <h3 class="product-name">{{ product.name }}</h3>
-                <p class="product-description">{{ product.description }}</p>
-                <p class="product-price">Giá: ${{ product.price }}</p>                
-=======
 <div class="container mt-5">
     <div class="row align-items-center justify-content-center intro-section ">
         <div class="col col-md-6 chu">
@@ -35,7 +7,6 @@
                 <p class="row justify-content-start fade-in" >Sản phẩm: Điện thoại, laptop, máy tính bảng và phụ kiện từ các thương hiệu hàng đầu</p>
                 <p class="row justify-content-start fade-in" >Chất lượng đảm bảo: Hàng chính hãng 100%, bảo hành uy tín.</p>
                 <p class="row justify-content-start fade-in" >Dịch vụ tận tâm: Tư vấn chuyên nghiệp, hỗ trợ mọi lúc.</p>
->>>>>>> 672b1468f000aca2a99b45a3e27e0226702713d0
             </div>
         </div>
         <img class= "col-lg-3 img-landing float" src="assets/iphone16.png" alt="iphone"> 
