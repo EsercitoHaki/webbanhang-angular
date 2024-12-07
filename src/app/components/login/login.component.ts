@@ -17,8 +17,8 @@ import { UserResponse } from '../../responses/user/user.response';
 export class LoginComponent {
   @ViewChild('loginForm') loginForm!: NgForm;
 
-  phoneNumber: string = '33445566';
-  password: string = '123456789';
+  phoneNumber: string = '';
+  password: string = '';
   showPassword: boolean = false;
 
   roles: Role[] = []; // Mảng roles
