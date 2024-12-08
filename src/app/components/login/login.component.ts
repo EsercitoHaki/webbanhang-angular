@@ -26,9 +26,6 @@ export class LoginComponent {
   phoneNumber: string = '33445566';
   password: string = '1234567';
 
-  //
-  errorMessage: string | null = null;
-
   roles: Role[] = []; // Mảng roles
   rememberMe: boolean = true;
   selectedRole: Role | undefined; // Biến để lưu giá trị được chọn từ dropdown
@@ -140,7 +137,12 @@ export class LoginComponent {
                 date_of_birth: new Date(response.date_of_birth),
               };    
               this.userService.saveUserResponseToLocalStorage(this.userResponse); 
-              this.router.navigate(['/']);                      
+              if(this.userResponse?.role.name == 'admin') {
+                this.router.navigate(['/admin']);    
+              } else if(this.userResponse?.role.name == 'user') {
+                this.router.navigate(['/']);                      
+              }
+              
             },
             complete: () => {
               debugger;
@@ -161,20 +163,4 @@ export class LoginComponent {
       }
     });
   }
-
-  onGoogleLogin() {
-    gapi.load('auth2', () => {
-      const auth2 = gapi.auth2.init({
-        client_id: '300458157401-lhpsaqtp4370qlo88gu8a9v8j8ia5pgc.apps.googleusercontent.com' // Thay bằng Client ID của bạn
-      });
-  
-      auth2.signIn().then((googleUser: gapi.auth2.GoogleUser) => {
-        const idToken = googleUser.getAuthResponse().id_token;
-        this.loginWithGoogle(idToken);
-      }).catch((error: any) => {
-        console.error('Google Sign-In error:', error);
-        this.errorMessage = 'Đăng nhập với Google thất bại. Vui lòng thử lại.';
-      });
-    });
-  }  
 }

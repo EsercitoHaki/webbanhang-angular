@@ -1,12 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Product } from '../../models/product';
-import { Category } from '../../models/category';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { CategoryService } from '../../services/category.service';
 import { environment } from '../../environments/environment';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { TokenService } from '../../services/token.service';
-
 
 @Component({
   selector: 'app-home',
@@ -16,36 +13,24 @@ import { TokenService } from '../../services/token.service';
 export class HomeComponent implements OnInit {
   products: Product[] = [];
   categories: Category[] = []; // Dữ liệu động từ categoryService
-  selectedCategoryId: number = 0; // Giá trị category được chọn
+  selectedCategoryId: number  = 0; // Giá trị category được chọn
   currentPage: number = 1;
   itemsPerPage: number = 12;
   pages: number[] = [];
-  totalPages: number = 0;
+  totalPages:number = 0;
   visiblePages: number[] = [];
-  keyword: string = "";
+  keyword:string = "";
 
   constructor(
     private productService: ProductService,
-    private categoryService: CategoryService,
-    private route: ActivatedRoute,
+    private categoryService: CategoryService,    
     private router: Router,
     private tokenService: TokenService
-  ) { }
+    ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
-    this.route.queryParams.subscribe(params => {
-      const token = params['token'];
-      console.log('Token từ URL:', token); // Debug
-  
-      if (token) {
-        this.tokenService.setToken(token); // Lưu token vào localStorage
-        console.log('Token được lưu:', this.tokenService.getToken());
-        this.router.navigate(['/home']); // Điều hướng lại để xóa query params
-      } else {
-        console.warn('Không tìm thấy token trong URL!');
-      }
-    });
+    this.getCategories(1, 100);
   }
   getCategories(page: number, limit: number) {
     this.categoryService.getCategories(page, limit).subscribe({
@@ -72,7 +57,7 @@ export class HomeComponent implements OnInit {
     this.productService.getProducts(keyword, selectedCategoryId, page, limit).subscribe({
       next: (response: any) => {
         debugger
-        response.products.forEach((product: Product) => {
+        response.products.forEach((product: Product) => {          
           product.url = `${environment.apiBaseUrl}/products/images/${product.thumbnail}`;
         });
         this.products = response.products;
@@ -86,7 +71,7 @@ export class HomeComponent implements OnInit {
         debugger;
         console.error('Error fetching products:', error);
       }
-    });
+    });    
   }
   onPageChange(page: number) {
     debugger;
@@ -106,12 +91,12 @@ export class HomeComponent implements OnInit {
     }
 
     return new Array(endPage - startPage + 1).fill(0)
-      .map((_, index) => startPage + index);
+        .map((_, index) => startPage + index);
   }
   // Hàm xử lý sự kiện khi sản phẩm được bấm vào
   onProductClick(productId: number) {
     debugger
     // Điều hướng đến trang detail-product với productId là tham số
     this.router.navigate(['/products', productId]);
-  }
+  }  
 }

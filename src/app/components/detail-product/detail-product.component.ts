@@ -9,6 +9,9 @@ import { environment } from '../../environments/environment';
 import { OrderResponse } from '../../responses/order/order.response';
 import { OrderService } from '../../services/order.service';
 import { OrderDetail } from '../../models/order.detail';
+import { CommentService } from '../../services/comment.service';
+import { Comment } from '../../models/comment';
+
 
 @Component({
   selector: 'app-detail-product',
@@ -17,15 +20,18 @@ import { OrderDetail } from '../../models/order.detail';
 })
 
 export class DetailProductComponent implements OnInit {
+  recommendedProducts: Product[] = [];
+  commentProducts: Comment[] = [];
   product?: Product;
   productId: number = 0;
   currentImageIndex: number = 0;
   quantity: number = 1;
   constructor(
-    private productService: ProductService,
-    private cartService: CartService,
-    // private categoryService: CategoryService,
-    // private router: Router,
+      private productService: ProductService,
+      private cartService: CartService,
+      // private categoryService: CategoryService,
+      // private router: Router,
+      private commentService: CommentService,
       private activatedRoute: ActivatedRoute,
       private router: Router,
     ) {
@@ -51,9 +57,12 @@ export class DetailProductComponent implements OnInit {
               });
             }            
             debugger
-            this.product = response 
+            this.product = response
             // Bắt đầu với ảnh đầu tiên
             this.showImage(0);
+
+            this.getRecommendedProducts(this.productId);
+            this.getCommentsByProduct(this.productId);
           },
           complete: () => {
             debugger;
@@ -62,11 +71,42 @@ export class DetailProductComponent implements OnInit {
             debugger;
             console.error('Error fetching detail:', error);
           }
-        });    
+        });
+           
       } else {
         console.error('Invalid productId:', idParam);
       }      
     }
+    getRecommendedProducts(productId: number)
+    {
+      this.productService.getRecommenderProduct(productId).subscribe({
+        next: (response: any) => {
+          this.recommendedProducts = response;
+        },
+        error: (error: any) => {
+          debugger;
+          console.error('Error fetching detail:', error);
+        }
+      });
+    }
+    getCommentsByProduct(productId: number) {
+      this.commentService.getCommentsByProduct(productId).subscribe({
+        next: (response: any) => {
+          this.commentProducts = response.map((comment: any) => {
+            const createdAt = new Date(comment.updated_at[0], comment.updated_at[1] - 1, comment.updated_at[2],
+                                       comment.updated_at[3], comment.updated_at[4], comment.updated_at[5]);
+            return {
+              ...comment,
+              created_at: createdAt
+            };
+          });
+        },
+        error: (error: any) => {
+          console.error('Error fetching comments:', error);
+        }
+      });
+    }
+  
     showImage(index: number): void {
       debugger
       if (this.product && this.product.product_images && 
@@ -99,6 +139,7 @@ export class DetailProductComponent implements OnInit {
       debugger
       if (this.product) {
         this.cartService.addToCart(this.product.id, this.quantity);
+        this.router.navigate(['/orders']);
       } else {
         // Xử lý khi product là null
         console.error('Không thể thêm sản phẩm vào giỏ hàng vì product là null.');

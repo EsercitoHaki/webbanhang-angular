@@ -1,12 +1,12 @@
 <app-header></app-header>
 <div class="container">
-    <div class="intro-section">
+    <div class="intro-section fade-in">
         <h1>Chi tiết đơn hàng</h1>
         <p>Xem thông tin chi tiết đơn hàng</p>
     </div>
     
     <!-- Thông tin người nhận -->
-    <div *ngIf="orderResponse" class="row">
+    <div *ngIf="orderResponse" class="row fade-in">
         <div class="col-md-6">
             <h2 class="product-header">Thông tin người nhận</h2>
             <div class="mb-3">
@@ -34,7 +34,7 @@
         </div>
 
         <!-- Sản phẩm đã đặt hàng -->
-        <div class="col-md-6">
+        <div class="col-md-6 fade-in">
             <h2 class="product-order">Sản phẩm đã đặt hàng</h2>
             <table>
                 <thead>
@@ -59,7 +59,7 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="text-start mt-3">
+            <div class="text-start mt-3 fade-in">
                 <h4 class="header-text text-end">Tổng giá: {{ orderResponse.total_money | number:'1.2-2' }}</h4>
             </div>            
         </div>

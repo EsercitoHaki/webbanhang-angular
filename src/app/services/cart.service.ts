@@ -42,4 +42,9 @@ export class CartService {
     this.cart.clear(); // Xóa toàn bộ dữ liệu trong giỏ hàng
     this.saveCartToLocalStorage(); // Lưu giỏ hàng mới vào Local Storage (trống)
   }
+
+  removeFromCart(productId: number): void {
+    this.cart.delete(productId); // Xóa sản phẩm khỏi Map
+    this.saveCartToLocalStorage(); // Lưu lại giỏ hàng đã cập nhật vào localStorage
+ } 
 }

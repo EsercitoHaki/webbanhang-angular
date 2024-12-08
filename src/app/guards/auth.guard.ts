@@ -8,7 +8,10 @@ import { inject } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthGuard {
-  constructor(private tokenService: TokenService, private router: Router) {}
+  constructor(
+    private tokenService: TokenService, 
+    private router: Router,    
+  ) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const isTokenExpired = this.tokenService.isTokenExpired();

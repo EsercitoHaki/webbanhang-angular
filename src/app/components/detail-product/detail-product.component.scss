@@ -1,83 +1,245 @@
+@import "../../styles/shared-styles.scss";
 .intro-section {
-    color: white;
-    padding: 20px;
-    text-align: center;
+  color: white;
+  padding: 20px;
+  text-align: center;
 }
 
-.product-image {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-}
 .thumbnail-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .thumbnail-item {
-    width: 120px;
-    height: 120px;
-    margin-right: 5px;
-    /* Thêm khoảng cách ngang giữa các ảnh */
+  width: 120px;
+  height: 120px;
+  margin-right: 5px;
 }
 
 .thumbnail-item:last-child {
-    margin-right: 0;
-    /* Xóa khoảng cách ngang ở ảnh cuối cùng */
+  margin-right: 0;
 }
 
 .thumbnail-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .thumbnail-item.active {
-    border: 2px solid white;
+  border: 2px solid white;
 }
+
 .product-details {
-    color: white;
-    padding: 20px;
+  color: white;
+  padding: 20px;
 }
 
 .product-actions {
-    display: flex;
-    justify-content: flex-start;
-    margin-top: 20px;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 20px;
 }
 
 .product-actions button {
-    margin-right: 10px;
+  margin-right: 10px;
 }
+
 .border-wrapper {
-    border: 1px solid white;      
+  border: 1px solid white;
+}
+
+.product-quantity {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+
+.product-quantity button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.product-quantity input {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  width: 40px;
+  margin: 0 10px;
+}
+
+.product-quantity input:focus {
+  outline: none;
+}
+
+.carousel-item {
+  position: relative;
+}
+
+.gradient-left,
+.gradient-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px; /* Increased width to make the gradient more noticeable */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.gradient-left {
+  left: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.8), transparent);
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+.gradient-right {
+  right: 0;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.8), transparent);
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+}
+
+.carousel-item:hover .gradient-left,
+.carousel-item:hover .gradient-right {
+  opacity: 1;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-size: 20px 20px;
+}
+
+.product-image{
+  height: 100%;
+  object-fit: contain;
+}
+.square-image{
+  display: flex;
+  height: 400px;
+  justify-content: center;
+}
+
+.product-item {
+  position: relative;
+  height: 440px; // Maintain original height
+  margin: 0 0 20px 20px; // Keep your existing card spacing
+  background: #0f0f0f;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: 0.5s;
+
+  // Skewed yellow background
+  &::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    width: 100%;
+    height: 100%;
+    background: $product;
+    transform: skewY(345deg);
+    transition: 0.5s;
   }
 
-  .product-quantity {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      margin-top: 10px;
+  &:hover::before {
+    top: -70%;
+    transform: skewY(390deg);
   }
 
-  .product-quantity button {
-      background-color: transparent;
-      border: none;
+  &::after {
+    content: "PRODUCT";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-weight: 600;
+    font-size: 4em;
+    color: rgba(0, 0, 0, 0.1);
+  }
+
+  // Image container
+  .imgBox {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+    z-index: 1;
+
+    .product-image {
+      height: 300px; // Preserve your desired size
+      width: auto;
+      object-fit: contain; // Ensure images fit properly
+      transition: 0.5s;
+    }
+
+    &:hover .product-image {
+      transform: scale(1.1); // Hover effect
+    }
+  }
+
+  // Content container
+  .contentBox {
+    position: relative;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 2;
+
+    h3 {
+      font-size: 18px;
       color: white;
-      font-size: 16px;
-      cursor: pointer;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .price {
+      font-size: 24px;
+      color: white;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-top: 10px;
+    }
+
+    .product-description {
+      color: rgb(173, 178, 203);
+      text-align: center;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .buy {
+      position: relative;
+      top: 100px;
+      opacity: 0;
+      padding: 10px 30px;
+      margin-top: 15px;
+      color: #000000;
+      text-decoration: none;
+      background: $product;
+      border-radius: 30px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: 0.5s;
+    }
+
+    &:hover .buy {
+      top: 0;
+      opacity: 1;
+    }
   }
-  .product-quantity input {
-    background-color: transparent;
-    border: none;
-    color: white;
-    font-size: 16px;
-    text-align: center;
-    width: 40px;
-    margin: 0 10px;
-  }
-  .product-quantity input:focus {
-    outline: none;
-  }  
+}

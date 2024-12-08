@@ -1,0 +1,37 @@
+@import "../../styles/shared-styles.scss";
+
+.container-fluid {
+    background-color: #F3F3F3;
+    padding-left: 0 !important; /* Remove left padding */
+    padding-right: 0 !important; /* Remove right padding */
+}
+.header {
+    background-color: #333;
+    /* Header background color */
+    color: white;
+    /* Text color */
+    text-align: center;
+    /* Center-align text in the header */
+}
+#sidebar {
+    background-color: #BBBBBB !important; /* Primary color */
+    height: 100vh;
+    overflow-y: auto; /* Add scrollbars if content overflows */
+}
+/* Custom CSS for sidebar links */
+#sidebar a {
+    color: #333; /* Text color for links */
+    padding: 20px 15px; /* Add padding to links for spacing */
+}
+/* Custom CSS for active link */
+#sidebar a.active {
+    font-weight: bold; /* Highlight active link */
+}
+/* Change background color on hover */
+#sidebar a:hover {
+    background-color: $product; /* Change the background color on hover */
+}
+.icon {
+    font-size: 1.25rem;
+    padding: 10px;
+}
