@@ -5,12 +5,6 @@
   text-align: center;
 }
 
-.product-image {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-}
-
 .thumbnail-container {
   display: flex;
   justify-content: space-between;
@@ -125,4 +119,127 @@
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   background-size: 20px 20px;
+}
+
+.product-image{
+  height: 100%;
+  object-fit: contain;
+}
+.square-image{
+  display: flex;
+  height: 400px;
+  justify-content: center;
+}
+
+.product-item {
+  position: relative;
+  height: 440px; // Maintain original height
+  margin: 0 0 20px 20px; // Keep your existing card spacing
+  background: #0f0f0f;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: 0.5s;
+
+  // Skewed yellow background
+  &::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    width: 100%;
+    height: 100%;
+    background: $product;
+    transform: skewY(345deg);
+    transition: 0.5s;
+  }
+
+  &:hover::before {
+    top: -70%;
+    transform: skewY(390deg);
+  }
+
+  &::after {
+    content: "PRODUCT";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-weight: 600;
+    font-size: 4em;
+    color: rgba(0, 0, 0, 0.1);
+  }
+
+  // Image container
+  .imgBox {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+    z-index: 1;
+
+    .product-image {
+      height: 300px; // Preserve your desired size
+      width: auto;
+      object-fit: contain; // Ensure images fit properly
+      transition: 0.5s;
+    }
+
+    &:hover .product-image {
+      transform: scale(1.1); // Hover effect
+    }
+  }
+
+  // Content container
+  .contentBox {
+    position: relative;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 2;
+
+    h3 {
+      font-size: 18px;
+      color: white;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .price {
+      font-size: 24px;
+      color: white;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-top: 10px;
+    }
+
+    .product-description {
+      color: rgb(173, 178, 203);
+      text-align: center;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .buy {
+      position: relative;
+      top: 100px;
+      opacity: 0;
+      padding: 10px 30px;
+      margin-top: 15px;
+      color: #000000;
+      text-decoration: none;
+      background: $product;
+      border-radius: 30px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: 0.5s;
+    }
+
+    &:hover .buy {
+      top: 0;
+      opacity: 1;
+    }
+  }
 }
