@@ -9,8 +9,6 @@ import { environment } from '../../environments/environment';
 import { OrderResponse } from '../../responses/order/order.response';
 import { OrderService } from '../../services/order.service';
 import { OrderDetail } from '../../models/order.detail';
-import { CommentService } from '../../services/comment.service';
-import { Comment } from '../../models/comment';
 
 
 @Component({
@@ -21,17 +19,15 @@ import { Comment } from '../../models/comment';
 
 export class DetailProductComponent implements OnInit {
   recommendedProducts: Product[] = [];
-  commentProducts: Comment[] = [];
   product?: Product;
   productId: number = 0;
   currentImageIndex: number = 0;
   quantity: number = 1;
   constructor(
-      private productService: ProductService,
-      private cartService: CartService,
-      // private categoryService: CategoryService,
-      // private router: Router,
-      private commentService: CommentService,
+    private productService: ProductService,
+    private cartService: CartService,
+    // private categoryService: CategoryService,
+    // private router: Router,
       private activatedRoute: ActivatedRoute,
       private router: Router,
     ) {
@@ -57,12 +53,11 @@ export class DetailProductComponent implements OnInit {
               });
             }            
             debugger
-            this.product = response
+            this.product = response 
             // Bắt đầu với ảnh đầu tiên
             this.showImage(0);
 
             this.getRecommendedProducts(this.productId);
-            this.getCommentsByProduct(this.productId);
           },
           complete: () => {
             debugger;
@@ -89,24 +84,6 @@ export class DetailProductComponent implements OnInit {
         }
       });
     }
-    getCommentsByProduct(productId: number) {
-      this.commentService.getCommentsByProduct(productId).subscribe({
-        next: (response: any) => {
-          this.commentProducts = response.map((comment: any) => {
-            const createdAt = new Date(comment.updated_at[0], comment.updated_at[1] - 1, comment.updated_at[2],
-                                       comment.updated_at[3], comment.updated_at[4], comment.updated_at[5]);
-            return {
-              ...comment,
-              created_at: createdAt
-            };
-          });
-        },
-        error: (error: any) => {
-          console.error('Error fetching comments:', error);
-        }
-      });
-    }
-  
     showImage(index: number): void {
       debugger
       if (this.product && this.product.product_images && 
