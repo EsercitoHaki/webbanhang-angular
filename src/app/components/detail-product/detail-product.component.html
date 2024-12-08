@@ -67,19 +67,34 @@
     </div>
   </div>
 
+  <!-- Bình luận -->
   <div class="comments-section">
     <h3>Bình luận</h3>
+
+    <!-- Form đăng comment -->
+    <div class="comment-form">
+      <textarea [(ngModel)]="newCommentContent" placeholder="Nhập bình luận của bạn..." rows="4"></textarea>
+      <button class="btn btn-primary" (click)="postComment()">Đăng bình luận</button>
+    </div>
+
     <div *ngIf="!commentProducts.length" class="no-comments">
       Không có bình luận nào cho sản phẩm này.
     </div>
+
+    <!-- Danh sách bình luận -->
     <div *ngFor="let comment of commentProducts" class="comment-item">
       <div class="comment-header">
         <strong>{{ comment.user?.fullname }}</strong>
         <small>{{ comment.created_at | date:'short' }}</small>
       </div>
       <p>{{ comment.content }}</p>
-      
-      <!-- Hiển thị bình luận con nếu có -->
+    
+      <div class="reply-form">
+        <!-- Liên kết nội dung trả lời với commentId -->
+        <textarea [(ngModel)]="replyContent[comment.id]" placeholder="Trả lời bình luận này..." rows="3"></textarea>
+        <button class="btn btn-secondary" (click)="postReply(comment.id)">Trả lời</button>
+      </div>
+    
       <div *ngIf="comment.replies && comment.replies.length > 0">
         <div *ngFor="let reply of comment.replies" class="reply-item">
           <div class="comment-header">
@@ -89,11 +104,14 @@
           <p>{{ reply.content }}</p>
         </div>
       </div>
-  
+    
       <hr />
     </div>
-  </div>
-  
+    
+    
+    
 
-</div>
-<app-footer></app-footer>
+
+
+  </div>
+  <app-footer></app-footer>
