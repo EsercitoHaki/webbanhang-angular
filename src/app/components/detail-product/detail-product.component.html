@@ -69,20 +69,31 @@
 
   <div class="comments-section">
     <h3>Bình luận</h3>
-    <div *ngIf="commentProducts.length === 0" class="no-comments">
+    <div *ngIf="!commentProducts.length" class="no-comments">
       Không có bình luận nào cho sản phẩm này.
     </div>
     <div *ngFor="let comment of commentProducts" class="comment-item">
       <div class="comment-header">
         <strong>{{ comment.user?.fullname }}</strong>
-        <div>
-          <small>{{ comment.created_at | date:'short' }}</small> <!-- Sử dụng pipe date để định dạng thời gian -->
+        <small>{{ comment.created_at | date:'short' }}</small>
+      </div>
+      <p>{{ comment.content }}</p>
+      
+      <!-- Hiển thị bình luận con nếu có -->
+      <div *ngIf="comment.replies && comment.replies.length > 0">
+        <div *ngFor="let reply of comment.replies" class="reply-item">
+          <div class="comment-header">
+            <strong>{{ reply.user?.fullname }}</strong>
+            <small>{{ reply.created_at | date:'short' }}</small>
+          </div>
+          <p>{{ reply.content }}</p>
         </div>
       </div>
-      <p class="comment-content">{{ comment.content }}</p>
+  
       <hr />
     </div>
   </div>
+  
 
 </div>
 <app-footer></app-footer>
