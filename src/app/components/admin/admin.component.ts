@@ -22,10 +22,9 @@ export class AdminComponent implements OnInit {
     
    }
   ngOnInit() {
-    this.userResponse = this.userService.getUserResponseFromLocalStorage();    
-    //default router
-    this.router.navigate(['/admin/orders']);
-   }  
+    this.userResponse = this.userService.getUserResponseFromLocalStorage();
+  }
+  
   logout() {
     this.userService.removeUserFromLocalStorage();
     this.tokenService.removeToken();

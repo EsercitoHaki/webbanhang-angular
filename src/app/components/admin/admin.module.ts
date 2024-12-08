@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { StatisticComponent } from './statistic/statistic.component';
 import { UserComponent } from './user/user.component';
 import { CommentComponent } from './comment/comment.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CommentComponent } from './comment/comment.component';
   imports: [
     AdminRoutingModule, // import routes,
     CommonModule,
-    FormsModule
+    FormsModule,
+    DragDropModule
   ]
 })
 export class AdminModule {}

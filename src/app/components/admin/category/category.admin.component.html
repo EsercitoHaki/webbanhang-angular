@@ -1,3 +1,15 @@
 <div class="container-fluid">
   <h1>This is Category Admin</h1>
+
+  <!-- Hiển thị danh sách các category với tính năng drag-and-drop -->
+  <div cdkDropList cdkDropListOrientation="horizontal" class="category-list" (cdkDropListDropped)="drop($event)">
+    <div *ngFor="let category of categories" cdkDrag class="category-box">
+      {{ category.name }}
+    </div>
+  </div>
+
+  <!-- Nếu không có danh mục nào -->
+  <div *ngIf="categories.length === 0">
+    <p>No categories found.</p>
+  </div>
 </div>

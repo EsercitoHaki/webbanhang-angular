@@ -1,4 +1,3 @@
-<h1>This is detail order admin</h1>
 <div class="container">
   <h1>Order Details</h1>
   
@@ -13,6 +12,10 @@
       <p><strong>Address:</strong> {{ orderResponse.address }}</p>
       <p><strong>Note:</strong> {{ orderResponse.note }}</p>
       <p><strong>Order Date:</strong> {{ orderResponse.order_date | date }}</p>
+      <p><strong>Shipping Method:</strong> {{ orderResponse.shipping_method }}</p>
+      <p><strong>Shipping Address:</strong> {{ orderResponse.shipping_address }}</p>
+      <p><strong>Shipping Date:</strong> {{ orderResponse.shipping_date }}</p>
+      <p><strong>Payment Method:</strong> {{ orderResponse.payment_method }}</p>
       
       <div class="form-group">
         <label for="statusSelect"><strong>Status:</strong></label>
@@ -26,7 +29,7 @@
         </select>
       </div>          
   </div>  
-  <h3>Order Details</h3>
+  <h3 class="mt-5">Order Details</h3>
   <table class="table">
     <thead>
       <tr>
