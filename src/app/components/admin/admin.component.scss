@@ -3,13 +3,14 @@
     padding-left: 0 !important; /* Remove left padding */
     padding-right: 0 !important; /* Remove right padding */
 }
+.row > *{
+    padding-right: 0 !important;
+}
 .header {
     background-color: #333;
     /* Header background color */
     color: white;
     /* Text color */
-    padding: 10px;
-    /* Add padding to the header */
     text-align: center;
     /* Center-align text in the header */
 }

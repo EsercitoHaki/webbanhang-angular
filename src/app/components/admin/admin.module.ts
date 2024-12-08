@@ -15,7 +15,6 @@ import { FormsModule } from '@angular/forms';
     AdminComponent,
     OrderAdminComponent,
     DetailOrderAdminComponent,
-
     ProductAdminComponent,
     CategoryAdminComponent,
   ],
