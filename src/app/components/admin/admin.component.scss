@@ -1,10 +1,9 @@
+@import "../../styles/shared-styles.scss";
+
 .container-fluid {
-    background-color: white;
+    background-color: #F3F3F3;
     padding-left: 0 !important; /* Remove left padding */
     padding-right: 0 !important; /* Remove right padding */
-}
-.row > *{
-    padding-right: 0 !important;
 }
 .header {
     background-color: #333;
@@ -15,16 +14,14 @@
     /* Center-align text in the header */
 }
 #sidebar {
-    background-color: #007bff !important; /* Primary color */
-    color: white; /* Text color */
+    background-color: #BBBBBB !important; /* Primary color */
     height: 100vh;
     overflow-y: auto; /* Add scrollbars if content overflows */
 }
 /* Custom CSS for sidebar links */
 #sidebar a {
-    color: white; /* Text color for links */
-    border-top: 1px solid rgba(255, 255, 255, 0.2); /* Add a border line at the top of each link */
-    padding: 10px 15px; /* Add padding to links for spacing */
+    color: #333; /* Text color for links */
+    padding: 20px 15px; /* Add padding to links for spacing */
 }
 /* Custom CSS for active link */
 #sidebar a.active {
@@ -32,8 +29,9 @@
 }
 /* Change background color on hover */
 #sidebar a:hover {
-    background-color: #0056b3; /* Change the background color on hover */
+    background-color: $product; /* Change the background color on hover */
 }
 .icon {
-    padding: 5px;
+    font-size: 1.25rem;
+    padding: 10px;
 }

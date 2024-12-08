@@ -6,12 +6,23 @@ import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { ProductAdminComponent } from "./product/product.admin.component";
 import { CategoryAdminComponent } from "./category/category.admin.component";
+import { StatisticComponent } from "./statistic/statistic.component";
+import { UserComponent } from "./user/user.component";
+import { CommentComponent } from "./comment/comment.component";
 
 const routes: Routes = [
     {
         path: 'admin',
         component: AdminComponent,
         children: [
+            {
+                path: 'thongke',
+                component: StatisticComponent
+            },
+            {
+                path: 'users',
+                component: UserComponent
+            },
             {
                 path: 'orders',
                 component: OrderAdminComponent
@@ -28,6 +39,10 @@ const routes: Routes = [
                 path: 'categories',
                 component: CategoryAdminComponent
             },
+            {
+                path: 'comments',
+                component: CommentComponent
+            }
         ]
     }
 ];

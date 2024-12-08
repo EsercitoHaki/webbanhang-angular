@@ -1,21 +1,21 @@
 <div class="container-fluid">
-  <header class="header bg-success text-white d-flex justify-content-between">
-    <h1 class="header-title">Dashboard Header</h1>
+  <header class="header text-white d-flex justify-content-between">
+    <h1 class="header-title ms-4">Thanh Hoa Shop</h1>
     <!-- Logout Button -->
     <button class="btn btn-danger btn-sm" (click)="logout()">Logout</button>
   </header>
-  <div class="row">
+  <div class="row g-0">
     <nav id="sidebar" class="col-md-2 col-lg-2 d-md-block bg-light sidebar">
       <div class="position-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link" 
+            <a class="nav-link"
               (click)="showAdminComponent('thongke')">
               <i class="fa fa-line-chart icon"></i>Thống kê
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" 
+            <a class="nav-link"
               (click)="showAdminComponent('users')">
               <i class="fa-solid fa-user icon"></i>Users
             </a>
@@ -47,7 +47,7 @@
         </ul>
       </div>
     </nav>
-    <div class="col-md-10 col-lg-10 overflow-auto">
+    <div class="col-md-8 col-lg-10 overflow-auto">
       <!--
       <ng-container [ngSwitch]="adminComponent">
         <app-order-admin *ngSwitchCase="'orders'"></app-order-admin>
