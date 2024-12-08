@@ -7,7 +7,8 @@
     <div class="col-md-6 ">
       <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner ">
-          <div *ngFor="let image of product?.product_images; let i = index" class="carousel-item" [ngClass]="{'active': i === currentImageIndex}">
+          <div *ngFor="let image of product?.product_images; let i = index" class="carousel-item"
+            [ngClass]="{'active': i === currentImageIndex}">
             <div class="square-image">
               <img [src]="image.image_url" class="product-image" alt="Product Image">
             </div>
@@ -22,7 +23,8 @@
       </div>
       <div class="row fade-in">
         <div class="thumbnail-container">
-          <div *ngFor="let image of product?.product_images; let i = index" class="thumbnail-item" [ngClass]="{'active': i === currentImageIndex}" (click)="thumbnailClick(i)">
+          <div *ngFor="let image of product?.product_images; let i = index" class="thumbnail-item"
+            [ngClass]="{'active': i === currentImageIndex}" (click)="thumbnailClick(i)">
             <img [src]="image.image_url" class="thumbnail-image" alt="Thumbnail Image">
           </div>
         </div>
@@ -51,20 +53,36 @@
   <div class="recommended-products fade-in">
     <h3>Sản phẩm gợi ý</h3>
     <div class="row fade-in">
-        <div class="col-lg-3 col-sm-6 fade-in" *ngFor="let product of recommendedProducts | slice:0:4">
-            <div class="product-item card">
-                <div class="imgBox">
-                    <img [src]="product.thumbnail" alt="Product Image" class="mouse product-image">
-                </div>
-                <div class="contentBox">
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <p class="price">Giá: {{ product.price | number:'1.0-0' }} VNĐ</p>
-                </div>
-            </div>
-        </div>      
+      <div class="col-lg-3 col-sm-6 fade-in" *ngFor="let product of recommendedProducts | slice:0:4">
+        <div class="product-item card">
+          <div class="imgBox">
+            <img [src]="product.thumbnail" alt="Product Image" class="mouse product-image">
+          </div>
+          <div class="contentBox">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="price">Giá: {{ product.price | number:'1.0-0' }} VNĐ</p>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
 
+  <div class="comments-section">
+    <h3>Bình luận</h3>
+    <div *ngIf="commentProducts.length === 0" class="no-comments">
+      Không có bình luận nào cho sản phẩm này.
+    </div>
+    <div *ngFor="let comment of commentProducts" class="comment-item">
+      <div class="comment-header">
+        <strong>{{ comment.user?.fullname }}</strong>
+        <div>
+          <small>{{ comment.created_at | date:'short' }}</small> <!-- Sử dụng pipe date để định dạng thời gian -->
+        </div>
+      </div>
+      <p class="comment-content">{{ comment.content }}</p>
+      <hr />
+    </div>
+  </div>
 
 </div>
 <app-footer></app-footer>
