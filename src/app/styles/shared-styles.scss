@@ -6,7 +6,7 @@ $text-hover:#E03C48;
 $text-boder-text: #E03C48;
 $text-hint: rgba(255, 255, 255, 0.1);
 $text-red: #E03C48;
-$product: #e24747;
+
 
 .btn-gradient {
     background: linear-gradient(to right, #333333, #dd1818);
@@ -69,7 +69,13 @@ $product: #e24747;
 
 //animation3
 
-
+//login
+$login-bg: #e7e7e7;
+$login-text:#333;
+$login-checkbox:#ff1616;
+$login-link: #001aff;
+$login-bg-role: #333;
+$login-devider:  #e24747;
 //Header
 $text-header: #F2F2F2;
 $bg-header:#252525;
@@ -84,6 +90,7 @@ $item-boder: #F2F2F2;
 $text-in-pagiation: #333;
 $bg-pagination: #F2F2F2;
 $bg-pg-hover-active:#BBBBBB;
+$product: #e24747;
 
 
 //order
