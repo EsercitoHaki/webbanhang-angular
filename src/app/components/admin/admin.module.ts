@@ -11,7 +11,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { StatisticComponent } from './statistic/statistic.component';
 import { UserComponent } from './user/user.component';
-import { CommentComponent } from './comment/comment.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
@@ -23,7 +22,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     CategoryAdminComponent,
     StatisticComponent,
     UserComponent,
-    CommentComponent,
   ],
   imports: [
     AdminRoutingModule, // import routes,
