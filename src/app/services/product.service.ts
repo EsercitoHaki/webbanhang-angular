@@ -12,6 +12,15 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
+  getNewProducts(limit: number): Observable<any[]> {  // Use any[] as the return type
+    const params = new HttpParams()
+      .set('limit', limit.toString())
+      .set('sort_by', 'created_at')
+      .set('order', 'desc');
+
+    return this.http.get<any[]>(this.apiGetProducts, { params });
+  }
+
   getProducts(keyword:string, categoryId:number, 
               page: number, limit: number
     ): Observable<Product[]> {
