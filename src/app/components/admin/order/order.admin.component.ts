@@ -17,7 +17,7 @@ import { Location } from '@angular/common';
 })
 export class OrderAdminComponent implements OnInit{  
   orders: OrderResponse[] = [];
-  currentPage: number = 0;
+  currentPage: number = 1;
   itemsPerPage: number = 12;
   pages: number[] = [];
   totalPages:number = 0;
@@ -38,7 +38,7 @@ export class OrderAdminComponent implements OnInit{
   }
   getAllOrders(keyword: string, page: number, limit: number) {
     debugger
-    this.orderService.getAllOrders(keyword, page, limit).subscribe({
+    this.orderService.getAllOrders(keyword, page - 1, limit).subscribe({
       next: (response: any) => {
         debugger        
         this.orders = response.orders;

@@ -1,15 +1,24 @@
-<div class="container-fluid">
-  <h1 class="fw-bold">Categories</h1>
-
-  <!-- Hiển thị danh sách các category với tính năng drag-and-drop -->
-  <div cdkDropList cdkDropListOrientation="horizontal" class="category-list" (cdkDropListDropped)="drop($event)">
-    <div *ngFor="let category of categories" cdkDrag class="category-box">
+<div class="category-list">
+  <div *ngFor="let category of categories; let i = index" cdkDrag class="category-box">
+    <input
+      *ngIf="editingIndex === i"
+      [(ngModel)]="categories[i].name"
+      (blur)="updateCategory(i)"
+      (keydown.enter)="updateCategory(i)"
+      class="form-control"
+      placeholder="Edit category name"
+      autofocus
+    />
+    <span
+      *ngIf="editingIndex !== i"
+      class="category-text"
+      (dblclick)="startEditing(i)"
+    >
       {{ category.name }}
+    </span>
+    <div class="multi-button">
+      <button class="fas fa-edit" (click)="startEditing(i)"></button>
+      <button class="fas fa-trash" (click)="deleteCategory(category.id, i)"></button>
     </div>
-  </div>
-
-  <!-- Nếu không có danh mục nào -->
-  <div *ngIf="categories.length === 0">
-    <p>No categories found.</p>
   </div>
 </div>

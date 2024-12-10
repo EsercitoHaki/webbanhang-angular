@@ -16,4 +16,12 @@ export class CategoryService {
       .set('limit', limit.toString());     
       return this.http.get<Category[]>(this.apiGetCategories, { params });           
   }
+
+  updateCategory(id: number, category: Category): Observable<any> {
+    return this.http.put(`${this.apiGetCategories}/${id}`, category);
+  }
+  
+  deleteCategory(id: number): Observable<any> {
+    return this.http.delete(`${this.apiGetCategories}/${id}`);
+  }  
 }
