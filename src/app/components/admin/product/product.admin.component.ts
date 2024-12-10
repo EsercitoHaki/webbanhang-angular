@@ -9,7 +9,7 @@ import { Product } from '../../../models/product';
 })
 export class ProductAdminComponent implements OnInit {
   products: Product[] = [];
-  currentPage: number = 0;  // Trang hiện tại
+  currentPage: number = 1;  // Trang hiện tại
   itemsPerPage: number = 10;  // Số sản phẩm mỗi trang
   totalPages: number = 0;  // Tổng số trang
 
@@ -20,7 +20,7 @@ export class ProductAdminComponent implements OnInit {
   }
 
   getAllProducts() {
-    this.productService.getProducts('', 0, this.currentPage, this.itemsPerPage).subscribe({
+    this.productService.getProducts('', 0, this.currentPage - 1, this.itemsPerPage).subscribe({
       next: (response: any) => {
         this.products = response.products;
         this.totalPages = response.totalPages;  // Cập nhật tổng số trang từ API

@@ -17,3 +17,16 @@
 .btn.btn-primary {
     margin-left: 10px;
 }
+
+table.table {
+    border-collapse: collapse;
+  
+    tr {
+      border-bottom: none;
+    }
+  
+    th, td {
+      border-top: none;
+      border-bottom: none;
+    }
+}
