@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   ) {}
 
   ngOnInit(): void {
-    // Initialization logic can go here if needed
+    this.getNewProducts(10);
   }
 
   ngAfterViewChecked(): void {
@@ -38,5 +38,17 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   // Method to navigate to the /products route when the button is clicked
   navigateToProducts(): void {
     this.router.navigate(['/products']);
+  }
+
+  // Fetch the latest products from the API
+  getNewProducts(limit: number): void {
+    this.productService.getNewProducts(limit).subscribe(
+      (products: any[]) => { // Directly use any[] for products
+        this.products = products;
+      },
+      (error) => {
+        console.error('Error fetching new products:', error);
+      }
+    );
   }
 }

@@ -9,6 +9,21 @@
     padding: 20px;
 }
 
+.intro-section2 {
+    background-color: rgb(236,232,225);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    text-align: center;
+    color: $home-2-text;
+    padding: 20px;
+}
+.intro-section2 h5{
+    color: $home-2-text;
+}
+.intro-section2 p{
+    color: $home-2-text;
+}
+
 
 .img-landing{
     height: 500px;
@@ -129,3 +144,5 @@ nav .pagination .page-item .page-link:hover {
 nav .pagination .page-item .page-link:active {
     background-color: $bg-pg-hover-active !important;
 }
+
+
