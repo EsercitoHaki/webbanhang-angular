@@ -1,39 +1,35 @@
+@import "../../styles/shared-styles.scss";
 .container {
-    color: white;
-    height: 100vh;    
+    color: $regiter-text;  
 }
 
 .register-form {
-    background-color: rgb(12, 12, 55);
+    background-color: $register-bg;
     border-radius: 10px;
     padding: 20px;
     max-width: 500px;
-    border: 1px solid rgb(32, 34, 60);
     align-items: center;
     justify-content: center;
 }
 
 .register-header {
     text-align: center;
-    /*      color: rgb(233, 66, 178);*/
-    color: rgb(105, 244, 181);
+    color: $regiter-text;
     margin-bottom: 20px;
 
 }
 
 .label-text {
-    color: rgb(243, 165, 42);
+    color: $regiter-text;
 }
 
 .form-control {
-    background-color: transparent;
     border: none;
-    color: white;
+    color: $regiter-text;
 }
 
 .form-control:focus {
-    color: white;
-    background-color: transparent;
+    color: $regiter-text;
     outline: none;
     box-shadow: none;
     border-color: transparent;
@@ -48,13 +44,32 @@
     position: absolute;
     top: 50%;
     right: 10px;
-    transform: translateY(-50%);
-    color: rgb(105, 244, 181);
+    color: #333;
+    cursor: pointer;
+}
+//
+.input-container {
+    position: relative;
+    display: inline-block;
+    width: 100%; /* Đảm bảo container theo chiều rộng input */
+}
+
+.input-container input {
+    width: 100%;
+    padding-right: 30px; /* Chừa không gian cho icon */
+}
+
+.input-container i {
+    position: absolute;
+    top: 50%; /* Căn giữa icon theo chiều dọc so với input */
+    right: 10px; /* Cách bên phải 10px */
+    transform: translateY(-5px); /* Điều chỉnh vị trí chính xác */
     cursor: pointer;
 }
 
+
 .checkbox-text {
-    color: rgb(243, 165, 42);
+    color: $register-checkbox;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -63,8 +78,13 @@
 
 /* Màu checkbox khi được chọn */
 .checkbox-text input[type="checkbox"]:checked {
-    border-color: white;
-    background-color: rgb(233, 66, 178);
+    border-color: $regiter-text;
+    background-color: $register-checkbox;
+}
+
+input[type="password"]::-webkit-clear-button,
+input[type="password"]::-webkit-password-toggle {
+  display: none; /* Ẩn icon không mong muốn từ trình duyệt */
 }
 
 .form-check-input {
@@ -72,13 +92,13 @@
 }
 
 .register-link {
-    color: rgb(105, 244, 181);
+    color: $register-link;
     text-decoration: none;
 }
 
 .register-button {
-    background: linear-gradient(to right, rgb(225, 64, 180), rgb(126, 43, 237));
-    color: white;
+    background: linear-gradient(to right,  #333, #e24747);
+    color: $register-bg;
     border-radius: 30px;
     width: 100%;
     padding: 10px 0;
@@ -88,28 +108,25 @@
 
 .divider {
     height: 1px;
-    background-color: rgb(243, 165, 42);
-    /*      background-color: rgb(105, 244, 181)*/
+    background-color: $register-devider ;
     margin: 20px;
 }
 
 .divider-nospace {
-    border-top: 1px solid white;
+    border-top: 1px solid $regiter-text;
 }
 
 .form-control::placeholder {
-    /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: rgba(243, 165, 42, 0.4);
-    opacity: 1;
-    /* Firefox */
+    color: $regiter-text;
+    opacity: 0.5;
 }
 
 .form-control:-ms-input-placeholder {
-    /* Internet Explorer 10-11 */
-    color: rgba(243, 165, 42, 0.4);
+    color: $regiter-text;
+    opacity: 0.5;
 }
 
 .form-control::-ms-input-placeholder {
-    /* Microsoft Edge */
-    color: rgba(243, 165, 42, 0.4);
+    color: $regiter-text;
+    opacity: 0.5;
 }
