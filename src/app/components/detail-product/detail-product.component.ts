@@ -11,6 +11,8 @@ import { OrderService } from '../../services/order.service';
 import { OrderDetail } from '../../models/order.detail';
 import { CommentService } from '../../services/comment.service';
 import { Comment } from '../../models/comment';
+import { CommentDTO } from '../../dtos/comment.dto';
+import { TokenService } from '../../services/token.service';
 
 
 @Component({
@@ -26,6 +28,10 @@ export class DetailProductComponent implements OnInit {
   productId: number = 0;
   currentImageIndex: number = 0;
   quantity: number = 1;
+  newCommentContent: string = '';
+  replyContent: { [commentId: number]: string } = {};
+  replyToCommentId: number | null = null;
+  
   constructor(
     private productService: ProductService,
     private cartService: CartService,
@@ -33,6 +39,7 @@ export class DetailProductComponent implements OnInit {
     // private router: Router,
     private commentService: CommentService,
     private activatedRoute: ActivatedRoute,
+    private tokenService: TokenService,
     private router: Router,
   ) {
 
@@ -103,12 +110,13 @@ export class DetailProductComponent implements OnInit {
           );
           return {
             ...comment,
-            created_at: createdAt
+            created_at: createdAt,
+            id: comment.id
           };
         });
 
-        // Không cần gán lại replies, vì API đã trả về đúng cấu trúc
-        this.commentProducts = comments;  // Dữ liệu đã đầy đủ
+        this.commentProducts = comments;
+        debugger
       },
       error: (error: any) => {
         console.error('Error fetching comments:', error);
@@ -116,6 +124,81 @@ export class DetailProductComponent implements OnInit {
     });
   }
 
+  postComment(): void {
+    const userId = this.tokenService.getUserId();
+    const token = this.tokenService.getToken();
+
+    if (!userId || !token) {
+      console.error('Không tìm thấy userId hoặc token');
+      return;
+    }
+    debugger
+    if(this.newCommentContent.trim() === '') {
+      console.error('Bình luận không thể để trống');
+      return;
+    }
+
+    const commentDTO: CommentDTO = {
+      content: this.newCommentContent,
+      product_id: this.productId,
+      user_id: userId,
+      parent_id: null
+    };
+
+    this.commentService.addComment(commentDTO).subscribe({
+      next: () => {
+        debugger
+        this.newCommentContent = '';
+        this.getCommentsByProduct(this.productId);
+      },
+      error: (error: any) => {
+        debugger
+        console.error('Error adding comment:', error);
+      }
+    });
+  }
+
+  postReply(commentId: number): void {
+    const replyContent = this.replyContent[commentId];
+    const userId = this.tokenService.getUserId();
+    if(!replyContent || replyContent.trim() === '') {
+      debugger
+      console.error('Nội dung comment không được để trống');
+      return;
+    }
+    if(commentId === null){
+      debugger
+      console.error('Không có comment con nào để trả lời');
+      return;
+    }
+    const replyDTO: CommentDTO ={
+      content: replyContent,
+      product_id: this.productId,
+      user_id: userId,
+      parent_id: commentId
+    }
+    debugger
+    this.commentService.replyToComment(commentId, replyDTO).subscribe({
+      next: () => {
+        this.replyContent = '';
+        this.replyToCommentId = null;
+        this.getCommentsByProduct(this.productId);
+      },
+      error: (error: any) => {
+        debugger
+        console.error('Error adding reply:', error);
+      }
+    });
+  }
+  getCommentId(comment: Comment): number {
+    return comment.id;
+  }
+
+  replyToCommentClick(commentId: number): void {
+    this.replyToCommentId = commentId;
+    debugger
+  }
+  
   showImage(index: number): void {
     debugger
     if (this.product && this.product.product_images &&
@@ -136,7 +219,6 @@ export class DetailProductComponent implements OnInit {
     this.currentImageIndex = index; // Cập nhật currentImageIndex
   }
   nextImage(): void {
-    debugger
     this.showImage(this.currentImageIndex + 1);
   }
 
