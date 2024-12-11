@@ -77,7 +77,9 @@
           <tr>
               <th>#</th>
               <th>Họ tên</th>
+              <th>Số điện thoại</th>
               <th>Địa chỉ</th>
+              <th>Thời gian đặt</th>
               <th>Trạng thái</th>
               <th>Tổng tiền</th>
           </tr>
@@ -86,7 +88,9 @@
           <tr *ngFor="let order of orders; let i = index">
               <td>{{ i + 1 }}</td>
               <td>{{ order.fullname }}</td>
+              <td>{{ order.phone_number}}</td>
               <td>{{ order.address }}</td>
+              <td>{{ order.order_date}}</td>
               <td>{{ order.status }}</td>
               <td>{{ order.total_money }}</td>
           </tr>
