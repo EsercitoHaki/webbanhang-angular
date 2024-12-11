@@ -1,10 +1,10 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { 
-  FormBuilder, 
-  FormGroup, 
+import {
+  FormBuilder,
+  FormGroup,
   Validators,
-  ValidationErrors, 
-  ValidatorFn, 
+  ValidationErrors,
+  ValidatorFn,
   AbstractControl
 } from '@angular/forms';
 
@@ -21,26 +21,26 @@ import { UpdateUserDTO } from '../../dtos/user/update.user.dto';
 export class UserProfileComponent implements OnInit {
   userResponse?: UserResponse;
   userProfileForm: FormGroup;
-  token:string = '';
+  token: string = '';
   constructor(
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
     private router: Router,
     private tokenService: TokenService,
-  ){        
+  ) {
     this.userProfileForm = this.formBuilder.group({
-      fullname: [''],     
-      address: ['', [Validators.minLength(3)]],       
-      password: ['', [Validators.minLength(3)]], 
-      retype_password: ['', [Validators.minLength(3)]], 
-      date_of_birth: [Date.now()],      
+      fullname: [''],
+      address: ['', [Validators.minLength(3)]],
+      password: ['', [Validators.minLength(3)]],
+      retype_password: ['', [Validators.minLength(3)]],
+      date_of_birth: [Date.now()],
     }, {
       validators: this.passwordMatchValidator// Custom validator function for password match
     });
   }
-  
-  ngOnInit(): void {  
+
+  ngOnInit(): void {
     debugger
     this.token = this.tokenService.getToken();
     this.userService.getUserDetail(this.token).subscribe({
@@ -49,13 +49,19 @@ export class UserProfileComponent implements OnInit {
         this.userResponse = {
           ...response,
           date_of_birth: new Date(response.date_of_birth),
-        };    
+        };
         this.userProfileForm.patchValue({
           fullname: this.userResponse?.fullname ?? '',
           address: this.userResponse?.address ?? '',
-          date_of_birth: this.userResponse?.date_of_birth.toISOString().substring(0, 10),
-        });        
-        this.userService.saveUserResponseToLocalStorage(this.userResponse);         
+
+          //sửa chút
+          date_of_birth: this.userResponse?.date_of_birth
+            ? this.userResponse.date_of_birth.toISOString().substring(0, 10)
+            : "N/A",
+
+        });
+        this.userService.saveUserResponseToLocalStorage(this.userResponse!);
+
       },
       complete: () => {
         debugger;
@@ -73,7 +79,7 @@ export class UserProfileComponent implements OnInit {
       if (password !== retypedPassword) {
         return { passwordMismatch: true };
       }
-  
+
       return null;
     };
   }
@@ -87,7 +93,7 @@ export class UserProfileComponent implements OnInit {
         retype_password: this.userProfileForm.get('retype_password')?.value,
         date_of_birth: this.userProfileForm.get('date_of_birth')?.value
       };
-  
+
       this.userService.updateUserDetail(this.token, updateUserDTO)
         .subscribe({
           next: (response: any) => {
@@ -100,10 +106,10 @@ export class UserProfileComponent implements OnInit {
           }
         });
     } else {
-      if (this.userProfileForm.hasError('passwordMismatch')) {        
+      if (this.userProfileForm.hasError('passwordMismatch')) {
         alert('Mật khẩu và mật khẩu gõ lại chưa chính xác')
       }
     }
-  }    
+  }
 }
 

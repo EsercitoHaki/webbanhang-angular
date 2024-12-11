@@ -23,6 +23,10 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.userResponse = this.userService.getUserResponseFromLocalStorage();
+    const userResponse = localStorage.getItem('userResponse');
+    if (userResponse) {
+      this.userResponse = JSON.parse(userResponse);
+    }
   }
 
   toggleDropdown(): void {

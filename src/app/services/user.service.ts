@@ -14,6 +14,7 @@ export class UserService {
   private apiRegister = `${environment.apiBaseUrl}/users/register`;
   private apiLogin = `${environment.apiBaseUrl}/users/login`;
   private apiUserDetail = `${environment.apiBaseUrl}/users/details`;
+  private apiLoginGoogle = `${environment.apiBaseUrl}/login_google`;
 
   private apiConfig = {
     headers: this.httpUtilService.createHeaders(),
@@ -21,8 +22,17 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private httpUtilService: HttpUtilService
+    private httpUtilService: HttpUtilService,
+    
   ) { }
+
+    // Thêm phương thức loginGoogle để gửi token từ Google lên backend
+    loginGoogle(token: string): Observable<any> {
+      return this.http.post('api/v1/google-login', { token });
+    }
+    
+  
+  
 
   register(registerDTO: RegisterDTO):Observable<any> {
     return this.http.post(this.apiRegister, registerDTO, this.apiConfig);
@@ -49,21 +59,10 @@ export class UserService {
       })
     })
   }
-  saveUserResponseToLocalStorage(userResponse?: UserResponse) {
-    try {
-      debugger
-      if(userResponse == null || !userResponse) {
-        return;
-      }
-      // Convert the userResponse object to a JSON string
-      const userResponseJSON = JSON.stringify(userResponse);  
-      // Save the JSON string to local storage with a key (e.g., "userResponse")
-      localStorage.setItem('user', userResponseJSON);  
-      console.log('User response saved to local storage.');
-    } catch (error) {
-      console.error('Error saving user response to local storage:', error);
-    }
+  saveUserResponseToLocalStorage(userResponse: UserResponse): void {
+    localStorage.setItem('userResponse', JSON.stringify(userResponse));
   }
+  
   getUserResponseFromLocalStorage():UserResponse | null {
     try {
       // Retrieve the JSON string from local storage using the key

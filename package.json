@@ -11,6 +11,7 @@
   },
   "private": true,
   "dependencies": {
+    "@abacritt/angularx-social-login": "^2.3.0",
     "@angular/animations": "^18.0.0",
     "@angular/cdk": "^17.0.0",
     "@angular/common": "^18.0.0",
@@ -40,6 +41,8 @@
     "@angular/cli": "^18.0.1",
     "@angular/compiler-cli": "^18.0.0",
     "@types/express": "^4.17.17",
+    "@types/google.accounts": "^0.0.15",
+    "@types/googlemaps": "^3.43.3",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.18.0",
     "jasmine-core": "~5.1.0",

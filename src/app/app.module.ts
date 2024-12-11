@@ -10,10 +10,15 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { provideHttpClient } from '@angular/common/http';
+
+import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
+
 import {
-  provideHttpClient, 
+  
   HTTP_INTERCEPTORS, 
-  HttpClientModule
+  
 } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptors';
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +27,7 @@ import { UserProfileComponent } from './components/user-profile/user.profile.com
 import { AdminModule } from './components/admin/admin.module';
 import { CommonModule } from '@angular/common';
 import { ProductComponent } from './components/product/product.component';
+import { GoogleSigninButtonComponent } from './google-signin-button/google-signin-button.component';
 
 
 @NgModule({
@@ -36,21 +42,33 @@ import { ProductComponent } from './components/product/product.component';
     LoginComponent, 
     RegisterComponent, 
     AppComponent, 
-    UserProfileComponent, ProductComponent,
+    UserProfileComponent, ProductComponent, GoogleSigninButtonComponent, 
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule,
     AdminModule,
+    SocialLoginModule
   ],
   providers: [provideHttpClient(),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
+    },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('300458157401-lhpsaqtp4370qlo88gu8a9v8j8ia5pgc.apps.googleusercontent.com')  // Thay bằng Client ID của bạn
+          }
+        ]
+      }
     }
   ],
   bootstrap: [

@@ -3,7 +3,8 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "typeRoots": ["src/types", "node_modules/@types"],
+    "types": ["google.accounts"]
   },
   "files": [
     "src/main.ts"
