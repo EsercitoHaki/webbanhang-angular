@@ -12,6 +12,7 @@ import { OrderResponse } from '../responses/order/order.response';
 export class OrderService {
   private apiUrl = `${environment.apiBaseUrl}/orders`;
   private apiGetAllOrders = `${environment.apiBaseUrl}/orders/get-orders-by-keyword`;
+  private apiGetOrderByUserId = `${environment.apiBaseUrl}/orders/user`;
 
   constructor(private http: HttpClient) {}
 
@@ -19,6 +20,16 @@ export class OrderService {
     // Gửi yêu cầu đặt hàng
     return this.http.post(this.apiUrl, orderData);
   }
+
+  getOrderByUserId(userId: number): Observable<OrderResponse[]> {
+    const url = `${this.apiGetOrderByUserId}/${userId}`;
+    return this.http.get<OrderResponse[]>(url);
+  }
+
+  getOrderHistoryByUserId(userId: number): Observable<OrderResponse[]> {
+    return this.http.get<OrderResponse[]>(`${this.apiGetOrderByUserId}/${userId}`);
+  }
+  
   getOrderById(orderId: number): Observable<any> {
     const url = `${environment.apiBaseUrl}/orders/${orderId}`;
     return this.http.get(url);

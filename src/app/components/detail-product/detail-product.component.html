@@ -88,13 +88,13 @@
         <small>{{ comment.created_at | date:'short' }}</small>
       </div>
       <p>{{ comment.content }}</p>
-    
+
       <div class="reply-form">
         <!-- Liên kết nội dung trả lời với commentId -->
         <textarea [(ngModel)]="replyContent[comment.id]" placeholder="Trả lời bình luận này..." rows="3"></textarea>
         <button class="btn btn-secondary" (click)="postReply(comment.id)">Trả lời</button>
       </div>
-    
+
       <div *ngIf="comment.replies && comment.replies.length > 0">
         <div *ngFor="let reply of comment.replies" class="reply-item">
           <div class="comment-header">
@@ -104,14 +104,7 @@
           <p>{{ reply.content }}</p>
         </div>
       </div>
-    
       <hr />
     </div>
-    
-    
-    
-
-
-
   </div>
   <app-footer></app-footer>
