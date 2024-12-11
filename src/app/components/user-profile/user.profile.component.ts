@@ -13,6 +13,8 @@ import { UserService } from '../../services/user.service';
 import { TokenService } from '../../services/token.service';
 import { UserResponse } from '../../responses/user/user.response';
 import { UpdateUserDTO } from '../../dtos/user/update.user.dto';
+import { OrderService } from '../../services/order.service';
+import { OrderResponse } from '../../responses/order/order.response';
 @Component({
   selector: 'user-profile',
   templateUrl: './user.profile.component.html',
@@ -20,6 +22,7 @@ import { UpdateUserDTO } from '../../dtos/user/update.user.dto';
 })
 export class UserProfileComponent implements OnInit {
   userResponse?: UserResponse;
+  orders: OrderResponse[] = [];
   userProfileForm: FormGroup;
   token:string = '';
   constructor(
@@ -28,6 +31,7 @@ export class UserProfileComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private tokenService: TokenService,
+    private orderService: OrderService,
   ){        
     this.userProfileForm = this.formBuilder.group({
       fullname: [''],     
@@ -43,6 +47,8 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {  
     debugger
     this.token = this.tokenService.getToken();
+    const userId = this.tokenService.getUserId();
+    this.loadOrderHistory(userId);
     this.userService.getUserDetail(this.token).subscribe({
       next: (response: any) => {
         debugger
@@ -55,7 +61,8 @@ export class UserProfileComponent implements OnInit {
           address: this.userResponse?.address ?? '',
           date_of_birth: this.userResponse?.date_of_birth.toISOString().substring(0, 10),
         });        
-        this.userService.saveUserResponseToLocalStorage(this.userResponse);         
+        this.userService.saveUserResponseToLocalStorage(this.userResponse);
+        debugger   
       },
       complete: () => {
         debugger;
@@ -65,6 +72,21 @@ export class UserProfileComponent implements OnInit {
         alert(error.error.message);
       }
     })
+  }
+
+  loadOrderHistory(userId: number){
+    this.orderService.getOrderHistoryByUserId(userId).subscribe({
+      next: (response: any) => {
+        this.orders = response;
+        debugger // Gán vào biến để hiển thị
+      },
+      complete: () => {
+        debugger;
+      },
+      error: (err: any) => {
+        console.error('Error loading order history:', err);
+      }
+    });
   }
   passwordMatchValidator(): ValidatorFn {
     return (formGroup: AbstractControl): ValidationErrors | null => {
@@ -104,6 +126,8 @@ export class UserProfileComponent implements OnInit {
         alert('Mật khẩu và mật khẩu gõ lại chưa chính xác')
       }
     }
-  }    
+  }
+  
+  
 }
 
