@@ -49,12 +49,12 @@
               <div class="mb-3">
                 <label for="retype_password" class="form-label">Nhập lại mật khẩu</label>
                 <input type="password" 
-                       class="form-control" 
-                       formControlName="retype_password"                         
-                       placeholder="Nhập lại mật khẩu" 
-                       required
-                       id="retype_password" 
-                       [class.is-invalid]="userProfileForm.get('retype_password')!.invalid 
+                      class="form-control" 
+                      formControlName="retype_password"                         
+                      placeholder="Nhập lại mật khẩu" 
+                      required
+                      id="retype_password" 
+                      [class.is-invalid]="userProfileForm.get('retype_password')!.invalid 
                           && userProfileForm.get('retype_password')!.touched">
                   <div *ngIf="userProfileForm.hasError('passwordMismatch')" 
                   class="invalid-feedback">
@@ -64,7 +64,7 @@
               <div class="text-center fade-in">
                 <button type="button" 
                     (click)="save()"
-                    class="btn btn-primary">Lưu thay đổi</button>
+                    class="btn-gradient">Lưu thay đổi</button>
               </div>
             </div>  
 

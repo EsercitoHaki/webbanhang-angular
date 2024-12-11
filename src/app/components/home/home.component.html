@@ -14,10 +14,9 @@
     </div>
 </div>
 <div class="container mt-5 mb-5">
-    <div class="row intro-section2">
+    <div class="row intro-section">
         <h3 class="row mb-5 fade-in justify-content-center">Một vài sản phẩm mới</h3>
-        
-        <div id="carouselExampleCaptions" class="carousel slide">
+        <!-- <div id="carouselExampleCaptions" class="carousel slide">
             <div class="carousel-indicators">
               <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
               <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -54,37 +53,35 @@
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Next</span>
             </button>
-          </div>
-
-          <!-- <div id="carouselExampleCaptions" class="carousel slide">
-            <div class="carousel-indicators">
-              <button *ngFor="let product of products; let i = index"
-                      type="button"
-                      [attr.data-bs-target]="'#carouselExampleCaptions'"
-                      [attr.data-bs-slide-to]="i"
-                      [class.active]="i === 0"
-                      [attr.aria-label]="'Slide ' + (i + 1)"></button>
+          </div> -->
+          <div class="product-container row">
+            <!-- Hiển thị danh sách sản phẩm -->
+            <div *ngIf="products.length === 0" class="no-products">
+              <p>Không có sản phẩm nào để hiển thị.</p>
             </div>
-            <div class="carousel-inner">
-              <div *ngFor="let product of products; let i = index" [ngClass]="{'carousel-item': true, 'active': i === 0}">
-                <img [src]="product.thumbnail" class="d-block w-25 h-25" alt="{{ product.name }}">
-                <div class="carousel-caption d-none d-md-block">
-                  <h5>{{ product.name }}</h5>
-                  <p>{{ product.description }}</p>
-                  <p>Price: ${{ product.price }}</p>
-                  <p>Created At: {{ product.created_at | date:'short' }}</p>
-                </div>
+          
+            <!-- Lặp qua mảng sản phẩm và hiển thị thông tin -->
+            <div *ngFor="let product of products" class="product-item row" [attr.data-id]="product.id">
+              <!-- Áp dụng hiệu ứng vanilla tilt cho mỗi sản phẩm -->
+              <div class="product-card col" [attr.data-tilt]="true">
+                <img [src]="product.thumbnail" alt="{{ product.name }}" class="product-thumbnail col" />
+                <h3 class="product-name col">{{ product.name }}</h3>
+                <span class="product-id col">ID: {{ product.id }}</span> <!-- Hiển thị ID sản phẩm -->
               </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div> -->
+          </div>
+          
+          <!-- Nút để điều hướng tới trang sản phẩm khác -->
+          <button (click)="navigateToProducts()" class="view-all-btn">
+            Xem tất cả sản phẩm
+          </button>
+          
+          
+          
+          
+          
+          
+          
 
     </div>
 </div>

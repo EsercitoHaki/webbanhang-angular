@@ -1,10 +1,11 @@
 <app-header></app-header>
 <div class="container">
-  <div class="intro-section fade-in">
-    <h1>Chi tiết sản phẩm</h1>
-  </div>
-  <div class="row fade-in">
-    <div class="col-md-6 ">
+  
+  <div class="row fade-in mt-3 intro-section shadow">
+    <div >
+      <h1 class="row justify-content-center my-4">Chi tiết sản phẩm</h1>
+    </div>
+    <div class="col-md-6  ">
       <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner ">
           <div *ngFor="let image of product?.product_images; let i = index" class="carousel-item"
@@ -30,16 +31,16 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6 fade-in">
+    <div class="col-md-6 fade-in border-start">
       <div class="product-details">
         <h2>{{ product?.name }}</h2>
         <p>{{ product?.description }}</p>
         <p>Giá: ${{ product?.price }}</p>
         <div class="product-actions">
-          <button class="btn btn-primary" (click)="addToCart()">Thêm vào giỏ hàng</button>
-          <button class="btn btn-success" (click)="buyNow()">Mua ngay</button>
+          <button class="row btn-add-to-cart justify-content-center" (click)="addToCart()">Thêm vào giỏ hàng</button>
+          <!-- <button class="btn btn-success" (click)="buyNow()">Mua ngay</button> -->
         </div>
-        <div class="product-quantity">
+        <div class=" product-quantity ">
           <div class="border-wrapper">
             <button (click)="decreaseQuantity()">-</button>
             <input type="text" [value]="quantity">
@@ -50,12 +51,12 @@
     </div>
   </div>
 
-  <div class="recommended-products fade-in">
-    <h3>Sản phẩm gợi ý</h3>
-    <div class="row fade-in">
-      <div class="col-lg-3 col-sm-6 fade-in" *ngFor="let product of recommendedProducts | slice:0:4">
-        <div class="product-item card">
-          <div class="imgBox">
+  <div class="recommended-products fade-in shadow">
+    <h1 class="row justify-content-center mt-3">Sản phẩm gợi ý</h1>
+    <div class="row fade-in mt-5">
+      <div class="col-lg-3 col-sm-5 fade-in" *ngFor="let product of recommendedProducts | slice:0:4">
+        <div class="product-item card ">
+          <div class="imgBox shadow">
             <img [src]="product.thumbnail" alt="Product Image" class="mouse product-image">
           </div>
           <div class="contentBox">
@@ -68,21 +69,20 @@
   </div>
 
   <!-- Bình luận -->
-  <div class="comments-section">
-    <h3>Bình luận</h3>
-
+  <div class="comments-section shadow">
+    <h1 class="row justify-content-center mt-3">Bình luận</h1>
     <!-- Form đăng comment -->
-    <div class="comment-form">
-      <textarea [(ngModel)]="newCommentContent" placeholder="Nhập bình luận của bạn..." rows="4"></textarea>
-      <button class="btn btn-primary" (click)="postComment()">Đăng bình luận</button>
+    <div class="row comment-form mt-3 justify-content-center">
+      <textarea class="col-lg-6" [(ngModel)]="newCommentContent" placeholder="Xin mời bạn để lại các đánh giá về sản phẩm của chúng tôi. Các câu hỏi sẽ được phản hồi sớm nhất có thể" rows="4"></textarea>
+      <button class="col-md-3 btn btn-primary" (click)="postComment()">Đăng bình luận</button>
     </div>
 
-    <div *ngIf="!commentProducts.length" class="no-comments">
+    <div *ngIf="!commentProducts.length" class="row no-comments mt-3 justify-content-center">
       Không có bình luận nào cho sản phẩm này.
     </div>
 
     <!-- Danh sách bình luận -->
-    <div *ngFor="let comment of commentProducts" class="comment-item">
+    <div *ngFor="let comment of commentProducts" class="row comment-item ">
       <div class="comment-header">
         <strong>{{ comment.user?.fullname }}</strong>
         <small>{{ comment.created_at | date:'short' }}</small>
@@ -104,14 +104,7 @@
           <p>{{ reply.content }}</p>
         </div>
       </div>
-    
-      <hr />
     </div>
-    
-    
-    
-
-
-
   </div>
-  <app-footer></app-footer>
+</div>
+<app-footer></app-footer>

@@ -1,8 +1,13 @@
 @import "../../styles/shared-styles.scss";
 .intro-section {
+  background-color: rgba(255,255,255 ,0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
   color: white;
-  padding: 20px;
-  text-align: center;
+  padding: 0 30px 30px 30px;
+}
+h1{
+  color: #fff;
 }
 
 .thumbnail-container {
@@ -50,12 +55,23 @@
 .border-wrapper {
   border: 1px solid white;
 }
-
+h2 {
+  font-weight: bold;
+}
+.btn-add-to-cart{
+  background: linear-gradient(to right,  #333, #e24747);
+  color: white;
+  border-radius: 30px;
+  width: 40%;
+  padding: 10px 0;
+  margin-top: 20px;
+  border: none;
+}
 .product-quantity {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-top: 10px;
+  margin: 10px 0 0 50px;
 }
 
 .product-quantity button {
@@ -134,7 +150,7 @@
 .product-item {
   position: relative;
   height: 440px; // Maintain original height
-  margin: 0 0 20px 20px; // Keep your existing card spacing
+  margin: 0 20px 20px 20px; // Keep your existing card spacing
   background: #0f0f0f;
   border-radius: 20px;
   overflow: hidden;
@@ -242,4 +258,20 @@
       opacity: 1;
     }
   }
+}
+
+// .recommended-products{
+//   background-color: rgba(255,255,255 ,0.2);
+//   backdrop-filter: blur(10px);
+//   border-radius: 50px;
+//   color: white;
+
+// }
+.comments-section{
+  border: #0f0f0f;
+  color: white;
+
+}
+.comment-form{
+  border-radius: 300px;
 }
