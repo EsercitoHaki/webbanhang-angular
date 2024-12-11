@@ -14,15 +14,15 @@ export class CommentService {
 
   constructor (private http: HttpClient) {}
 
-  getCommentsByProduct(productId: number): Observable<Comment[]> {
-    return this.http.get<Comment[]>(`${this.apiGetComments}?product_id=${productId}`);
+  getCommentsByProduct(productId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiGetComments}?product_id=${productId}`);
   }
 
   addComment(commentDTO: CommentDTO): Observable<any> {
-    return this.http.post(this.apiPostComment, commentDTO);
+    return this.http.post(this.apiPostComment, commentDTO, { responseType: 'text' });
   }
 
   replyToComment(parentId: number, replyDTO: CommentDTO): Observable<any> {
-    return this.http.post(`${this.apiPostComment}/reply/${parentId}`, replyDTO);
+    return this.http.post(`${this.apiPostComment}/reply/${parentId}`, replyDTO, { responseType: 'text' });
   }
 }
