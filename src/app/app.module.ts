@@ -23,7 +23,6 @@ import { AdminModule } from './components/admin/admin.module';
 import { CommonModule } from '@angular/common';
 import { ProductComponent } from './components/product/product.component';
 
-
 @NgModule({
 
   declarations: [    

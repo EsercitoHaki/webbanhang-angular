@@ -1,32 +1,56 @@
 @import '../../../styles/shared-styles.scss';
 
 .page-number {
-    cursor: pointer;
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    margin: 0 2px;
-    border-radius: 3px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  margin: 0 2px;
+  border-radius: 3px;
 }
 
 .page-number.active {
-    background-color: $shopapp-color !important;
-    color: #fff;
-    border-color: $shopapp-color !important;
+  background-color: $shopapp-color !important;
+  color: #fff;
+  border-color: $shopapp-color !important;
 }
 
 .btn.btn-primary {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 table.table {
-    border-collapse: collapse;
-  
-    tr {
-      border-bottom: none;
-    }
-  
-    th, td {
-      border-top: none;
-      border-bottom: none;
-    }
+  border-collapse: collapse;
+
+  tr {
+    border-bottom: none;
+  }
+
+  th, td {
+    border-top: none;
+    border-bottom: none;
+  }
+}
+
+/* Style for the popup menu */
+.popup-menu {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 10;
+}
+
+.popup-menu button {
+  margin-bottom: 5px;
+}
+
+.popup-menu button:last-child {
+  margin-bottom: 0;
+}
+
+.btn-secondary {
+  font-size: 18px;
+  padding: 5px 10px;
 }
