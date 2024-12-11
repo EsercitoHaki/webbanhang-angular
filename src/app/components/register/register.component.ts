@@ -19,6 +19,9 @@ export class RegisterComponent {
   isAccepted: boolean;
   dateOfBirth: Date;
 
+  showPassword: boolean = false;
+  showRetypePassword: boolean = false;
+
   constructor(private router: Router, private userService: UserService){
     this.phoneNumber = '';
     this.password = '';
@@ -78,6 +81,15 @@ export class RegisterComponent {
     } else {
       this.registerForm.form.controls['retypePassword'].setErrors(null);
     }
+  }
+  // Phương thức toggle cho mật khẩu
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+
+  // Phương thức toggle cho mật khẩu nhập lại
+  toggleRetypePasswordVisibility() {
+    this.showRetypePassword = !this.showRetypePassword;
   }
   checkAge() {
     if (this.dateOfBirth) {
