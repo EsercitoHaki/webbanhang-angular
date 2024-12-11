@@ -13,54 +13,17 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
   
-  // getNewProducts(keyword: string, categoryId: number, page: number, limit: number): Observable<any[]> {
-  //   const params = new HttpParams()
-  //     .set('keyword', keyword)
-  //     .set('category_id', categoryId.toString())
-  //     .set('page', page.toString())
-  //     .set('limit', limit.toString());
-  
-  //   return this.http.get<any>(this.apiGetProducts, { params }).pipe(
-  //     map(response => {
-  //       console.log('API response:', response); 
-  
-  //       const products = response.products; 
-  //       if (Array.isArray(products)) {
-  //         return products
-  //           .sort((a, b) => a.productId - b.productId) 
-  //           .slice(0, 10)
-  //           .map(product => ({
-  //             id: product.productId,        
-  //             name: product.name,           
-  //             thumbnail: product.thumbnail 
-  //           }));
-  //       } else {
-  //         console.error('API response does not contain a valid products array:', products);
-  //         return [];
-  //       }
-  //     })
-  //   );
-  // }
-  
-  getNewProducts(keyword: string, categoryId: number, page: number, limit: number): Observable<any> {
+
+  getNewProducts(keyword: string, categoryId: number, page: number, limit: number): Observable<Product[]> {
     const params = new HttpParams()
       .set('keyword', keyword)
       .set('category_id', categoryId.toString())
       .set('page', page.toString())
       .set('limit', limit.toString());
-  
-    return this.http.get<any>(this.apiGetProducts, { params }).pipe(
-      map(response => {
-        console.log('API response:', response);
-        const filteredProducts = response.products.filter((product: any) => 
-          product.productId >= 1 && product.productId <= 10
-        );
-        return filteredProducts;
-      })
-    );
+    return this.http.get<Product[]>(this.apiGetProducts, { params })
   }
   
-  
+
   getProducts(keyword: string, categoryId: number, page: number, limit: number): Observable<Product[]> {
     const params = new HttpParams()
       .set('keyword', keyword)

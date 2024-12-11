@@ -1,57 +1,50 @@
 import { Product } from './../../models/product';
-import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { Router } from '@angular/router';  // Import Router for navigation
 import VanillaTilt from 'vanilla-tilt';
-import { ProductResponse } from './../../responses/product/product.response';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, AfterViewChecked {
-  products: any[] = [];
+export class HomeComponent implements OnInit, AfterViewInit {
+  products: Product[] = [];
+  newProducts: { id: number; name: string; price: number; thumbnail: string }[] = [];
   private isVanillaTiltInitialized: boolean = false;
 
   constructor(
-    private productService: ProductService,  // Đảm bảo sử dụng productService
-    private router: Router  // Inject Router into the constructor
+    private productService: ProductService,
+    private router: Router 
   ) {}
 
   ngOnInit(): void {
-    this.getNewProducts('', 0, 0, 10);
+    this.getNewProducts('', 0, 0, 12);
   }
 
-  getNewProducts(keyword: string, categoryId: number, page: number, limit: number): void {
-    this.productService.getNewProducts(keyword, categoryId, page, limit).subscribe(
-      (response) => {
-        console.log('API response home:', response);
-        const products = response.products;
-  
-        // Ensure that products is an array and map it to ProductResponse
-        if (Array.isArray(products)) {
-          // Map the API response to ProductResponse format
-          this.products = products.map(product => ({
-            product_name: product.name,  // Assuming the API provides 'name'
-            thumbnail: product.thumbnail, // Assuming the API provides 'thumbnail'
-            price: product.price,         // Assuming the API provides 'price'
-          })) as ProductResponse[];
-  
-          // Debugging the mapped products
-          debugger;
-        } else {
-          console.error('API response does not contain valid products array:', products);
-        }
+  getNewProducts(keyword: string, selectedCategoryId: number, page: number, limit: number): void {
+    this.productService.getProducts(keyword, selectedCategoryId, page, limit).subscribe({
+      next: (response: any) => {
+        console.log('API Response:', response);
+
+        this.newProducts = response.products.map((product: Product) => ({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          thumbnail: `${environment.apiBaseUrl}/products/images/${product.thumbnail}`
+        }));
+        console.log('Mapped New Products:', this.newProducts);
       },
-      (error) => {
+      error: (error: any) => {
         console.error('Error fetching products:', error);
       }
-    );
+    });
   }
-  
-  ngAfterViewChecked(): void {
-    if (!this.isVanillaTiltInitialized && this.products.length > 0) {
+
+  ngAfterViewInit(): void {
+    if (!this.isVanillaTiltInitialized && this.newProducts.length > 0) {
       this.initializeVanillaTilt();
     }
   }
@@ -64,8 +57,13 @@ export class HomeComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  // Method to navigate to the /products route when the button is clicked
   navigateToProducts(): void {
     this.router.navigate(['/products']);
+  }
+
+  navigateToProductDetail(productId: number): void {
+    this.router.navigate(['/products', productId], { replaceUrl: true }).then(() => {
+      window.scrollTo(0, 0); 
+    });
   }
 }
