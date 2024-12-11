@@ -26,6 +26,7 @@
     "@auth0/angular-jwt": "^5.2.0",
     "@fortawesome/fontawesome-free": "^6.7.1",
     "bootstrap": "^5.3.3",
+    "chart.js": "^4.4.7",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "express": "^4.18.2",
