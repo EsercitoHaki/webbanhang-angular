@@ -9,8 +9,9 @@
 .header {
     background-color: #333;
     /* Header background color */
-    color: white;
+    color: $shopapp-background-color;
     /* Text color */
+    font-weight: bold;
     text-align: center;
     /* Center-align text in the header */
 }
@@ -51,6 +52,8 @@
     padding: 10px;
 }
 
-.btn-logout {
-    font-size: 1.25rem;
+.content-wrapper {
+display: flex;
+justify-content: center; /* Center horizontally */
+align-items: center;
 }

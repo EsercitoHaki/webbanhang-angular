@@ -14,6 +14,7 @@ export class UserService {
   private apiRegister = `${environment.apiBaseUrl}/users/register`;
   private apiLogin = `${environment.apiBaseUrl}/users/login`;
   private apiUserDetail = `${environment.apiBaseUrl}/users/details`;
+  private apiUser = `${environment.apiBaseUrl}/users`;
 
   private apiConfig = {
     headers: this.httpUtilService.createHeaders(),
@@ -31,6 +32,9 @@ export class UserService {
   login(loginDTO: LoginDTO): Observable<any> {    
     return this.http.post(this.apiLogin, loginDTO, this.apiConfig);
   }
+
+  getAllUsers(page: number, limit: number): Observable<any> { return this.http.get(`${this.apiUser}?page=${page}&limit=${limit}`); }
+
   getUserDetail(token: string) {
     return this.http.post(this.apiUserDetail, {
       headers: new HttpHeaders({
@@ -89,6 +93,6 @@ export class UserService {
       console.error('Error removing user data from local storage:', error);
       // Handle the error as needed
     }
-  }
+  }  
 
 }

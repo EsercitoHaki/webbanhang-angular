@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <h1 class="fw-bold">Products</h1>
+  <h1 class="fw-bold display-2">Sản Phẩm</h1>
   <table class="table">
     <thead>
       <tr>
@@ -60,19 +60,17 @@
           />
         </td>
         <td>
-          <button 
-            class="btn btn-success" 
-            (click)="updateProduct(product)"
-          >
-            Update
+          <!-- Menu icon (hamburger icon) -->
+          <button class="btn btn-secondary" (click)="toggleMenu(product)">
+            <i class="fa fa-bars"></i> <!-- Three horizontal lines (hamburger icon) -->
           </button>
-          <button 
-            class="btn btn-danger" 
-            (click)="deleteProduct(product.id)"
-          >
-            Delete
-          </button>
-        </td>
+        
+          <!-- Popup Menu -->
+          <div *ngIf="menuState[product.id]" class="popup-menu">
+            <button class="btn btn-success" (click)="updateProduct(product)">Update</button>
+            <button class="btn btn-danger" (click)="deleteProduct(product.id)">Delete</button>
+          </div>
+        </td>              
       </tr>
     </tbody>
   </table>

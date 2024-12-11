@@ -70,4 +70,30 @@
 
 </div>
 </form>
+<div class="col-md-8 mx-auto mt-5">
+  <h2 class="product-header fade-in">Lịch sử đơn hàng</h2>
+  <table class="table table-bordered">
+      <thead>
+          <tr>
+              <th>#</th>
+              <th>Họ tên</th>
+              <th>Địa chỉ</th>
+              <th>Trạng thái</th>
+              <th>Tổng tiền</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let order of orders; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ order.fullname }}</td>
+              <td>{{ order.address }}</td>
+              <td>{{ order.status }}</td>
+              <td>{{ order.total_money }}</td>
+          </tr>
+          <tr *ngIf="orders.length === 0">
+              <td colspan="5" class="text-center">Chưa có đơn hàng nào.</td>
+          </tr>
+      </tbody>
+  </table>
+</div>
 <app-footer></app-footer>

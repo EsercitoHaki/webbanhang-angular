@@ -7,6 +7,16 @@ $text-boder-text: #E03C48;
 $text-hint: rgba(255, 255, 255, 0.1);
 $text-red: #E03C48;
 
+@font-face {
+    font-family: 'Dune';
+    src: url('../../assets/fonts/DVN-Dune_Rise.ttf') format('truetype'); /* Sửa thành 'truetype' */
+    font-weight: normal;
+    font-style: normal;
+}
+
+.dune {
+    font-family: 'Dune';
+}
 
 .btn-gradient {
     background: linear-gradient(to right, #333333, #dd1818);

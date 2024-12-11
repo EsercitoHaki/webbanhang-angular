@@ -1,6 +1,6 @@
 
 <div class="container-fluid">
-  <h1 class="fw-bold">Orders</h1>
+  <h1 class="fw-bold display-2">Đơn hàng</h1>
   <table class="table">
       <thead>
         <tr>
@@ -45,19 +45,21 @@
           <td>{{ order.payment_method }}</td>
           -->
           <td>
-            <div style="display: flex; gap: 10px;">
-            <button 
-              (click)="viewDetails(order)"
-                  class="btn btn-primary"
-                  style="white-space: nowrap;">
-                  View Details
+            <!-- Hamburger menu icon (three horizontal lines) -->
+            <button class="btn btn-secondary" (click)="toggleMenu(order)">
+              <i class="fa fa-bars"></i> <!-- Hamburger icon -->
             </button>
-            <button class="btn btn-danger" 
-              (click)="deleteOrder(order.id)"
-              >Delete</button>                
-            </div>
-          </td>            
           
+            <!-- Popup Menu: Only show when `menuState[order.id]` is true -->
+            <div *ngIf="menuState[order.id]" class="popup-menu">
+              <button class="btn btn-primary" (click)="viewDetails(order)">
+                View Details
+              </button>
+              <button class="btn btn-danger" (click)="deleteOrder(order.id)">
+                Delete
+              </button>
+            </div>
+          </td>          
         </tr>
       </tbody>
     </table>

@@ -12,6 +12,7 @@ export class ProductAdminComponent implements OnInit {
   currentPage: number = 1;  // Trang hiện tại
   itemsPerPage: number = 10;  // Số sản phẩm mỗi trang
   totalPages: number = 0;  // Tổng số trang
+  menuState: { [key: number]: boolean } = {};
 
   constructor(private productService: ProductService) {}
 
@@ -34,6 +35,11 @@ export class ProductAdminComponent implements OnInit {
   onPageChange(page: number) {
     this.currentPage = page;
     this.getAllProducts();  // Tải lại sản phẩm khi trang thay đổi
+  }
+
+  toggleMenu(product: Product) {
+    // Thay đổi trạng thái của menu đối với sản phẩm đó
+    this.menuState[product.id] = !this.menuState[product.id];
   }
 
   saveProduct(product: Product) {

@@ -1,13 +1,11 @@
+@import '../../../styles/shared-styles.scss';
+
 .category-list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 15px;
-  padding: 15px;
-  border: solid 1px #ccc;
-  border-radius: 4px;
-  min-height: 60px;
-  max-width: 100%;
+  gap: 20px;
+  padding: 10px;
   align-items: center; /* Vertically center the items */
   justify-content: center;
 }
@@ -22,7 +20,7 @@
   cursor: move;
   background: white;
   text-align: center;
-  font-size: 14px;
+  font-size: 1.25rem;
   flex: 0 0 auto;
   overflow: visible;
   transition: all 0.3s ease-in-out;

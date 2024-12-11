@@ -23,6 +23,7 @@ export class OrderAdminComponent implements OnInit{
   totalPages:number = 0;
   keyword:string = "";
   visiblePages: number[] = [];
+  menuState: { [key: number]: boolean } = {};
 
   constructor(
     private orderService: OrderService,
@@ -54,10 +55,15 @@ export class OrderAdminComponent implements OnInit{
       }
     });    
   }
+
   onPageChange(page: number) {
     debugger;
     this.currentPage = page;
     this.getAllOrders(this.keyword, this.currentPage, this.itemsPerPage);
+  }
+
+  toggleMenu(order: OrderResponse) {
+    this.menuState[order.id] = !this.menuState[order.id];
   }
 
   generateVisiblePageArray(currentPage: number, totalPages: number): number[] {
