@@ -31,6 +31,8 @@ export class DetailProductComponent implements OnInit {
   newCommentContent: string = '';
   replyContent: { [commentId: number]: string } = {};
   replyToCommentId: number | null = null;
+  activeReplyCommentId: number | null = null; // Biến lưu id của comment đang được trả lời
+
   
   constructor(
     private productService: ProductService,
@@ -158,39 +160,55 @@ export class DetailProductComponent implements OnInit {
       }
     });
   }
+  
+  toggleReply(commentId: number): void {
+    // Bật/tắt textarea cho comment tương ứng
+    if (this.activeReplyCommentId === commentId) {
+      this.activeReplyCommentId = null; // Ẩn nếu đã mở
+    } else {
+      this.activeReplyCommentId = commentId; // Hiện textarea cho comment hiện tại
+    }
+  }
+  
 
   postReply(commentId: number): void {
     const replyContent = this.replyContent[commentId];
     const userId = this.tokenService.getUserId();
-    if(!replyContent || replyContent.trim() === '') {
-      debugger
+  
+    // Kiểm tra nội dung reply
+    if (!replyContent || replyContent.trim() === '') {
       console.error('Nội dung comment không được để trống');
       return;
     }
-    if(commentId === null){
-      debugger
+  
+    // Kiểm tra commentId
+    if (commentId === null) {
       console.error('Không có comment con nào để trả lời');
       return;
     }
-    const replyDTO: CommentDTO ={
+  
+    // Tạo DTO để gửi
+    const replyDTO: CommentDTO = {
       content: replyContent,
       product_id: this.productId,
       user_id: userId,
       parent_id: commentId
-    }
-    debugger
+    };
+  
+    // Gọi service để gửi reply
     this.commentService.replyToComment(commentId, replyDTO).subscribe({
       next: () => {
-        this.replyContent = '';
-        this.replyToCommentId = null;
-        this.getCommentsByProduct(this.productId);
+        this.replyContent[commentId] = ''; // Xóa nội dung reply
+        this.replyToCommentId = null; // Quay về trạng thái ban đầu (ẩn ô nhập liệu)
+        this.getCommentsByProduct(this.productId); // Tải lại danh sách comment
       },
       error: (error: any) => {
-        debugger
         console.error('Error adding reply:', error);
       }
     });
   }
+  
+  
   getCommentId(comment: Comment): number {
     return comment.id;
   }
