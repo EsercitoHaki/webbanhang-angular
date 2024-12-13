@@ -61,13 +61,19 @@ export class ProductService {
   }
   
   
-  getProducts(keyword: string, categoryId: number, page: number, limit: number): Observable<Product[]> {
-    const params = new HttpParams()
-      .set('keyword', keyword)
-      .set('category_id', categoryId)
-      .set('page', page.toString())
-      .set('limit', limit.toString());
-    return this.http.get<Product[]>(this.apiGetProducts, { params });
+  getProducts(
+    keyword: string,
+    categoryId: number,
+    page: number,
+    limit: number
+  ): Observable<Product[]> {
+    const params = {
+      keyword: keyword,
+      category_id: categoryId.toString(),
+      page: page.toString(),
+      limit: limit.toString()
+    };
+    return this.http.get<Product[]>(`${this.apiGetProducts}`, { params });
   }
 
   getDetailProduct(productId: number) {

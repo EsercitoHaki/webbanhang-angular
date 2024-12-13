@@ -37,7 +37,7 @@ export class ProductComponent implements OnInit, AfterViewChecked {
   ngOnInit(): void {
     // Lấy giá trị page từ query params khi trang được tải lại
     this.activatedRoute.queryParams.subscribe(params => {
-      const page = +params['page'] || 1; // Lấy giá trị page từ query params hoặc mặc định là 1
+      const page = +params['page'] || 0; // Lấy giá trị page từ query params hoặc mặc định là 1
       this.currentPage = page;
       this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
     });
@@ -72,28 +72,31 @@ export class ProductComponent implements OnInit, AfterViewChecked {
   }
 
   searchProducts(): void {
-    this.currentPage = 1;
+    this.currentPage = 0;
     this.itemsPerPage = 12;
     this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
   }
 
-  getProducts(keyword: string, selectedCategoryId: number, page: number, limit: number): void {
+  getProducts(keyword: string, selectedCategoryId: number, page: number, limit: number) {
+    debugger;
     this.productService.getProducts(keyword, selectedCategoryId, page, limit).subscribe({
       next: (response: any) => {
-        response.products.forEach((product: Product) => {
+        debugger;
+        response.products.forEach((product: Product) => {          
           product.url = `${environment.apiBaseUrl}/products/images/${product.thumbnail}`;
         });
         this.products = response.products;
         this.totalPages = response.totalPages;
         this.visiblePages = this.generateVisiblePageArray(this.currentPage, this.totalPages);
-
-        // Đặt lại trạng thái để `VanillaTilt` khởi tạo lại khi dữ liệu thay đổi
-        this.isVanillaTiltInitialized = false;
+      },
+      complete: () => {
+        debugger;
       },
       error: (error: any) => {
+        debugger;
         console.error('Error fetching products:', error);
       }
-    });
+    });    
   }
 
   onPageChange(page: number): void {

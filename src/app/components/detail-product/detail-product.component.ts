@@ -88,6 +88,7 @@ export class DetailProductComponent implements OnInit {
     this.productService.getRecommenderProduct(productId).subscribe({
       next: (response: any) => {
         this.recommendedProducts = response;
+        debugger
       },
       error: (error: any) => {
         debugger;
