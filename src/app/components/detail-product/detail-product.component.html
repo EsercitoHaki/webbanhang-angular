@@ -69,40 +69,56 @@
   </div>
 
   <!-- Bình luận -->
-  <div class="comments-section shadow">
-    <h1 class="row justify-content-center mt-3">Bình luận</h1>
-    <!-- Form đăng comment -->
-    <div class="row comment-form mt-3 justify-content-center">
-      <textarea class="col-lg-6" [(ngModel)]="newCommentContent" placeholder="Xin mời bạn để lại các đánh giá về sản phẩm của chúng tôi. Các câu hỏi sẽ được phản hồi sớm nhất có thể" rows="4"></textarea>
-      <button class="col-md-3 btn btn-primary" (click)="postComment()">Đăng bình luận</button>
+<div class="comments-section shadow">
+  <h1 class="row justify-content-center mt-3">Bình luận</h1>
+  <!-- Form đăng comment -->
+  <div class="row comment-form mt-3 justify-content-center">
+    <textarea class="col-lg-6" [(ngModel)]="newCommentContent" placeholder="Xin mời bạn để lại các đánh giá về sản phẩm của chúng tôi. Các câu hỏi sẽ được phản hồi sớm nhất có thể" rows="4"></textarea>
+    <button class="col-md-3 btn btn-primary" (click)="postComment()">Đăng bình luận</button>
+  </div>
+
+  <div *ngIf="!commentProducts.length" class="row no-comments mt-3 justify-content-center">
+    Không có bình luận nào cho sản phẩm này.
+  </div>
+
+  <!-- Danh sách bình luận -->
+  <div *ngFor="let comment of commentProducts" class="row comment-item ">
+    <div class="comment-header">
+      <strong>{{ comment.user?.fullname }}</strong>
+      <small>{{ comment.created_at | date:'short' }}</small>
+    </div>
+    <p>{{ comment.content }}</p>
+
+    <div class="reply-form">
+      <!-- Liên kết nội dung trả lời với commentId -->
+      <div *ngIf="replyToCommentId === comment.id" class="reply-input mt-2">        
+        <textarea   
+          [(ngModel)]="replyContent[comment.id]" 
+          placeholder="Trả lời bình luận này..." 
+          rows="3">
+        </textarea>
+        <button 
+          class="btn btn-success mt-2"
+          (click)="postReply(comment.id)">
+          Gửi
+        </button>
+      </div>
+
+      <button 
+        *ngIf="replyToCommentId !== comment.id"
+        class="btn btn-primary mt-2"
+        (click)="replyToCommentId = comment.id">
+        Trả lời
+      </button>
     </div>
 
-    <div *ngIf="!commentProducts.length" class="row no-comments mt-3 justify-content-center">
-      Không có bình luận nào cho sản phẩm này.
-    </div>
-
-    <!-- Danh sách bình luận -->
-    <div *ngFor="let comment of commentProducts" class="row comment-item ">
-      <div class="comment-header">
-        <strong>{{ comment.user?.fullname }}</strong>
-        <small>{{ comment.created_at | date:'short' }}</small>
-      </div>
-      <p>{{ comment.content }}</p>
-
-      <div class="reply-form">
-        <!-- Liên kết nội dung trả lời với commentId -->
-        <textarea [(ngModel)]="replyContent[comment.id]" placeholder="Trả lời bình luận này..." rows="3"></textarea>
-        <button class="btn btn-secondary" (click)="postReply(comment.id)">Trả lời</button>
-      </div>
-
-      <div *ngIf="comment.replies && comment.replies.length > 0">
-        <div *ngFor="let reply of comment.replies" class="reply-item">
-          <div class="comment-header">
-            <strong>{{ reply.user?.fullname }}</strong>
-            <small>{{ reply.created_at | date:'short' }}</small>
-          </div>
-          <p>{{ reply.content }}</p>
+    <div *ngIf="comment.replies && comment.replies.length > 0">
+      <div *ngFor="let reply of comment.replies" class="reply-item">
+        <div class="comment-header">
+          <strong>{{ reply.user?.fullname }}</strong>
+          <small>{{ reply.created_at | date:'short' }}</small>
         </div>
+        <p>{{ reply.content }}</p>
       </div>
     </div>
   </div>

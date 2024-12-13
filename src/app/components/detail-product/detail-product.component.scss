@@ -9,6 +9,31 @@
 h1{
   color: #fff;
 }
+// Mixin để tái sử dụng hiệu ứng nút
+@mixin button-style($bg-color, $hover-color, $text-color: #fff) {
+  background-color: $bg-color;
+  color: $text-color;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 15px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $hover-color;
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: translateY(1px);
+    box-shadow: none;
+  }
+}
+
 
 .thumbnail-container {
   display: flex;
@@ -66,6 +91,17 @@ h2 {
   padding: 10px 0;
   margin-top: 20px;
   border: none;
+  &:hover {
+    background: linear-gradient(to left,  #333, #e24747);
+    transform: scale(1.05); /* Hiệu ứng phóng to khi hover */
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3); /* Hiệu ứng shadow khi hover */
+  }
+
+  &:active {
+    background: linear-gradient(to right,  #333, #e24747);
+    transform: scale(1); /* Khi click, không phóng to */
+    box-shadow: none; /* Bỏ shadow khi click */
+  }
 }
 .product-quantity {
   display: flex;
@@ -267,11 +303,99 @@ h2 {
 //   color: white;
 
 // }
-.comments-section{
-  border: #0f0f0f;
+.comments-section {
+  border-radius: 10px !important;
+  .comment-item {
+    border-radius: 10px !important;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    margin-top: 10px;
+    
+
+    .comment-header {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .reply-form {
+      margin-top: 10px;
+
+      .reply-input {
+        margin-top: 10px;
+        border: 1px solid #ddd;
+        padding: 5px;
+        background-color: #f1f1f1;
+        border-radius: 5px;
+      }
+
+      button {
+        margin-top: 5px;
+      }
+    }
+
+    /* Bình luận con (Reply) */
+    .reply-item {
+      margin-left: 20px;
+      padding: 8px;
+      background-color: #f1f1f1;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-top: 10px;
+      font-style: italic;
+    }
+  }
+  /* Nút Đăng bình luận */
+.comment-form button {
+  padding: 12px 25px;
+  background: linear-gradient(to right,  #333, #e24747);
   color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: linear-gradient(to left,  #333, #e24747);
+    transform: scale(1.05); /* Hiệu ứng phóng to khi hover */
+    box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3); /* Hiệu ứng shadow khi hover */
+  }
+
+  &:active {
+    background: linear-gradient(to right,  #333, #e24747);
+    transform: scale(1); /* Khi click, không phóng to */
+    box-shadow: none; /* Bỏ shadow khi click */
+  }
+}
+
+/* Nút Trả lời bình luận */
+.comment-item .reply-form button {
+  padding: 10px 20px;
+  background: linear-gradient(to right,  #333, #e24747);
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: linear-gradient(to left,  #333, #e24747);
+    transform: scale(1.05); /* Hiệu ứng phóng to khi hover */
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3); /* Hiệu ứng shadow khi hover */
+  }
+
+  &:active {
+    background: linear-gradient(to right,  #333, #e24747);
+    transform: scale(1); /* Khi click, không phóng to */
+    box-shadow: none; /* Bỏ shadow khi click */
+  }
+}
 
 }
+
 .comment-form{
   border-radius: 300px;
 }
