@@ -13,11 +13,12 @@
 .category-box {
   position: relative;
   width: 20%;
+  aspect-ratio: 1; /* This enforces a square aspect ratio */
   padding: 20px 10px;
   border: solid 1px #ccc;
   border-radius: 4px;
   color: rgba(0, 0, 0, 0.87);
-  cursor: move;
+  cursor: pointer; /* Changed from move to normal pointer */
   background: white;
   text-align: center;
   font-size: 1.25rem;
@@ -25,9 +26,9 @@
   overflow: visible;
   transition: all 0.3s ease-in-out;
 
-  &.cdk-drag {
-    transition: none !important;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;    
 
   .category-text {
     z-index: 1;
@@ -82,5 +83,78 @@
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 4px;
+  }
+}
+
+.create-category-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f8f9fa;
+  color: #A61C3C;
+  font-size: 2rem;
+  cursor: pointer;
+  border: 2px dashed #A61C3C;
+
+  .plus-icon {
+    font-size: 3rem;
+  }
+
+  &:hover {
+    background: #A61C3C;
+    color: white;
+  }
+}
+
+.create-category-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Đảm bảo popup luôn ở trên cùng */
+
+  .popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
+    h2 {
+      margin-bottom: 1rem;
+    }
+
+    .form-control {
+      margin-bottom: 1rem;
+    }
+
+    .popup-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+
+      .btn-primary {
+        background-color: #C1ABa6;
+        border-color: #C1ABA6;
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background-color: #A61C3C;
+        border-color: #A61C3C;
+        color: white;
+      }
+
+      .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        color: white;
+      }
+    }
   }
 }

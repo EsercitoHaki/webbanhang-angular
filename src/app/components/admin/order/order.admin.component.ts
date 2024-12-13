@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Order } from '../../../models/order';
 import { OrderService } from '../../../services/order.service';
-import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
 import { OrderResponse } from '../../../responses/order/order.response';
 import { Location } from '@angular/common';
 
@@ -41,7 +35,7 @@ export class OrderAdminComponent implements OnInit{
     debugger
     this.orderService.getAllOrders(keyword, page - 1, limit).subscribe({
       next: (response: any) => {
-        debugger        
+        debugger
         this.orders = response.orders;
         this.totalPages = response.totalPages;
         this.visiblePages = this.generateVisiblePageArray(this.currentPage, this.totalPages);
@@ -53,8 +47,8 @@ export class OrderAdminComponent implements OnInit{
         debugger;
         console.error('Error fetching products:', error);
       }
-    });    
-  }
+    }); 
+  }  
 
   onPageChange(page: number) {
     debugger;

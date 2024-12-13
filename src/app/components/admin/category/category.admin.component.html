@@ -1,7 +1,10 @@
 <div class="container-fluid">
   <h1 class="fw-bold mb-5 display-2">Danh mục</h1>
   <div class="category-list">
-    <div *ngFor="let category of categories; let i = index" cdkDrag class="category-box">
+    <div class="category-box create-category-box" (click)="openCreateCategoryPopup()">
+      <span class="plus-icon">+</span>
+    </div>
+    <div *ngFor="let category of categories; let i = index" class="category-box">
       <input
         *ngIf="editingIndex === i"
         [(ngModel)]="categories[i].name"
@@ -20,7 +23,33 @@
       </span>
       <div class="multi-button">
         <button class="fas fa-edit" (click)="startEditing(i)"></button>
-        <button class="fas fa-trash" (click)="deleteCategory(category.id, i)"></button>
+        <button
+          class="fas fa-trash"
+          (click)="deleteCategory(category.id, i)"
+        ></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup for Creating Category -->
+  <div
+    class="create-category-popup"
+    *ngIf="showCreateCategoryPopup"
+    (click)="closePopup($event)"
+  >
+    <div class="popup-content" (click)="$event.stopPropagation()">
+      <h2>Create New Category</h2>
+      <input
+        type="text"
+        [(ngModel)]="newCategoryName"
+        placeholder="Enter category name"
+        class="form-control"
+      />
+      <div class="popup-buttons">
+        <button class="btn btn-primary" (click)="addCategory()">Add</button>
+        <button class="btn btn-secondary" (click)="cancelCreateCategory()">
+          Cancel
+        </button>
       </div>
     </div>
   </div>
