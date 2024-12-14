@@ -16,6 +16,7 @@ import { UserProfileComponent } from './components/user-profile/user.profile.com
 import { AdminComponent } from './components/admin/admin.component';
 import { AdminGuardFn } from './guards/admin.guard';
 import { ProductComponent } from './components/product/product.component';
+import { EditUserProfileComponent } from './components/edit-user-profile/edit-user-profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'user-profile', component: UserProfileComponent, canActivate:[AuthGuardFn] },
   { path: 'orders/:id', component: OrderDetailComponent },
   { path: 'products', component: ProductComponent},
+  { path: 'edit-user-profile', component: EditUserProfileComponent},
   //Admin   
   { 
     path: 'admin', 
