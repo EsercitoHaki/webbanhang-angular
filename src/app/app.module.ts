@@ -23,6 +23,7 @@ import { AdminModule } from './components/admin/admin.module';
 import { CommonModule } from '@angular/common';
 import { ProductComponent } from './components/product/product.component';
 import { EditUserProfileComponent } from './components/edit-user-profile/edit-user-profile.component';
+import { OrderInformationComponent } from './components/order-information/order-information.component';
 
 @NgModule({
 
@@ -36,7 +37,7 @@ import { EditUserProfileComponent } from './components/edit-user-profile/edit-us
     LoginComponent, 
     RegisterComponent, 
     AppComponent, 
-    UserProfileComponent, ProductComponent, EditUserProfileComponent,
+    UserProfileComponent, ProductComponent, EditUserProfileComponent, OrderInformationComponent,
   ],
   imports: [
     BrowserModule,

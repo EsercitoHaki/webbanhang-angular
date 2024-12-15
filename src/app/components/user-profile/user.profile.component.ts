@@ -82,7 +82,7 @@ export class UserProfileComponent implements OnInit {
 
   viewDetails(order:OrderResponse) {
     debugger
-    this.router.navigate(['/admin/orders', order.id]);
+    this.router.navigate(['order-information/', order.id]);
   }
 
   navigateToEditProfile(): void {

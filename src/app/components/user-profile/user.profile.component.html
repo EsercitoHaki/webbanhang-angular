@@ -21,9 +21,6 @@
     <button class="btn btn-primary" (click)="navigateToEditProfile()">
         Thay đổi hồ sơ người dùng
     </button>
-    <!-- <button class="btn btn-danger" (click)="deleteOrder(order.id)">
-Delete
-</button> -->
 </div>
 
 <div class="col-md-8 mx-auto mt-5">
@@ -51,19 +48,13 @@ Delete
                 <td>{{ order.status }}</td>
                 <td>{{ order.total_money }}</td>
                 <td>
-                    <!-- Hamburger menu icon (three horizontal lines) -->
                     <button class="btn btn-secondary" (click)="toggleMenu(order)">
                         <i class="fa fa-bars"></i>
                     </button>
-
-                    <!-- Popup Menu: Only show when `menuState[order.id]` is true -->
                     <div *ngIf="menuState[order.id]" class="popup-menu">
                         <button class="btn btn-primary" (click)="viewDetails(order)">
                             View Details
                         </button>
-                        <!-- <button class="btn btn-danger" (click)="deleteOrder(order.id)">
-                    Delete
-                  </button> -->
                     </div>
                 </td>
             </tr>
