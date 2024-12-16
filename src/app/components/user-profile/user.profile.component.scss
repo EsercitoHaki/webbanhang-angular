@@ -3,28 +3,158 @@
 .container {
     color: $text-white;
 }
-.intro-section {
-    color: $text-white;
+
+.user-profile-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Giảm khoảng cách giữa các cột */
+    align-items: flex-start; /* Căn chỉnh các phần tử theo chiều dọc */
+}
+
+.user-info-card{
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
     padding: 20px;
-    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    flex: 1; /* Đảm bảo mỗi phần chiếm không gian đều */
+    // overflow: hidden;
 }
-.product-header {
+
+.user-info-header h2, .product-header {
     color: $user-text-header;
+    font-size: 24px;
 }
-.form-control {
-    background-color:$user-bg-form;
-    border: 1px solid rgb(29, 33, 54);
+
+.user-info-header h4 {
+    color: $user-text-header;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.user-info {
     color: $text-white;
 }
 
-.form-control:focus {
-    border-color: $text-white;
-    background-color:$user-bg-form;
-}
-.form-label {
-    color: $text-white;
+.info-row {
+    margin-bottom: 20px;
 }
 
-.product-order {
-    color: $shopapp-title-color;
+.info-row label {
+    font-weight: bold;
+    color: $text-white;
+    font-size: 16px;
+}
+
+.form-control-static {
+    font-size: 16px;
+    color: $text-white;
+    background-color: transparent;
+    border: none;
+    padding: 8px;
+    margin-top: 5px;
+    display: block;
+}
+.table {
+    background-color: rgba(200, 200, 200, 0.5); // Xám nhạt trong suốt hơn
+    border-radius: 12px;
+    overflow: hidden; // Bo tròn viền
+    text-align: center;
+    color: #333;
+
+    // Header của bảng
+    thead {
+        background-color: rgba(120, 120, 120, 0.6); // Xám đậm nhẹ trong suốt
+        color: #fff;
+
+        th {
+            padding: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            border: none;
+        }
+    }
+
+    // Nội dung của bảng
+    tbody {
+        tr {
+            transition: background-color 0.3s ease;
+
+            td {
+                padding: 10px;
+                border: none;
+                background-color: rgba(220, 220, 220, 0.3); // Xám nhạt trong suốt
+            }
+
+            // Hiệu ứng hover
+            &:hover {
+                background-color: rgba(180, 180, 180, 0.4); // Xám trung tính nhạt hơn khi hover
+            }
+        }
+
+        // Dòng thông báo khi không có đơn hàng
+        tr.no-orders {
+            td {
+                color: #777;
+                font-style: italic;
+                background-color: rgba(200, 200, 200, 0.2);
+            }
+        }
+    }
+}
+/* Đảm bảo không gian và hiệu ứng cho phần popup menu */
+.popup-menu {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 10;
+}
+
+.popup-menu button {
+    padding: 8px 12px;
+    border: none;
+    background-color: #8e44ad;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.popup-menu button:hover {
+    background-color: #732d91;
+}
+
+.btn-primary {
+    padding: 12px 25px;
+    background: linear-gradient(to right,  #333, #e24747);
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  
+    &:hover {
+      background: linear-gradient(to left,  #333, #e24747);
+      transform: scale(1.05); /* Hiệu ứng phóng to khi hover */
+      box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3); /* Hiệu ứng shadow khi hover */
+    }
+  
+    &:active {
+      background: linear-gradient(to right,  #333, #e24747);
+      transform: scale(1); /* Khi click, không phóng to */
+      box-shadow: none; /* Bỏ shadow khi click */
+    }
+}
+
+
+.btn-secondary {
+    background-color: #bdc3c7;
+    color: white;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #95a5a6;
 }

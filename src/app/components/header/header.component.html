@@ -3,16 +3,45 @@
     <div class="container">
       <!-- Logo SVG -->
       <a routerLink="/" class="svg-link">
-        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="80" viewBox="0 0 100 100">
+        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 100 100">
+          <!-- Vòng tròn ngoài -->
           <circle cx="50" cy="50" r="48" fill="#8e44ad" stroke="#732d91" stroke-width="4" />
+          
+          <!-- Tai mèo trái (mềm mại hơn) -->
+          <path d="M30 35 C35 10, 45 10, 50 35" fill="#8e44ad" stroke="#732d91" stroke-width="2" />
+      
+          <!-- Tai mèo phải (mềm mại hơn) -->
+          <path d="M70 35 C65 10, 55 10, 50 35" fill="#8e44ad" stroke="#732d91" stroke-width="2" />
+      
+          <!-- Mặt mèo -->
           <circle cx="50" cy="50" r="30" fill="#ffffff" />
+      
+          <!-- Mắt trái -->
           <ellipse cx="40" cy="45" rx="5" ry="8" fill="#8e44ad" />
+          <!-- Mắt phải -->
           <ellipse cx="60" cy="45" rx="5" ry="8" fill="#8e44ad" />
-          <path d="M40 60 Q50 70 60 60" stroke="#8e44ad" stroke-width="3" fill="none" />
-          <path d="M35 30 Q25 10 45 10 Q37 20 35 30" fill="#ffffff" stroke="#8e44ad" stroke-width="2" />
-          <path d="M65 30 Q75 10 55 10 Q63 20 65 30" fill="#ffffff" stroke="#8e44ad" stroke-width="2" />
+      
+          <!-- Mũi mèo -->
+          <polygon points="48,55 52,55 50,60" fill="#8e44ad" />
+      
+          <!-- Miệng mèo -->
+          <path d="M50 60 Q45 68 40 60" stroke="#8e44ad" stroke-width="2" fill="none" />
+          <path d="M50 60 Q55 68 60 60" stroke="#8e44ad" stroke-width="2" fill="none" />
+      
+          <!-- Râu mèo trái -->
+          <path d="M35 55 L20 52" stroke="#732d91" stroke-width="2" />
+          <path d="M35 58 L20 58" stroke="#732d91" stroke-width="2" />
+          <path d="M35 61 L20 64" stroke="#732d91" stroke-width="2" />
+      
+          <!-- Râu mèo phải -->
+          <path d="M65 55 L80 52" stroke="#732d91" stroke-width="2" />
+          <path d="M65 58 L80 58" stroke="#732d91" stroke-width="2" />
+          <path d="M65 61 L80 64" stroke="#732d91" stroke-width="2" />
         </svg>
       </a>
+      
+      
+      
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,6 +65,8 @@
               <i class="fas fa-shopping-cart icon"></i> Đơn hàng
             </a>
           </li>
+
+          
 
           <!-- Dropdown -->
           <<li class="nav-item " *ngIf="userResponse">
