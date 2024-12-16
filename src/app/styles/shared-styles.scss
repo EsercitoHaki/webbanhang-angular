@@ -80,6 +80,28 @@ $text-red: #E03C48;
 }
 
 //animation3
+// Animation cho text chạy vòng quanh div
+.marquee {
+    overflow: hidden;
+  
+    &__content {
+      animation: marquee 5s linear infinite;
+      width: 100%;
+        color: #A91526;
+        /* Text color */
+        font-weight: bold;
+    }
+  }
+  
+  // Keyframes cho animation marquee
+  @keyframes marquee {
+    0% {
+      transform: translateX(-70%);
+    }
+    100% {
+      transform: translateX(70%);
+    }
+  }  
 //icon-animation
 
 

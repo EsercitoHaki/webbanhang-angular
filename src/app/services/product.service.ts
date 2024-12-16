@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
 })
 export class ProductService {
   private apiGetProducts = `${environment.apiBaseUrl}/products`;
+  private apiUrl = `${environment.apiBaseUrl}/products`; // URL for your backend API
 
   constructor(private http: HttpClient) { }
   
@@ -87,6 +88,10 @@ export class ProductService {
 
   getRecommenderProduct(productId: number): Observable<Product[]> {
     return this.http.get<Product[]>(`${environment.apiBaseUrl}/products/recommendations/${productId}`);
+  }
+
+  addProduct(product: Product): Observable<Product> {
+    return this.http.post<Product>(this.apiUrl, product);
   }
 
   // Thêm phương thức để cập nhật sản phẩm

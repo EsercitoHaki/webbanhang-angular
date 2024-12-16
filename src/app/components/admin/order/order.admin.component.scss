@@ -1,17 +1,18 @@
 @import '../../../styles/shared-styles.scss';
 
-.page-number {
-  cursor: pointer;
-  padding: 5px 10px;
-  border: 1px solid #ccc;
-  margin: 0 2px;
-  border-radius: 3px;
+nav .pagination .page-item .page-link {
+  background-color: $bg-pagination;
+  color: $text-in-pagiation;
+  border: none;
+  font-weight: bold;
 }
 
-.page-number.active {
-  background-color: $shopapp-color !important;
-  color: #fff;
-  border-color: $shopapp-color !important;
+nav .pagination .page-item .page-link:hover {
+  background-color: $bg-pg-hover-active;
+}
+
+nav .pagination .page-item .page-link.active {
+  background-color: $bg-pg-hover-active !important;
 }
 
 .btn.btn-primary {

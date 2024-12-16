@@ -1,1 +1,28 @@
 @import '../../../styles/shared-styles.scss';
+
+.container-fluid {
+  canvas {
+    width: 100%; /* Đặt chiều rộng tối đa cho canvas */
+    height: 100vh; /* Đặt chiều cao cố định hoặc tùy chỉnh */
+    max-width: 800px; /* Tùy chọn: giới hạn chiều rộng */
+  }
+}
+
+.top-products {
+  h2 {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    color: #333;
+  }
+
+  .list-group-item {
+    font-size: 1.2rem;
+    padding: 10px 15px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+  }
+
+  .badge {
+    font-size: 1rem;
+  }
+}

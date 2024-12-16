@@ -1,17 +1,18 @@
 @import '../../../styles/shared-styles.scss';
 
-.page-number {
-  cursor: pointer;
-  padding: 5px 10px;
-  border: 1px solid #ccc;
-  margin: 0 2px;
-  border-radius: 3px;
+nav .pagination .page-item .page-link {
+  background-color: $bg-pagination;
+  color: $text-in-pagiation;
+  border: none;
+  font-weight: bold;
 }
 
-.page-number.active {
-  background-color: $shopapp-color !important;
-  color: #fff;
-  border-color: $shopapp-color !important;
+nav .pagination .page-item .page-link:hover {
+  background-color: $bg-pg-hover-active;
+}
+
+nav .pagination .page-item .page-link.active {
+  background-color: $bg-pg-hover-active !important;
 }
 
 .btn.btn-primary {
@@ -54,4 +55,53 @@ table.table {
 .btn-secondary {
   font-size: 18px;
   padding: 5px 10px;
+}
+
+/* Styles for Add Product Dialog */
+.popup-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 20;
+}
+
+.dialog-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  width: 400px;
+}
+
+.dialog-content .form-group {
+  margin-bottom: 15px;
+}
+
+.dialog-content .form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.dialog-content .form-control {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.dialog-content .d-flex {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+.dialog-content .btn {
+  margin-left: 10px;
 }
