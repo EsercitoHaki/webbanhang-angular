@@ -13,6 +13,8 @@ export class ProductAdminComponent implements OnInit {
   itemsPerPage: number = 10;  // Số sản phẩm mỗi trang
   totalPages: number = 0;  // Tổng số trang
   menuState: { [key: number]: boolean } = {};
+  showAddProductDialog: boolean = false;
+  newProduct: Product = {} as Product;
 
   constructor(private productService: ProductService) {}
 
@@ -53,7 +55,7 @@ export class ProductAdminComponent implements OnInit {
     this.productService.updateProduct(product).subscribe({
       next: (response) => {
         console.log('Product updated successfully');
-        // Cập nhật thời gian `updated_at` hoặc thực hiện các thao tác sau khi thành công
+        // Cập nhật thời gian updated_at hoặc thực hiện các thao tác sau khi thành công
       },
       error: (error) => {
         console.error('Error updating product:', error);
@@ -88,6 +90,26 @@ export class ProductAdminComponent implements OnInit {
     }
   
     return new Array(endPage - startPage + 1).fill(0).map((_, index) => startPage + index);
-  }  
-  
+  } 
+
+  openAddProductDialog() {
+    this.showAddProductDialog = true;
+  }
+
+  closeAddProductDialog() {
+    this.showAddProductDialog = false;
+  }
+
+  addProduct() {
+    this.productService.addProduct(this.newProduct).subscribe({
+      next: (response) => {
+        this.products.push(response);
+        this.closeAddProductDialog();
+        this.getAllProducts();  // Tải lại sản phẩm sau khi thêm mới
+      },
+      error: (error) => {
+        console.error('Error adding product:', error);
+      }
+    });
+  }
 }

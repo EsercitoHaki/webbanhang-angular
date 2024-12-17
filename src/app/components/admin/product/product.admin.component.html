@@ -1,5 +1,8 @@
 <div class="container-fluid">
-  <h1 class="fw-bold display-2">Sản Phẩm</h1>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="fw-bold display-2">Sản Phẩm</h1>
+    <button class="btn btn-primary" (click)="openAddProductDialog()"> <i class="fa fa-plus"></i> Thêm Sản Phẩm </button>
+  </div>
   <table class="table">
     <thead>
       <tr>
@@ -96,5 +99,37 @@
         </li>
       </ul>
     </nav>
+  </div>
+  <!-- Add Product Dialog -->
+   <div *ngIf="showAddProductDialog" class="popup-dialog">
+    <div class="dialog-content">
+      <h2>Thêm Sản Phẩm Mới</h2>
+      <form (ngSubmit)="addProduct()">
+        <div class="form-group">
+          <label>Tên sản phẩm</label>
+          <input type="text" [(ngModel)]="newProduct.name" class="form-control" name="name" required />
+        </div>
+        <div class="form-group">
+          <label>Giá</label>
+          <input type="number" [(ngModel)]="newProduct.price" class="form-control" name="price" required />
+        </div>
+        <div class="form-group">
+          <label>Thumbnail</label>
+          <input type="text" [(ngModel)]="newProduct.thumbnail" class="form-control" name="thumbnail" required />
+        </div>
+        <div class="form-group">
+          <label>Mô tả</label>
+          <input type="text" [(ngModel)]="newProduct.description" class="form-control" name="description" required />
+        </div>
+        <div class="form-group">
+          <label>Category ID</label>
+          <input type="number" [(ngModel)]="newProduct.category_id" class="form-control" name="category_id" required />
+        </div>
+        <div class="d-flex justify-content-end">
+          <button type="button" class="btn btn-secondary" (click)="closeAddProductDialog()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

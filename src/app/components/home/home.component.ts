@@ -66,4 +66,5 @@ export class HomeComponent implements OnInit, AfterViewInit {
       window.scrollTo(0, 0); 
     });
   }
+  
 }
