@@ -74,12 +74,17 @@
     color: $text-hint;
 }
 
-.product-item {
-    height: 420px;
+.product-thumbnail {
+    height: 280px;
     background-color: $item-boder;
     border-radius: 20px;
     padding: 20px;
     margin-bottom: 20px;
+}
+
+.item{
+    width: 300px;
+    height: 460px;
 }
 
 .product-image {
@@ -89,7 +94,7 @@
     // margin-bottom: 10px;
     width: 100%; /* Đảm bảo ảnh chiếm toàn bộ chiều rộng */
     height: 266px; /* Đảm bảo tỷ lệ ảnh không bị méo */
-    object-fit: cover; /* Cắt ảnh nếu cần để đảm bảo không bị vỡ tỷ lệ */
+    object-fit: contain; /* Cắt ảnh nếu cần để đảm bảo không bị vỡ tỷ lệ */
     margin-bottom: 10px;
 }
 
@@ -148,4 +153,7 @@ nav .pagination .page-item .page-link:active {
 .product-item{
     width: 300px;
     height: 300px;
+}
+.carousel-inner{
+    margin: 0 30px 0 30px;
 }
