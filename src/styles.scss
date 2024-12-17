@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-// src/styles/variables.scss
-$text-white: #ffffff;
-$user-text-header: #333333; // Ví dụ về một biến màu khác
-=======
+
 @import '../src/app/styles/shared-styles.scss';
 
 /* Custom scrollbar cho toàn trang */
@@ -20,4 +16,4 @@ $user-text-header: #333333; // Ví dụ về một biến màu khác
   background: #bbb; /* Màu nền của scrollbar */
   border-radius: 5px;
 }
->>>>>>> 794ea6bae1dbfb02bc3943e811535d2c2a099ab8
+

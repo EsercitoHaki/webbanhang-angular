@@ -1,0 +1,121 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.order-info-card,
+.order-table-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bóng đổ mềm */
+    border: 1px; /* Viền nhạt */
+}
+
+h3, h1 {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.order-info-card p,
+.order-table-card table {
+    font-size: 0.95rem;
+    color: #fff;
+}
+
+
+.table td {
+    vertical-align: middle; 
+    text-align: center; 
+}
+
+.table {
+    background-color: rgba(200, 200, 200, 0.5); 
+    border-radius: 12px;
+    overflow: hidden; 
+    text-align: center;
+    color: #333;
+
+    // Header của bảng
+    thead {
+        background-color: rgba(120, 120, 120, 0.6); 
+        color: #fff;
+
+        th {
+            padding: 12px;
+            font-weight: 600;
+            // text-transform: uppercase;
+            border: none;
+        }
+    }
+
+  
+    tbody {
+        tr {
+            transition: background-color 0.3s ease;
+
+            td {
+                padding: 10px;
+                border: none;
+                background-color: rgba(220, 220, 220, 0.3); 
+            }
+
+            // Hiệu ứng hover
+            &:hover {
+                background-color: rgba(180, 180, 180, 0.4); 
+            }
+        }
+
+    
+        tr.no-orders {
+            td {
+                color: #777;
+                // font-style: italic;
+                background-color: rgba(200, 200, 200, 0.2);
+            }
+        }
+    }
+}
+.btn-primary {
+    padding: 12px 25px;
+    background: linear-gradient(to right,  #333, #e24747);
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  
+    &:hover {
+      background: linear-gradient(to left,  #333, #e24747);
+      transform: scale(1.05); 
+      box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3); 
+    }
+  
+    &:active {
+      background: linear-gradient(to right,  #333, #e24747);
+      transform: scale(1); 
+      box-shadow: none; 
+    }
+}
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+
+    .order-info-card,
+    .order-table-card {
+        margin-bottom: 20px;
+    }
+}
+
+
+.product-image {
+    width: 80px; 
+    height: 80px;
+    object-fit: cover; 
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+    margin: 0 auto; 
+    display: block; 
+}
