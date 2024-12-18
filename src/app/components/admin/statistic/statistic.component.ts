@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { OrderService } from '../../../services/order.service';  // Giả sử bạn đã có service này
+import { OrderService } from '../../../services/order.service';
 import { Chart, registerables } from 'chart.js';
 import { OrderResponse } from '../../../responses/order/order.response';
-
-Chart.register(...registerables); // Đăng ký các module của Chart.js
+import { OrderDetail } from '../../../models/order.detail';
+Chart.register(...registerables);
 
 @Component({
   selector: 'app-statistic',
@@ -11,15 +11,16 @@ Chart.register(...registerables); // Đăng ký các module của Chart.js
   styleUrls: ['./statistic.component.scss']
 })
 export class StatisticComponent implements OnInit {
-  @ViewChild('salesChart') salesChart!: ElementRef; // Thêm dấu '!' để TypeScript biết rằng salesChart sẽ được gán giá trị
-
+  @ViewChild('salesChart') salesChart!: ElementRef;
+  @ViewChild('topProductsChart') topProductsChart!: ElementRef;
   salesData: any = [];
-  topProducts: { name: string; quantity: number }[] = []; // Lưu trữ top 5 sản phẩm
+  topProductsData: any = [];
 
   constructor(private orderService: OrderService) {}
 
   ngOnInit(): void {
-    this.getSalesData(); // Lấy dữ liệu doanh thu
+    this.getSalesData();
+    this.getTopSellingProducts();
   }
 
   getSalesData(): void {
@@ -29,41 +30,15 @@ export class StatisticComponent implements OnInit {
         if (response && response.orders) {
           const orders: OrderResponse[] = response.orders;
           const sales = new Array(12).fill(0);
-          const productMap = new Map<string, number>(); // Bản đồ lưu trữ số lượng sản phẩm
-  
+
           orders.forEach((order: OrderResponse) => {
             const orderDate = new Date(order.order_date);
             if (orderDate.getFullYear() === currentYear) {
               const month = orderDate.getMonth();
               sales[month] += order.total_money;
-
-              // Kiểm tra và log order_details
-              console.log('Order Details:', order.order_details);
-              order.order_details.forEach((detail) => {
-                const productName = detail.product.name;
-                let quantity = detail.number_of_products; // Use 'numberOfProducts' as in the DetailOrderAdminComponent
-  
-                // Ensure quantity is a valid number, or treat it as 0 if not
-                if (!quantity || isNaN(quantity)) {
-                  console.warn(`Invalid or missing quantity for product: ${productName}`);
-                  quantity = 0; // Default to 0 if quantity is missing or invalid
-                }
-  
-                // Sum the quantities per product
-                productMap.set(
-                  productName,
-                  (productMap.get(productName) || 0) + quantity
-                );
-              });
             }
           });
-  
-          // Sắp xếp và lấy top 5 sản phẩm bán chạy nhất
-          this.topProducts = Array.from(productMap.entries())
-            .map(([name, quantity]) => ({ name, quantity }))
-            .sort((a, b) => b.quantity - a.quantity)
-            .slice(0, 5);
-  
+
           this.salesData = sales;
           this.createSalesChart();
         } else {
@@ -76,10 +51,65 @@ export class StatisticComponent implements OnInit {
     });
   }
 
+  getTopSellingProducts(): void {
+    this.orderService.getAllOrders('', 0, 1000).subscribe({
+      next: (response: any) => {
+        console.log('Full response:', response); // Log entire response
+  
+        if (response && response.orders) {
+          const orders: OrderResponse[] = response.orders;
+          console.log('Orders:', orders); // Log orders array
+  
+          const productSales: { [key: string]: number } = {};
+  
+          orders.forEach((order: OrderResponse) => {
+            console.log('Current Order:', order); // Log each order
+            console.log('Order Details:', order.order_details); // Log order details
+  
+            if (order.order_details && order.order_details.length > 0) {
+              order.order_details.forEach((detail: any) => {
+  
+                // Normalize field names
+                const numberOfProducts = detail.numberOfProducts;
+  
+                if (detail.product && detail.product.name) {
+                  const productName = detail.product.name;
+  
+                  console.log(`Product: ${productName}, Quantity: ${numberOfProducts}`);
+  
+                  productSales[productName] = (productSales[productName] || 0) + numberOfProducts;
+                }
+              });
+            }
+          });
+  
+          console.log('Product Sales:', productSales); // Log final product sales object
+  
+          // Convert productSales to an array and sort
+          const topProductsArray = Object.entries(productSales)
+            .map(([name, totalAmount]) => ({ name, totalAmount }))
+            .sort((a, b) => b.totalAmount - a.totalAmount)
+            .slice(0, 5);
+  
+          console.log('Top Products Array:', topProductsArray); // Log top products array
+  
+          this.topProductsData = topProductsArray;
+          this.createTopProductsChart();
+        } else {
+          console.error('No orders found in response.');
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching top selling products:', err);
+      },
+    });
+  }
+  
+
   createSalesChart(): void {
     const ctx = this.salesChart.nativeElement.getContext('2d');
     new Chart(ctx, {
-      type: 'line', // Chọn loại biểu đồ là line
+      type: 'line',
       data: {
         labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
         datasets: [
@@ -97,6 +127,47 @@ export class StatisticComponent implements OnInit {
         scales: {
           y: {
             beginAtZero: true
+          }
+        }
+      }
+    });
+  }
+
+  createTopProductsChart(): void {
+    const labels = this.topProductsData.map((product: any) => 
+      `${product.name} (${product.totalAmount})`
+    );
+    const data = this.topProductsData.map((product: any) => product.totalAmount);
+  
+    const ctx = this.topProductsChart.nativeElement.getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Số lượng bán được',
+            data: data,
+            backgroundColor: '#42A5F5',
+            borderColor: '#1E88E5',
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return `Số lượng: ${context.formattedValue}`;
+              }
+            }
           }
         }
       }

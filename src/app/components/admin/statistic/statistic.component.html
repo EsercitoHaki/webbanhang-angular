@@ -1,19 +1,7 @@
 <div class="container-fluid">
   <h1 class="fw-bold display-2">Thống kê</h1>
   <p class="display-6 fw-bold">Doanh thu 3 năm gần nhất</p>
-  <canvas #salesChart></canvas> <!-- Sử dụng canvas để vẽ biểu đồ -->
-
-  <!-- Top 5 sản phẩm bán chạy nhất -->
-  <div class="top-products mt-5">
-    <h2 class="fw-bold">Top 5 sản phẩm bán chạy nhất</h2>
-    <ul class="list-group">
-      <li
-        class="list-group-item d-flex justify-content-between align-items-center"
-        *ngFor="let product of topProducts"
-      >
-        {{ product.name }}
-        <span class="badge bg-primary rounded-pill">{{ product.quantity }}</span>
-      </li>
-    </ul>
-  </div>
+  <canvas #salesChart></canvas>
+  <p class="display-6 fw-bold">Top 5 sản phẩm bán chạy nhất</p>
+  <canvas #topProductsChart></canvas>
 </div>

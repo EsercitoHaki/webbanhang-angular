@@ -1,4 +1,3 @@
-import { ProductService } from './product.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -38,9 +37,9 @@ export class OrderService {
     page: number, limit: number
   ): Observable<OrderResponse[]> {
       const params = new HttpParams()
-      .set('keyword', keyword)      
+      .set('keyword', keyword)
       .set('page', page.toString())
-      .set('limit', limit.toString());            
+      .set('limit', limit.toString());
       return this.http.get<any>(this.apiGetAllOrders, { params });
   }
   
@@ -52,4 +51,9 @@ export class OrderService {
     const url = `${environment.apiBaseUrl}/orders/${orderId}`;
     return this.http.delete(url, { responseType: 'text' });
   }
+
+  getTopSellingProducts(): Observable<any> {
+    const url = `${environment.apiBaseUrl}/orders/top-selling-products`;
+    return this.http.get<any>(url);
+  }  
 }
