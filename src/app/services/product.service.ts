@@ -62,7 +62,7 @@ export class ProductService {
     return this.http.put<Product>(`${this.apiGetProducts}/${product.id}`, product);
   }
 
-  deleteProduct(productId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiGetProducts}/${productId}`);
+  deleteProduct(productId: number): Observable<any> {
+    return this.http.delete(`${this.apiGetProducts}/${productId}`, { responseType: 'text' });
   }  
 }

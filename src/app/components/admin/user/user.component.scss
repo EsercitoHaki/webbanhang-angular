@@ -35,6 +35,11 @@ button {
     background: #dc3545;
     color: white;
   }
+
+  &.fa-check:hover {
+    background: #28a745;
+    color: white;
+  }
 }
 
 .card {

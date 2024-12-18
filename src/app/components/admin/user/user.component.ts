@@ -37,6 +37,23 @@ export class UserComponent implements OnInit {
     });
   }
 
+  blockOrEnable(userId: number, isActive: boolean): void {
+    const newStatus = isActive ? false : true;  // Thay đổi trạng thái người dùng
+    
+    this.userService.blockOrEnable(userId, newStatus).subscribe({
+      next: () => {
+        // Cập nhật trạng thái người dùng trong UI sau khi API trả về
+        const user = this.users.find(u => u.id === userId);
+        if (user) {
+          user.is_active = newStatus;  // Đổi trạng thái người dùng trong mảng
+        }
+      },
+      error: (err) => {
+        console.error('Error updating user status', err);
+      }
+    });
+  }
+
   onPageChange(page: number) {
     this.currentPage = page;
     this.getAllUsers(this.currentPage, this.itemsPerPage);

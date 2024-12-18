@@ -15,6 +15,7 @@ export class UserService {
   private apiLogin = `${environment.apiBaseUrl}/users/login`;
   private apiUserDetail = `${environment.apiBaseUrl}/users/details`;
   private apiUser = `${environment.apiBaseUrl}/users`;
+  private apiBlockOrEnable = `${this.apiUser}/block`;  // URL API cho blockOrEnable
 
   private apiConfig = {
     headers: this.httpUtilService.createHeaders(),
@@ -93,6 +94,9 @@ export class UserService {
       console.error('Error removing user data from local storage:', error);
       // Handle the error as needed
     }
-  }  
+  }
 
+  blockOrEnable(userId: number, active: boolean): Observable<any> {
+    return this.http.put(`${this.apiBlockOrEnable}/${userId}/${active ? 1 : 0}`, {}, this.apiConfig);
+  }
 }

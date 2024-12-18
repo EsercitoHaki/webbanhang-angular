@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../services/product.service';
+import { CategoryService } from '../../../services/category.service';
 import { Product } from '../../../models/product';
+import { Category } from '../../../models/category';
 
 @Component({
   selector: 'app-product-admin',
@@ -15,23 +17,44 @@ export class ProductAdminComponent implements OnInit {
   menuState: { [key: number]: boolean } = {};
   showAddProductDialog: boolean = false;
   newProduct: Product = {} as Product;
+  categories: Category[] = []; // Danh sách các danh mục
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private categoryService: CategoryService // Inject CategoryService
+  ) {}
 
   ngOnInit(): void {
     this.getAllProducts();
+    this.getAllCategories(); // Lấy danh sách danh mục
   }
 
   getAllProducts() {
     this.productService.getProducts('', 0, this.currentPage - 1, this.itemsPerPage).subscribe({
       next: (response: any) => {
         this.products = response.products;
-        this.totalPages = response.totalPages;  // Cập nhật tổng số trang từ API
+        this.totalPages = response.totalPages;
       },
       error: (error) => {
         console.error('Error fetching products:', error);
       }
     });
+  }
+
+  getAllCategories() {
+    this.categoryService.getCategories(1, 100).subscribe({ // Giả sử tối đa 100 danh mục
+      next: (categories: Category[]) => {
+        this.categories = categories;
+      },
+      error: (error) => {
+        console.error('Error fetching categories:', error);
+      }
+    });
+  }
+
+  getCategoryName(categoryId: number): string {
+    const category = this.categories.find(cat => cat.id === categoryId);
+    return category ? category.name : 'Không xác định';
   }
   
   onPageChange(page: number) {

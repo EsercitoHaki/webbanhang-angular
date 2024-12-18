@@ -54,17 +54,13 @@ export class StatisticComponent implements OnInit {
   getTopSellingProducts(): void {
     this.orderService.getAllOrders('', 0, 1000).subscribe({
       next: (response: any) => {
-        console.log('Full response:', response); // Log entire response
   
         if (response && response.orders) {
           const orders: OrderResponse[] = response.orders;
-          console.log('Orders:', orders); // Log orders array
   
           const productSales: { [key: string]: number } = {};
   
           orders.forEach((order: OrderResponse) => {
-            console.log('Current Order:', order); // Log each order
-            console.log('Order Details:', order.order_details); // Log order details
   
             if (order.order_details && order.order_details.length > 0) {
               order.order_details.forEach((detail: any) => {
@@ -74,24 +70,17 @@ export class StatisticComponent implements OnInit {
   
                 if (detail.product && detail.product.name) {
                   const productName = detail.product.name;
-  
-                  console.log(`Product: ${productName}, Quantity: ${numberOfProducts}`);
-  
                   productSales[productName] = (productSales[productName] || 0) + numberOfProducts;
                 }
               });
             }
           });
   
-          console.log('Product Sales:', productSales); // Log final product sales object
-  
           // Convert productSales to an array and sort
           const topProductsArray = Object.entries(productSales)
             .map(([name, totalAmount]) => ({ name, totalAmount }))
             .sort((a, b) => b.totalAmount - a.totalAmount)
             .slice(0, 5);
-  
-          console.log('Top Products Array:', topProductsArray); // Log top products array
   
           this.topProductsData = topProductsArray;
           this.createTopProductsChart();
@@ -116,7 +105,7 @@ export class StatisticComponent implements OnInit {
           {
             label: 'Doanh thu (VND)',
             data: this.salesData,
-            borderColor: '#4CAF50',
+            borderColor: '#fa2a55',
             fill: false,
             tension: 0.1
           }
@@ -148,8 +137,8 @@ export class StatisticComponent implements OnInit {
           {
             label: 'Số lượng bán được',
             data: data,
-            backgroundColor: '#42A5F5',
-            borderColor: '#1E88E5',
+            backgroundColor: '#E5432D',
+            borderColor: '#E5432D',
             borderWidth: 1
           }
         ]

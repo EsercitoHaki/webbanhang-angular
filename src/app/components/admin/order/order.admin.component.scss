@@ -15,10 +15,6 @@ nav .pagination .page-item .page-link.active {
   background-color: $bg-pg-hover-active !important;
 }
 
-.btn.btn-primary {
-  margin-left: 10px;
-}
-
 table.table {
   border-collapse: collapse;
 
@@ -34,13 +30,12 @@ table.table {
 
 /* Style for the popup menu */
 .popup-menu {
-  position: absolute;
+  width: min-content;
   background-color: #fff;
   border: 1px solid #ccc;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   padding: 10px;
   border-radius: 5px;
-  z-index: 10;
 }
 
 .popup-menu button {

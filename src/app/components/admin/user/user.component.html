@@ -14,10 +14,12 @@
             <p class="card-text">Phone Number: {{ user.phone_number }}</p>
             <p class="card-text">Address: {{ user.address }}</p>
             <p class="card-text">Birthdate: {{ user.date_of_birth | date }}</p>
-            <p class="card-text">Role: {{ getRole(user) }}</p>
+            <p class="card-text">active: {{ user.is_active }}</p>
             <div>
               <button class="fas fa-edit me-3 mt-3"></button>
-              <button class="fas fa-trash"></button>
+              <button class="fas"
+                [ngClass]="{'fa-trash': user.is_active, 'fa-check': !user.is_active}"
+                (click)="blockOrEnable(user.id, user.is_active)"></button>
             </div>
           </div>
         </div>

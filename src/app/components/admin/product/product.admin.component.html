@@ -13,7 +13,7 @@
         <th>Description</th>
         <th>Created At</th>
         <th>Updated At</th>
-        <th>Category ID</th>
+        <th>Category</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -55,12 +55,15 @@
         <td>{{ product.created_at | date }}</td>
         <td>{{ product.updated_at | date }}</td>
         <td>
-          <input 
-            type="number" 
-            [(ngModel)]="product.category_id" 
+          <select 
             class="form-control" 
-            (blur)="saveProduct(product)"
-          />
+            [(ngModel)]="product.category_id" 
+            (change)="saveProduct(product)"
+          >
+            <option *ngFor="let category of categories" [value]="category.id">
+              {{ category.name }}
+            </option>
+          </select>
         </td>
         <td>
           <!-- Menu icon (hamburger icon) -->
