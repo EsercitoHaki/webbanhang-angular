@@ -1,56 +1,56 @@
 <app-header></app-header>
-<div class="container">
-    <h1>Order Details</h1>
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Order Details</h1>
 
+    <!-- Row chứa 2 cột: Order Info và Table -->
     <div class="row">
-        <div class="col-md-6">
-            <h3>Order Information</h3>
-            <p><strong>Full Name:</strong> {{ orderResponse.fullname }}</p>
-            <p><strong>Phone Number:</strong> {{ orderResponse.phone_number }}</p>
-            <p><strong>Email:</strong> {{ orderResponse.email }}</p>
-            <p><strong>Address:</strong> {{ orderResponse.address }}</p>
-            <p><strong>Note:</strong> {{ orderResponse.note }}</p>
-            <p><strong>Order Date:</strong> {{ orderResponse.order_date | date }}</p>
-            <p><strong>Shipping Method:</strong> {{ orderResponse.shipping_method }}</p>
-            <p><strong>Shipping Address:</strong> {{ orderResponse.shipping_address }}</p>
-            <p><strong>Shipping Date:</strong> {{ orderResponse.shipping_date }}</p>
-            <p><strong>Payment Method:</strong> {{ orderResponse.payment_method }}</p>
-            <p><strong>Status:</strong>{{ orderResponse.status }}</p>
-            <!-- <div class="form-group">
-                
-                <select class="form-control" id="statusSelect" [(ngModel)]="orderResponse.status">
-                    <option value="pending">Pending</option>
-                    <option value="processing">Processing</option>
-                    <option value="shipped">Shipped</option>
-                    <option value="delivered">Delivered</option>
-                    <option value="cancelled">Cancelled</option>
-                </select>
-            </div> -->
+        <!-- Order Information ở cột bên trái -->
+        <div class="col-md-5 fade-in">
+            <div class="order-info-card p-4">
+                <h3 class="text-center mb-4">Order Information</h3>
+                <p><strong>Full Name: </strong> {{ orderResponse.fullname }}</p>
+                <p><strong>Phone Number: </strong> {{ orderResponse.phone_number }}</p>
+                <p><strong>Email: </strong> {{ orderResponse.email }}</p>
+                <p><strong>Address: </strong> {{ orderResponse.address }}</p>
+                <p><strong>Note: </strong> {{ orderResponse.note }}</p>
+                <p><strong>Order Date: </strong> {{ orderResponse.order_date | date }}</p>
+                <p><strong>Shipping Method: </strong> {{ orderResponse.shipping_method }}</p>
+                <p><strong>Shipping Address: </strong> {{ orderResponse.shipping_address }}</p>
+                <p><strong>Shipping Date: </strong> {{ orderResponse.shipping_date }}</p>
+                <p><strong>Payment Method: </strong> {{ orderResponse.payment_method }}</p>
+                <p><strong>Status: </strong> {{ orderResponse.status }}</p>
+            </div>
         </div>
-        <h3 class="mt-5">Order Details</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <!--<th>Total</th>-->
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let order_detail of orderResponse.order_details; 
-          let i = index">
-                    <td>{{ order_detail.product.name }}</td>
-                    <td>
-                        <p>{{order_detail.product.price}}</p>
-                    <td>
-                        <p>{{order_detail.number_of_products}}</p>
-                    </td>
-                    <!--<td>{{ order_detail.total_money }}</td>-->
-                </tr>
-            </tbody>
-        </table>
-        <button class="btn btn-primary col-md-2" (click)="returnUserDetails()">Trở về</button>
+
+        <!-- Table Order Details ở cột bên phải -->
+        <div class="col-md-7 fade-in">
+            <div class="order-table-card p-4">
+                <h3 class="text-center mb-4">Order Details</h3>
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Image</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let order_detail of orderResponse.order_details; let i = index">
+                            <td>{{ order_detail.product.name }}</td>
+                            <td><img [src]="order_detail.product.thumbnail" alt="Product Image" class="product-image"></td>
+                            <td>{{ order_detail.product.price | currency }}</td>
+                            <td>{{ order_detail.number_of_products }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Button Trở về -->
+    <div class="text-center mt-4">
+        <button class="btn btn-primary btn-lg" (click)="returnUserDetails()">Trở về</button>
     </div>
 </div>
 <app-footer></app-footer>
