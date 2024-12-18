@@ -15,18 +15,54 @@ nav .pagination .page-item .page-link.active {
   background-color: $bg-pg-hover-active !important;
 }
 
-table.table {
-  border-collapse: collapse;
+.table {
+  background-color: rgb(250, 246, 246); 
+  border-radius: 12px;
+  overflow: hidden; 
+  text-align: center;
+  color: #333;
 
-  tr {
-    border-bottom: none;
+  // Header của bảng
+  thead {
+      background-color: rgba(255, 255, 255, 0.6); 
+      color: #fff;
+
+      th {
+          padding: 12px;
+          font-weight: 600;
+          // text-transform: uppercase;
+          border: none;
+      }
   }
 
-  th, td {
-    border-top: none;
-    border-bottom: none;
+
+  tbody {
+      tr {
+          transition: background-color 0.3s ease;
+
+          td {
+              padding: 10px;
+              border: none;
+              background-color: rgba(220, 220, 220, 0.3); 
+          }
+
+          // Hiệu ứng hover
+          &:hover {
+              background-color: rgba(180, 180, 180, 0.4); 
+          }
+      }
+
+  
+      tr.no-orders {
+          td {
+              color: #777;
+              // font-style: italic;
+              background-color: rgba(200, 200, 200, 0.2);
+          }
+      }
   }
 }
+
 
 /* Style for the popup menu */
 .popup-menu {
@@ -49,4 +85,27 @@ table.table {
 .btn-secondary {
   font-size: 18px;
   padding: 5px 10px;
+}
+
+.btn-primary {
+  padding: 12px  ;
+  background: linear-gradient(to right,  #ffffff, #000000);
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: linear-gradient(to left,  #ffffff, #000000);
+    transform: scale(1.05); 
+    box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3); 
+  }
+
+  &:active {
+    background: linear-gradient(to right,  #ffffff, #000000);
+    transform: scale(1); 
+    box-shadow: none; 
+  }
 }
