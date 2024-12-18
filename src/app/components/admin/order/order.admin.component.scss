@@ -89,7 +89,7 @@ nav .pagination .page-item .page-link.active {
 
 .btn-primary {
   padding: 12px  ;
-  background: linear-gradient(to right,  #ffffff, #000000);
+  background: linear-gradient(to right,  #525151, #a1a1a1);
   color: white;
   font-size: 1rem;
   border: none;
@@ -98,13 +98,13 @@ nav .pagination .page-item .page-link.active {
   transition: all 0.3s ease;
 
   &:hover {
-    background: linear-gradient(to left,  #ffffff, #000000);
+    background: linear-gradient(to left,  #525151, #a1a1a1);
     transform: scale(1.05); 
     box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3); 
   }
 
   &:active {
-    background: linear-gradient(to right,  #ffffff, #000000);
+    background: linear-gradient(to right,  #525151, #a1a1a1);
     transform: scale(1); 
     box-shadow: none; 
   }
