@@ -95,29 +95,6 @@ export class OrderInformationComponent implements OnInit{
         }
       });
     }    
-    
-    // saveOrder(): void {    
-    //   debugger    
-    //   this.orderService
-    //     .updateOrder(this.orderId, new OrderDTO(this.orderResponse))
-    //     .subscribe({
-    //     next: (response: any) => {
-    //       debugger
-    //       // Handle the successful update
-    //       console.log('Order updated successfully:', response);
-    //       // Navigate back to the previous page
-    //       this.router.navigate(['../'], { relativeTo: this.route });
-    //     },
-    //     complete: () => {
-    //       debugger;        
-    //     },
-    //     error: (error: any) => {
-    //       // Handle the error
-    //       debugger
-    //       console.error('Error updating order:', error);
-    //     }
-    //   });   
-    // }
 
     returnUserDetails(){
       this.router.navigate(['/user-profile']);

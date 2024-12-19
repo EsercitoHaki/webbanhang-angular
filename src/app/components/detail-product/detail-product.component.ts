@@ -269,4 +269,10 @@ export class DetailProductComponent implements OnInit {
   buyNow(): void {
     this.router.navigate(['/orders']);
   }
+  onProductClick(productId: number): void {
+    this.router.navigate(['/products', productId]).then(() => {
+      this.productId = productId;
+      this.ngOnInit();
+    });
+  }
 }
