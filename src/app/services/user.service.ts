@@ -29,7 +29,11 @@ export class UserService {
   register(registerDTO: RegisterDTO):Observable<any> {
     return this.http.post(this.apiRegister, registerDTO, this.apiConfig);
   }
-
+  
+  countUsersByRole(roleId: number): Observable<number> {
+    const url = `${this.apiUser}/count-by-role/${roleId}`;
+    return this.http.get<number>(url, this.apiConfig);
+  }
   login(loginDTO: LoginDTO): Observable<any> {    
     return this.http.post(this.apiLogin, loginDTO, this.apiConfig);
   }
