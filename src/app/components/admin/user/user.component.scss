@@ -10,36 +10,14 @@
   justify-content: center;
 }
 
-button {
-  width: 2rem;
-  height: 2rem;
-  border: none;
-  border-radius: 50%;
-  background: #f0f0f0;
-  color: #666;
-  font-size: 12px;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: background 0.2s ease, transform 0.2s ease;
+.active-status {
+  color: #28a745; /* Màu xanh lá cây */
+  font-weight: bold;
+}
 
-  &:hover {
-    transform: scale(1.2);
-  }
-
-  &.fa-edit:hover {
-    background: #007bff;
-    color: white;
-  }
-
-  &.fa-trash:hover {
-    background: #dc3545;
-    color: white;
-  }
-
-  &.fa-check:hover {
-    background: #28a745;
-    color: white;
-  }
+.inactive-status {
+  color: #dc3545; /* Màu đỏ */
+  font-weight: bold;
 }
 
 .card {
@@ -51,6 +29,38 @@ button {
   border: none;
   margin-left: 15px;
   margin-right: 15px;
+
+  button {
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    border-radius: 50%;
+    background: #f0f0f0;
+    color: #666;
+    font-size: 12px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background 0.2s ease, transform 0.2s ease;
+  
+    &:hover {
+      transform: scale(1.2);
+    }
+  
+    &.fa-edit:hover {
+      background: #007bff;
+      color: white;
+    }
+  
+    &.fa-trash:hover {
+      background: #dc3545;
+      color: white;
+    }
+  
+    &.fa-check:hover {
+      background: #28a745;
+      color: white;
+    }
+  }
 }
 
 .image-flip:hover .backside,
@@ -138,4 +148,57 @@ nav .pagination .page-item .page-link:hover {
 
 nav .pagination .page-item .page-link.active {
   background-color: $bg-pg-hover-active !important;
+}
+
+.edit-user-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1069;
+
+  .popup-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 400px;
+
+    h2 {
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .popup-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: space-between;
+
+      .btn-primary {
+        background-color: #C1ABa6;
+        border-color: #C1ABA6;
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background-color: #A61C3C;
+        border-color: #A61C3C;
+        color: white;
+      }
+
+      .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        color: white;
+      }
+    }
+  }
 }

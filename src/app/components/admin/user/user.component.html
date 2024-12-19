@@ -14,9 +14,13 @@
             <p class="card-text">Phone Number: {{ user.phone_number }}</p>
             <p class="card-text">Address: {{ user.address }}</p>
             <p class="card-text">Birthdate: {{ user.date_of_birth | date }}</p>
-            <p class="card-text">active: {{ user.is_active }}</p>
+            <p class="card-text">
+              <span [ngClass]="{'active-status': user.is_active, 'inactive-status': !user.is_active}">
+                {{ user.is_active ? 'active' : 'not active' }}
+              </span>
+            </p>            
             <div>
-              <button class="fas fa-edit me-3 mt-3"></button>
+              <button class="fas fa-edit me-3 mt-3" (click)="openEditPopup(user)"></button>
               <button class="fas"
                 [ngClass]="{'fa-trash': user.is_active, 'fa-check': !user.is_active}"
                 (click)="blockOrEnable(user.id, user.is_active)"></button>
@@ -49,4 +53,71 @@
       </ul>
     </nav>
   </div>
+  <div
+  class="edit-user-popup"
+  *ngIf="showEditUserPopup"
+  (click)="closeEditPopup($event)"
+>
+  <div class="popup-content" (click)="$event.stopPropagation()">
+    <h2>Edit User</h2>
+    <form>
+      <div class="form-group mb-3">
+        <label for="name">Full Name</label>
+        <input
+          id="name"
+          type="text"
+          [(ngModel)]="selectedUser.fullname"
+          name="name"
+          class="form-control"
+        />
+      </div>
+      <div class="form-group mb-3">
+        <label for="phone">Phone Number</label>
+        <input
+          id="phone"
+          type="text"
+          [(ngModel)]="selectedUser.phone_number"
+          name="phone"
+          class="form-control"
+        />
+      </div>
+      <div class="form-group mb-3">
+        <label for="address">Address</label>
+        <input
+          id="address"
+          type="text"
+          [(ngModel)]="selectedUser.address"
+          name="address"
+          class="form-control"
+        />
+      </div>
+      <div class="form-group mb-3">
+        <label for="birthdate">Birthdate</label>
+        <input
+          id="birthdate"
+          type="date"
+          [(ngModel)]="selectedUser.date_of_birth"
+          name="birthdate"
+          class="form-control"
+        />
+      </div>
+      <div class="form-check mb-3">
+        <input
+          id="active"
+          type="checkbox"
+          [(ngModel)]="selectedUser.is_active"
+          name="active"
+          class="form-check-input"
+        />
+        <label class="form-check-label" for="active">Active</label>
+      </div>
+      <div class="popup-buttons">
+        <button class="btn btn-primary" (click)="updateUser()">Save</button>
+        <button class="btn btn-secondary" (click)="closeEditPopup($event)">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
 </div>

@@ -59,6 +59,7 @@ export class ProductAdminComponent implements OnInit {
   
   onPageChange(page: number) {
     this.currentPage = page;
+    console.log('Current Page:', this.currentPage);  // Debugging line
     this.getAllProducts();  // Tải lại sản phẩm khi trang thay đổi
   }
 
@@ -77,8 +78,8 @@ export class ProductAdminComponent implements OnInit {
     // Gửi yêu cầu cập nhật sản phẩm lên server
     this.productService.updateProduct(product).subscribe({
       next: (response) => {
-        console.log('Product updated successfully');
-        // Cập nhật thời gian updated_at hoặc thực hiện các thao tác sau khi thành công
+        this.toggleMenu(response);
+        alert('Product updated successfully');
       },
       error: (error) => {
         console.error('Error updating product:', error);
@@ -128,6 +129,7 @@ export class ProductAdminComponent implements OnInit {
       next: (response) => {
         this.products.push(response);
         this.closeAddProductDialog();
+        alert('Product added successfully');
         this.getAllProducts();  // Tải lại sản phẩm sau khi thêm mới
       },
       error: (error) => {

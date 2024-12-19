@@ -99,4 +99,13 @@ export class UserService {
   blockOrEnable(userId: number, active: boolean): Observable<any> {
     return this.http.put(`${this.apiBlockOrEnable}/${userId}/${active ? 1 : 0}`, {}, this.apiConfig);
   }
+
+  updateUserDetailsByAdmin(userId: number, updateUserDTO: UpdateUserDTO, token: string): Observable<any> {
+    return this.http.put(`${this.apiUser}/admin/details/${userId}`, updateUserDTO, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      })
+    });
+  }  
 }

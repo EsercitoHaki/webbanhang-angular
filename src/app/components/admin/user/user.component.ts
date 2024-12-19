@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { UserResponse } from '../../../responses/user/user.response';
+import { TokenService } from '../../../services/token.service';
 
 @Component({
   selector: 'app-user',
@@ -10,11 +11,16 @@ import { UserResponse } from '../../../responses/user/user.response';
 export class UserComponent implements OnInit {
   users: UserResponse[] = [];
   currentPage: number = 1;
-  itemsPerPage: number = 10;
+  itemsPerPage: number = 9;
   totalPages: number = 0;
   visiblePages: number[] = [];
+  showEditUserPopup = false; // Biến để kiểm soát popup
+  selectedUser: any = {}; // Lưu thông tin user đang chỉnh sửa
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private tokenService: TokenService
+  ) {}
 
   ngOnInit(): void {
     this.getAllUsers(this.currentPage, this.itemsPerPage);
@@ -22,6 +28,43 @@ export class UserComponent implements OnInit {
 
   getRole(user: UserResponse): string {
     return user.role ? user.role.name : 'No Role';  // Hoặc một giá trị mặc định khác
+  }
+
+  openEditPopup(user: any): void {
+    this.selectedUser = { ...user }; // Tạo một bản sao để chỉnh sửa
+    this.showEditUserPopup = true;
+  }
+
+  closeEditPopup(event: MouseEvent): void {
+    this.showEditUserPopup = false;
+    this.selectedUser = {};
+  }
+
+  updateUser(): void {
+    const token = this.tokenService.getToken(); // Sử dụng TokenService để lấy token
+    if (!token) {
+      console.error('Token is missing');
+      return;
+    }
+
+    this.userService.updateUserDetailsByAdmin(
+      this.selectedUser.id, // Truyền ID của user
+      this.selectedUser,    // Truyền dữ liệu cập nhật
+      token                 // Truyền token
+    ).subscribe({
+      next: () => {
+        // Cập nhật lại UI
+        const index = this.users.findIndex((u) => u.id === this.selectedUser.id);
+        if (index > -1) {
+          this.users[index] = { ...this.selectedUser };
+        }
+        this.showEditUserPopup = false; // Đóng popup
+        alert('User updated successfully!'); // Thông báo thành công
+      },
+      error: (err) => {
+        console.error('Failed to update user', err);
+      },
+    });
   }  
 
   getAllUsers(page: number, limit: number) {
