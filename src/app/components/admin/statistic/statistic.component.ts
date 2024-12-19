@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { OrderService } from '../../../services/order.service';
 import { Chart, registerables } from 'chart.js';
+import { UserService } from '../../../services/user.service';
 import { OrderResponse } from '../../../responses/order/order.response';
 import { OrderDetail } from '../../../models/order.detail';
 Chart.register(...registerables);
@@ -13,16 +14,38 @@ Chart.register(...registerables);
 export class StatisticComponent implements OnInit {
   @ViewChild('salesChart') salesChart!: ElementRef;
   @ViewChild('topProductsChart') topProductsChart!: ElementRef;
+
   salesData: any = [];
   topProductsData: any = [];
 
-  constructor(private orderService: OrderService) {}
+  totalSales: number = 0;
+  totalOrders: number = 0;
+  totalAccounts: number = 0;
+
+  constructor(private orderService: OrderService, private userService: UserService) {}
 
   ngOnInit(): void {
     this.getSalesData();
     this.getTopSellingProducts();
+    this.getTotalSalesAndOrders();
+    this.getTotalAccounts();
   }
 
+  getTotalAccounts(): void {
+    this.userService.countUsersByRole(1).subscribe({
+      next: (count: number) => {
+        this.totalAccounts = count;
+      },
+      error: (err) => {
+        console.error('Error fetching total accounts:', err);
+      },
+    });
+  }
+  
+  
+  
+  
+  
   getSalesData(): void {
     const currentYear = new Date().getFullYear();
     this.orderService.getAllOrders('', 0, 12).subscribe({
@@ -160,6 +183,22 @@ export class StatisticComponent implements OnInit {
           }
         }
       }
+    });
+  }
+  getTotalSalesAndOrders(): void {
+    this.orderService.getAllOrders('', 0, 1000).subscribe({
+      next: (response: any) => {
+        if (response && response.orders) {
+          const orders: OrderResponse[] = response.orders;
+          this.totalOrders = orders.length;
+          this.totalSales = orders.reduce((sum, order) => sum + order.total_money, 0);
+        } else {
+          console.error('No orders found in response.');
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching total sales and orders:', err);
+      },
     });
   }
 }
