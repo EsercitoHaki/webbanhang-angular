@@ -24,7 +24,6 @@ export class ProductService {
     return this.http.get<Product[]>(this.apiGetProducts, { params })
   }
   
-  
   getProducts(
     keyword: string,
     categoryId: number,

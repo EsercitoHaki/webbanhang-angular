@@ -3,6 +3,7 @@ import { ProductService } from '../../../services/product.service';
 import { CategoryService } from '../../../services/category.service';
 import { Product } from '../../../models/product';
 import { Category } from '../../../models/category';
+import { ProductImage } from '../../../models/product.image';
 
 @Component({
   selector: 'app-product-admin',
@@ -18,6 +19,9 @@ export class ProductAdminComponent implements OnInit {
   showAddProductDialog: boolean = false;
   newProduct: Product = {} as Product;
   categories: Category[] = []; // Danh sách các danh mục
+  selectedProductImages: any[] = []; // Lưu trữ ảnh của sản phẩm đã chọn
+  popupVisible: boolean = false; // Trạng thái hiển thị popup
+  popupPosition = { x: 0, y: 0 }; // Vị trí popup
 
   constructor(
     private productService: ProductService,
@@ -27,6 +31,17 @@ export class ProductAdminComponent implements OnInit {
   ngOnInit(): void {
     this.getAllProducts();
     this.getAllCategories(); // Lấy danh sách danh mục
+  }
+
+  showPopup(images: any[], event: MouseEvent) {
+    this.selectedProductImages = images; // Gán danh sách ảnh
+    this.popupPosition = { x: event.clientX, y: event.clientY }; // Lấy vị trí chuột
+    this.popupVisible = true; // Hiển thị popup
+    console.log(this.selectedProductImages);
+  }
+
+  closePopup() {
+    this.popupVisible = false;
   }
 
   getAllProducts() {
