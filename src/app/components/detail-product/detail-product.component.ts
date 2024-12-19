@@ -271,9 +271,8 @@ export class DetailProductComponent implements OnInit {
   }
   onProductClick(productId: number): void {
     this.router.navigate(['/products', productId]).then(() => {
-      // Load lại dữ liệu chi tiết sản phẩm
-      this.productId = productId; // Cập nhật productId
-      this.ngOnInit(); // Gọi lại ngOnInit để tải lại sản phẩm
+      this.productId = productId;
+      this.ngOnInit();
     });
   }
 }
