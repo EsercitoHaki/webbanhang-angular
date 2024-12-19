@@ -48,21 +48,6 @@ select.form-control.product-category {
   margin-right: 10px;
 }
 
-nav .pagination .page-item .page-link {
-  background-color: $bg-pagination;
-  color: $text-in-pagiation;
-  border: none;
-  font-weight: bold;
-}
-
-nav .pagination .page-item .page-link:hover {
-  background-color: $bg-pg-hover-active;
-}
-
-nav .pagination .page-item .page-link.active {
-  background-color: $bg-pg-hover-active !important;
-}
-
 /* New Product Card Styles */
 .product-item {
   position: relative;

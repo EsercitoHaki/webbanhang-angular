@@ -36,9 +36,9 @@
             <li class="page-item" *ngIf="currentPage > 1">
                 <a class="page-link" (click)="onPageChange(currentPage - 1)">Previous</a>
             </li>
-            <ng-container *ngFor="let page of visiblePages">
-                <li class="page-item" [ngClass]="{'active': page === currentPage}">
-                    <a class="page-link" (click)="onPageChange(page)">{{ page }}</a>
+            <ng-container *ngFor="let page of generateVisiblePages()">
+                <li class="page-item">
+                    <a class="page-link" [ngClass]="{'active': page === currentPage}" (click)="onPageChange(page)">{{ page }}</a>
                 </li>
             </ng-container>
             <li class="page-item" *ngIf="currentPage < totalPages">

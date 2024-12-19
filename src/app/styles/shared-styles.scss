@@ -104,7 +104,6 @@ $text-red: #E03C48;
   }  
 //icon-animation
 
-
 //login
 $login-bg: #e7e7e7;
 $login-text:#333;
@@ -134,8 +133,8 @@ $home-2-text: #e24747;
 //product
 $text-in-item:#F2F2F2;
 $item-boder: #F2F2F2;
-$text-in-pagiation: #333;
-$bg-pagination: #F2F2F2;
+$text-in-pagiation: #000000;
+$bg-pagination: #ffffff00;
 $bg-pg-hover-active:#BBBBBB;
 $product: #e24747;
 
@@ -169,3 +168,24 @@ $shopapp-background-color: #A91526;
 $white: #ffffff;
 $background-select-color: #333;
 $rating: #FFD700;
+
+nav .pagination .page-item .page-link {
+    margin-top: 2.5rem;
+    background-color: $bg-pagination;
+    color: $text-in-pagiation;
+    border: none;
+    font-weight: bold;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+nav .pagination .page-item .page-link:hover {
+    background-color: $bg-pg-hover-active;
+    border-radius: 50% !important;
+}
+
+nav .pagination .page-item .page-link.active {
+    background-color: $footer-text-h1 !important;
+    border-radius: 50%;
+    color: white;
+}

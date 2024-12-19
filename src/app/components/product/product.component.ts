@@ -19,9 +19,7 @@ export class ProductComponent implements OnInit, AfterViewChecked {
   selectedCategoryId: number = 0;
   currentPage: number = 1;
   itemsPerPage: number = 12;
-  pages: number[] = [];
   totalPages: number = 0;
-  visiblePages: number[] = [];
   keyword: string = "";
 
   private isVanillaTiltInitialized: boolean = false;
@@ -37,9 +35,9 @@ export class ProductComponent implements OnInit, AfterViewChecked {
   ngOnInit(): void {
     // Lấy giá trị page từ query params khi trang được tải lại
     this.activatedRoute.queryParams.subscribe(params => {
-      const page = +params['page'] || 0; // Lấy giá trị page từ query params hoặc mặc định là 1
+      const page = +params['page'] || 1; // Lấy giá trị page từ query params hoặc mặc định là 1
       this.currentPage = page;
-      this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
+      this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage - 1, this.itemsPerPage);
     });
 
     // Lấy danh mục sản phẩm
@@ -87,7 +85,6 @@ export class ProductComponent implements OnInit, AfterViewChecked {
         });
         this.products = response.products;
         this.totalPages = response.totalPages;
-        this.visiblePages = this.generateVisiblePageArray(this.currentPage, this.totalPages);
       },
       complete: () => {
         debugger;
@@ -112,20 +109,18 @@ export class ProductComponent implements OnInit, AfterViewChecked {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  generateVisiblePageArray(currentPage: number, totalPages: number): number[] {
+  generateVisiblePages(): number[] {
     const maxVisiblePages = 5;
     const halfVisiblePages = Math.floor(maxVisiblePages / 2);
-
-    let startPage = Math.max(currentPage - halfVisiblePages, 1);
-    let endPage = Math.min(startPage + maxVisiblePages - 1, totalPages);
-
+  
+    let startPage = Math.max(this.currentPage - halfVisiblePages, 1);
+    let endPage = Math.min(startPage + maxVisiblePages - 1, this.totalPages);
+  
     if (endPage - startPage + 1 < maxVisiblePages) {
       startPage = Math.max(endPage - maxVisiblePages + 1, 1);
     }
-
-    return new Array(endPage - startPage + 1)
-      .fill(0)
-      .map((_, index) => startPage + index);
+  
+    return new Array(endPage - startPage + 1).fill(0).map((_, index) => startPage + index);
   }
 
   onProductClick(productId: number): void {

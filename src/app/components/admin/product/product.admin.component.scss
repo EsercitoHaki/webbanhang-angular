@@ -1,21 +1,5 @@
 @import '../../../styles/shared-styles.scss';
 
-nav .pagination .page-item .page-link {
-  background-color: $bg-pagination;
-  color: $text-in-pagiation;
-  border: none;
-  font-weight: bold;
-}
-
-nav .pagination .page-item .page-link:hover {
-  background-color: $bg-pg-hover-active;
-}
-
-nav .pagination .page-item .page-link.active {
-  background-color: $bg-pg-hover-active !important;
-  color: white !important;
-}
-
 .btn-primary {
   padding: 12px  ;
   background: linear-gradient(to right,  #727272, #e24747);

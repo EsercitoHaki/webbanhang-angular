@@ -1,20 +1,5 @@
 @import '../../../styles/shared-styles.scss';
 
-nav .pagination .page-item .page-link {
-  background-color: $bg-pagination;
-  color: $text-in-pagiation;
-  border: none;
-  font-weight: bold;
-}
-
-nav .pagination .page-item .page-link:hover {
-  background-color: $bg-pg-hover-active;
-}
-
-nav .pagination .page-item .page-link.active {
-  background-color: $bg-pg-hover-active !important;
-}
-
 .table {
   background-color: rgb(250, 246, 246); 
   border-radius: 12px;
