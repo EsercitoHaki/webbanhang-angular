@@ -4,27 +4,38 @@
 
   <!-- Cards -->
   <div class="row mt-4">
-    <div class="col-md-4">
-      <div class="card text-center bg-info text-white">
+    <div class="col-sm-6">
+      <div class="card text-center text-white sale">
         <div class="card-body">
-          <h5 class="card-title">Total Sales</h5>
-          <p class="card-text display-5">{{ totalSales | currency:'VND' }}</p>
+          <h3 class="card-title row justify-content-center">Total Sales</h3>
+          <div class="row">
+            <p class="card-text display-5 col-8">{{ totalSales | currency:'VND' }}</p>
+            <i class="fa-solid fa-dollar-sign col-4 "></i>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="card text-center bg-primary text-white">
+    <div class="col-sm-3">
+      <div class="card text-center text-white order">
         <div class="card-body">
-          <h5 class="card-title">Total Orders</h5>
-          <p class="card-text display-5">{{ totalOrders }}</p>
+          <h3 class="card-title row justify-content-center">Total Orders</h3>
+          <div class="row">
+            <p class="card-text display-5 col-7">{{ totalOrders }}</p>
+            <i class="fa-solid fa-sack-dollar col-4"></i>
+            
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="card text-center bg-success text-white">
+    <div class="col-sm-3">
+      <div class="card text-center text-white account">
         <div class="card-body">
-          <h5 class="card-title">Total Accounts</h5>
-          <p class="card-text display-5">{{ totalAccounts }}</p>
+          <h3 class="card-title row justify-content-center">Total Accounts</h3>
+          <div class="row">
+            <p class="card-text display-5 col-7">{{ totalAccounts }}</p>
+            <i class="fa-solid fa-users col-4"></i>
+          
+          </div>
         </div>
       </div>
     </div>

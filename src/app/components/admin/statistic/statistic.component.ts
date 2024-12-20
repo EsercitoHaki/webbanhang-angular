@@ -4,6 +4,7 @@ import { Chart, registerables } from 'chart.js';
 import { UserService } from '../../../services/user.service';
 import { OrderResponse } from '../../../responses/order/order.response';
 import { OrderDetail } from '../../../models/order.detail';
+import VanillaTilt from 'vanilla-tilt';
 Chart.register(...registerables);
 
 @Component({
@@ -42,27 +43,29 @@ export class StatisticComponent implements OnInit {
     });
   }
   
-  
-  
-  
-  
+
   getSalesData(): void {
     const currentYear = new Date().getFullYear();
+    const yearsToFetch = [currentYear, currentYear - 1, currentYear - 2];
+    const salesDataByYear: { [key: number]: number[] } = {};
+  
+    yearsToFetch.forEach(year => salesDataByYear[year] = new Array(12).fill(0));
+  
     this.orderService.getAllOrders('', 0, 12).subscribe({
       next: (response: any) => {
         if (response && response.orders) {
           const orders: OrderResponse[] = response.orders;
-          const sales = new Array(12).fill(0);
-
+  
           orders.forEach((order: OrderResponse) => {
             const orderDate = new Date(order.order_date);
-            if (orderDate.getFullYear() === currentYear) {
+            const year = orderDate.getFullYear();
+            if (yearsToFetch.includes(year)) {
               const month = orderDate.getMonth();
-              sales[month] += order.total_money;
+              salesDataByYear[year][month] += order.total_money;
             }
           });
-
-          this.salesData = sales;
+  
+          this.salesData = salesDataByYear;
           this.createSalesChart();
         } else {
           console.error('No orders found in response.');
@@ -73,6 +76,7 @@ export class StatisticComponent implements OnInit {
       },
     });
   }
+  
 
   getTopSellingProducts(): void {
     this.orderService.getAllOrders('', 0, 1000).subscribe({
@@ -86,7 +90,7 @@ export class StatisticComponent implements OnInit {
           orders.forEach((order: OrderResponse) => {
   
             if (order.order_details && order.order_details.length > 0) {
-              order.order_details.forEach((detail: any) => {
+order.order_details.forEach((detail: any) => {
   
                 // Normalize field names
                 const numberOfProducts = detail.numberOfProducts;
@@ -120,19 +124,24 @@ export class StatisticComponent implements OnInit {
 
   createSalesChart(): void {
     const ctx = this.salesChart.nativeElement.getContext('2d');
+    const datasets: { label: string; data: number[]; borderColor: string; fill: boolean; tension: number }[] = [];
+    const colors = ['#fa2a55', '#2a9df4', '#34c759']; // Màu sắc cho từng năm
+  
+    Object.keys(this.salesData).forEach((year, index) => {
+      datasets.push({
+        label: `Doanh thu ${year}`,
+        data: this.salesData[year],
+        borderColor: colors[index],
+        fill: false,
+        tension: 0.1
+      });
+    });
+  
     new Chart(ctx, {
       type: 'line',
       data: {
         labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
-        datasets: [
-          {
-            label: 'Doanh thu (VND)',
-            data: this.salesData,
-            borderColor: '#fa2a55',
-            fill: false,
-            tension: 0.1
-          }
-        ]
+        datasets: datasets
       },
       options: {
         responsive: true,
@@ -144,6 +153,8 @@ export class StatisticComponent implements OnInit {
       }
     });
   }
+  
+  
 
   createTopProductsChart(): void {
     const labels = this.topProductsData.map((product: any) => 
@@ -185,7 +196,7 @@ export class StatisticComponent implements OnInit {
       }
     });
   }
-  getTotalSalesAndOrders(): void {
+getTotalSalesAndOrders(): void {
     this.orderService.getAllOrders('', 0, 1000).subscribe({
       next: (response: any) => {
         if (response && response.orders) {

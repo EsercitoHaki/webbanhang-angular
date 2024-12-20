@@ -22,6 +22,8 @@ export class ProductAdminComponent implements OnInit {
   selectedProductImages: any[] = []; // Lưu trữ ảnh của sản phẩm đã chọn
   popupVisible: boolean = false; // Trạng thái hiển thị popup
   popupPosition = { x: 0, y: 0 }; // Vị trí popup
+  selectedFiles: File[] = []; // Lưu trữ danh sách tệp đã chọn
+  selectedProductId: number | null = null; // Thêm thuộc tính này trong class ProductAdminComponent
 
   constructor(
     private productService: ProductService,
@@ -33,23 +35,132 @@ export class ProductAdminComponent implements OnInit {
     this.getAllCategories(); // Lấy danh sách danh mục
   }
 
-  showPopup(images: any[], event: MouseEvent) {
+  showPopup(images: any[], productId: number, event: MouseEvent) {
     const baseUrl = 'http://localhost:8088/api/v1/products/images/';
     this.selectedProductImages = images.map(image => ({
       url: image.image_url.startsWith('http') ? image.image_url : `${baseUrl}${image.image_url}`
     }));
+    this.selectedProductId = productId; // Lưu productId hiện tại
     this.popupPosition = { x: event.clientX, y: event.clientY };
     this.popupVisible = true;
-  }  
+  }
 
   closePopup() {
     this.popupVisible = false;
   }
 
+  onFilesSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      this.selectedFiles = Array.from(input.files); // Lưu danh sách các tệp được chọn
+      this.uploadImages(); // Gọi phương thức upload
+    }
+  }
+  
+  // uploadImages() {
+  //   if (!this.selectedFiles.length) {
+  //     alert('Vui lòng chọn ít nhất một tệp.');
+  //     return;
+  //   }
+  
+  //   if (!this.selectedProductId) {
+  //     alert('Không xác định được sản phẩm để tải lên hình ảnh.');
+  //     return;
+  //   }
+  
+  //   this.productService.uploadImages(this.selectedProductId, this.selectedFiles).subscribe({
+  //     next: (response) => {
+  //       alert('Tải lên ảnh thành công!');
+  //       this.selectedProductImages.push(
+  //         ...response.map((image: { image_url: string }) => ({
+  //           url: image.image_url.startsWith('http')
+  //             ? image.image_url
+  //             : `http://localhost:8088/api/v1/products/images/${image.image_url}`
+  //         }))
+  //       );
+  //       this.selectedFiles = []; // Xóa danh sách tệp đã chọn sau khi tải lên
+  //     },
+  //     error: (error) => {
+  //       console.error('Lỗi khi tải lên ảnh:', error);
+  //       alert('Đã xảy ra lỗi khi tải lên ảnh.');
+  //     }
+  //   });
+  // }
+
+  uploadImages() {
+    if (!this.selectedFiles.length) {
+      alert('Vui lòng chọn ít nhất một tệp.');
+      return;
+    }
+  
+    if (!this.selectedProductId) {
+      alert('Không xác định được sản phẩm để tải lên hình ảnh.');
+      return;
+    }
+  
+    this.productService.uploadImages(this.selectedProductId, this.selectedFiles).subscribe({
+      next: (response) => {
+        alert('Tải lên ảnh thành công!');
+        this.selectedProductImages.push(
+          ...response.map((image: { image_url: string, id: number }) => ({
+            url: image.image_url.startsWith('http')
+              ? image.image_url
+              : `http://localhost:8088/api/v1/products/images/${image.image_url}`,
+            id: image.id // Assuming the response includes the image ID
+          }))
+        );
+        this.selectedFiles = []; // Clear the selected files after upload
+      },
+      error: (error) => {
+        console.error('Lỗi khi tải lên ảnh:', error);
+        alert('Đã xảy ra lỗi khi tải lên ảnh.');
+      }
+    });
+  }
+  
+  
+  // deleteImage(image: any) {
+  //   const confirmation = window.confirm('Are you sure you want to delete this image?');
+  //   if (confirmation) {
+  //     const imageUrl = image.url;  // Get the image URL
+  
+  //     this.productService.deleteImage(this.selectedProductId!, imageUrl).subscribe({
+  //       next: () => {
+  //         // Remove the image from the selectedProductImages list
+  //         this.selectedProductImages = this.selectedProductImages.filter(img => img.url !== imageUrl);
+  //         alert('Image deleted successfully');
+  //       },
+  //       error: (error) => {
+  //         console.error('Error deleting image:', error);
+  //         alert('There was an error deleting the image.');
+  //       }
+  //     });
+  //   }
+  // }
+  deleteImage(image: any) {
+    const confirmation = window.confirm('Are you sure you want to delete this image?');
+    if (confirmation) {
+      const imageId = image.id;  // Assuming image object has an 'id' field
+      this.productService.deleteImage(this.selectedProductId!, imageId).subscribe({
+        next: () => {
+          // Remove the image from the selectedProductImages list by id
+          this.selectedProductImages = this.selectedProductImages.filter(img => img.id !== imageId);
+          alert('Image deleted successfully');
+        },
+        error: (error) => {
+          console.error('Error deleting image:', error);
+          alert('There was an error deleting the image.');
+        }
+      });
+    }
+  }
+  
+  
+  
+
   getAllProducts() {
     this.productService.getProducts('', 0, this.currentPage - 1, this.itemsPerPage).subscribe({
       next: (response: any) => {
-        console.log('Fetched Products:', response.products); // Log dữ liệu để kiểm tra
         this.products = response.products;
         this.totalPages = response.totalPages;
       },

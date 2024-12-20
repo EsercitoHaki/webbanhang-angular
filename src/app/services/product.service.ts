@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 import { Product } from '../models/product';
@@ -63,5 +63,24 @@ export class ProductService {
 
   deleteProduct(productId: number): Observable<any> {
     return this.http.delete(`${this.apiGetProducts}/${productId}`, { responseType: 'text' });
+  }
+
+  uploadImages(productId: number, files: File[]): Observable<any> {
+    const formData = new FormData();
+    files.forEach(file => formData.append('files', file));
+  
+    return this.http.post(
+      `http://localhost:8088/api/v1/products/uploads/${productId}`,
+      formData
+    );
   }  
+
+  // deleteImage(imageId: number) {
+  //   return this.http.delete(`http://localhost:8088/api/v1/products/images/${imageId}`);
+  // }  
+  deleteImage(productId: number, imageUrl: string): Observable<any> {
+    const url = `${this.apiUrl}/products/${productId}/images?imageUrl=${encodeURIComponent(imageUrl)}`;
+    return this.http.delete(url);
+  }
+  
 }

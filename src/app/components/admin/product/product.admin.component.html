@@ -42,7 +42,7 @@
           />
         </td>
         <td>
-          <button class="btn btn-primary btn-sm" (click)="showPopup(product.product_images, $event)">
+          <button class="btn btn-primary btn-sm" (click)="showPopup(product.product_images, product.id ,$event)">
             Ảnh
           </button>
         </td>
@@ -193,11 +193,22 @@
     </div>
     <div class="popup-body">
       <div class="image-grid">
-        <img
-          *ngFor="let image of selectedProductImages"
-          [src]="image.url"
-          alt="Product Image"
-          class="product-image"
+        <div class="image-wrapper" *ngFor="let image of selectedProductImages">
+          <img [src]="image.url" alt="Product Image" class="product-image" />
+          <button class="delete-btn" (click)="deleteImage(image)">x</button>
+        </div>
+      </div>
+      <div class="upload-section mt-3">
+        <label for="file-upload" class="btn btn-success">
+          Thêm Ảnh
+        </label>
+        <input
+          id="file-upload"
+          type="file"
+          accept="image/*"
+          multiple
+          (change)="onFilesSelected($event)"
+          hidden
         />
       </div>
     </div>
