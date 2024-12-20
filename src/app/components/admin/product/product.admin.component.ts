@@ -34,11 +34,13 @@ export class ProductAdminComponent implements OnInit {
   }
 
   showPopup(images: any[], event: MouseEvent) {
-    this.selectedProductImages = images; // Gán danh sách ảnh
-    this.popupPosition = { x: event.clientX, y: event.clientY }; // Lấy vị trí chuột
-    this.popupVisible = true; // Hiển thị popup
-    console.log(this.selectedProductImages);
-  }
+    const baseUrl = 'http://localhost:8088/api/v1/products/images/';
+    this.selectedProductImages = images.map(image => ({
+      url: image.image_url.startsWith('http') ? image.image_url : `${baseUrl}${image.image_url}`
+    }));
+    this.popupPosition = { x: event.clientX, y: event.clientY };
+    this.popupVisible = true;
+  }  
 
   closePopup() {
     this.popupVisible = false;
@@ -47,6 +49,7 @@ export class ProductAdminComponent implements OnInit {
   getAllProducts() {
     this.productService.getProducts('', 0, this.currentPage - 1, this.itemsPerPage).subscribe({
       next: (response: any) => {
+        console.log('Fetched Products:', response.products); // Log dữ liệu để kiểm tra
         this.products = response.products;
         this.totalPages = response.totalPages;
       },
@@ -54,7 +57,7 @@ export class ProductAdminComponent implements OnInit {
         console.error('Error fetching products:', error);
       }
     });
-  }
+  }  
 
   getAllCategories() {
     this.categoryService.getCategories(1, 100).subscribe({ // Giả sử tối đa 100 danh mục

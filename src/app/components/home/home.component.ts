@@ -66,5 +66,32 @@ export class HomeComponent implements OnInit, AfterViewInit {
       window.scrollTo(0, 0); 
     });
   }
+
+  navigateToCategory(categoryId: number): void {
+    this.router.navigate(['/products'], {
+      queryParams: { categoryId: categoryId }
+    });
+  }
+  
+  navigateToLaptop(): void {
+    this.navigateToCategory(2);
+  }
+  
+  navigateToAccessories(): void {
+    this.navigateToCategory(5); 
+  }
+  
+  navigateToWatches(): void {
+    this.navigateToCategory(4); 
+  }
+  
+  navigateToTvs(): void {
+    this.navigateToCategory(6); 
+  }
+  
+  navigateToHomeAppliances(): void {
+    this.navigateToCategory(7); 
+  }
+  
   
 }

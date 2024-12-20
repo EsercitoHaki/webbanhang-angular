@@ -37,9 +37,10 @@ export class ProductComponent implements OnInit, AfterViewChecked {
     this.activatedRoute.queryParams.subscribe(params => {
       const page = +params['page'] || 1; // Lấy giá trị page từ query params hoặc mặc định là 1
       this.currentPage = page;
+      const categoryId = +params['categoryId'] || 0;
+      this.selectedCategoryId = categoryId;
       this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage - 1, this.itemsPerPage);
     });
-
     // Lấy danh mục sản phẩm
     this.getCategories(1, 100);
   }

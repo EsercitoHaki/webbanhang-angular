@@ -17,8 +17,8 @@
   <div class="container mt-5 mb-5">
     <div class="intro-section">
       <h3 class="row mb-5 fade-in justify-content-center">Một vài sản phẩm mới</h3>
-      <div id="carouselExampleCaptions" class="carousel slide" *ngIf="newProducts.length > 0; else noProducts">
-        <div class="carousel-indicators row">
+      <div id="carouselExampleCaptions" class="carousel slide fade-in" *ngIf="newProducts.length > 0; else noProducts">
+        <div class="carousel-indicators row ">
           <button 
             *ngFor="let page of [].constructor(3); let i = index" 
             type="button" 
@@ -49,8 +49,7 @@
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
       </button>
-  
-      <button class="carousel-control-next col-3 justify-content-end" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+<button class="carousel-control-next col-3 justify-content-end" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>
@@ -59,23 +58,71 @@
       <p>Không có sản phẩm nào</p>
     </ng-template>
   </div>
-  
-  
-  
-
+  <div class="container mt-5 mb-5">
+    <!-- Mục Laptop -->
+    <div class="row align-items-center justify-content-center intro-section">
+        <img class="col-lg-3 img-landing float" src="../../../assets/laptop.png" alt="Laptop">
+        <div class="col-md-6 chu">
+            <h1 class="row mb-5 fade-in">Laptop - Đồng hành cùng bạn</h1>
+            <p class="row justify-content-start fade-in">Laptop chính hãng từ Dell, HP, MacBook, và nhiều thương hiệu nổi tiếng khác.</p>
+            <p class="row justify-content-start fade-in">Đáp ứng mọi nhu cầu học tập, làm việc và giải trí.</p>
+            <button class="btn btn-danger fade-in" (click)="navigateToLaptop()" >Xem sản phẩm</button>
+        </div>
+    </div>
+  </div>
 
   <div class="container mt-5 mb-5">
-      <div class="row align-items-center justify-content-center intro-section ">
-          <div class="col col-md-6 chu">
-              <h1 class="row mb-5 fade-in ">Chào mừng bạn đến với Thanh Hoa Shop</h1>
-              <div class="row mt-5 align-items-center">
-                  <p class="row justify-content-start fade-in" >Sản phẩm: Điện thoại, laptop, máy tính bảng và phụ kiện từ các thương hiệu hàng đầu</p>
-                  <p class="row justify-content-start fade-in" >Chất lượng đảm bảo: Hàng chính hãng 100%, bảo hành uy tín.</p>
-                  <p class="row justify-content-start fade-in" >Dịch vụ tận tâm: Tư vấn chuyên nghiệp, hỗ trợ mọi lúc.</p>
-              </div>
-          </div>
-          <img class= "col-lg-3 img-landing float" src="assets/iphone16.png" alt="iphone"> 
-      </div>
+    <!-- Mục Phụ kiện -->
+    <div class="row align-items-center justify-content-center intro-section">
+        <div class="col-md-6 chu">
+            <h1 class="row mb-5 fade-in">Phụ kiện - Hoàn thiện trải nghiệm</h1>
+            <p class="row justify-content-start fade-in">Tai nghe, bàn phím, chuột và phụ kiện chính hãng giúp tối ưu hóa thiết bị của bạn.</p>
+            <p class="row justify-content-start fade-in">Thiết kế hiện đại, độ bền cao, và giá cả cạnh tranh.</p>
+            <button class="btn btn-danger fade-in" (click)="navigateToAccessories()">Xem sản phẩm</button>
+        </div>
+        <img class="col-lg-3 img-landing float" src="../../../assets/accessories.png" alt="Phụ kiện">
+    </div>
   </div>
+
+  <div class="container mt-5 mb-5">
+    <!-- Mục Đồng hồ -->
+    <div class="row align-items-center justify-content-center intro-section">
+        <img class="col-lg-3 img-landing float" src="../../../assets/watch.png" alt="Đồng hồ">
+        <div class="col-md-6 chu">
+            <h1 class="row mb-5 fade-in">Đồng hồ - Phong cách và công nghệ</h1>
+            <p class="row justify-content-start fade-in">Đồng hồ thông minh và truyền thống từ các thương hiệu nổi tiếng.</p>
+            <p class="row justify-content-start fade-in">Đồng hành cùng phong cách và sức khỏe của bạn.</p>
+            <button class="btn btn-danger fade-in" (click)="navigateToWatches()">Xem sản phẩm</button>
+        </div>
+    </div>
+  </div>
+
+  <div class="container mt-5 mb-5">
+    <!-- Mục Tivi -->
+    <div class="row align-items-center justify-content-center intro-section">
+        <div class="col-md-6 chu">
+<h1 class="row mb-5 fade-in justify-content-center">Tivi - Giải trí đỉnh cao</h1>
+            <p class="row justify-content-start fade-in justify-content-center">Smart TV, OLED, QLED từ các thương hiệu như Sony, LG, Samsung.</p>
+            <p class="row justify-content-start fade-in justify-content-center">Chất lượng hình ảnh và âm thanh vượt trội.</p>
+            <button class="btn btn-danger fade-in" (click)="navigateToTvs()">Xem sản phẩm</button>
+        </div>
+        <img class="col-lg-3 img-landing float" src="../../../assets/TV.png" alt="Tivi">
+    </div>
+  </div>
+
+  <div class="container mt-5 mb-5">
+    <!-- Mục Gia dụng -->
+    <div class="row align-items-center justify-content-center intro-section">
+        <img class="col-lg-3 img-landing float" src="../../../assets/home-appliances.png" alt="Gia dụng">
+        <div class="col-md-6 chu">
+            <h1 class="row mb-5 fade-in">Gia dụng - Tiện ích cho ngôi nhà bạn</h1>
+            <p class="row justify-content-start fade-in">Các thiết bị gia dụng hiện đại, bền bỉ và tiện nghi.</p>
+            <p class="row justify-content-start fade-in">Mang lại sự thoải mái và tiện ích trong cuộc sống hàng ngày.</p>
+            <button class="btn btn-danger fade-in" (click)="navigateToHomeAppliances()">Xem sản phẩm</button>
+        </div>
+    </div>
+  </div>
+
+
 
 <app-footer></app-footer>
